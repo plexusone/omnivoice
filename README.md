@@ -5,6 +5,7 @@
 [![Go SAST][go-sast-svg]][go-sast-url]
 [![Go Report Card][goreport-svg]][goreport-url]
 [![Docs][docs-godoc-svg]][docs-godoc-url]
+[![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
 
 Batteries-included voice pipeline framework for Go. This package provides a unified interface for speech-to-text (STT) and text-to-speech (TTS) with all providers included.
@@ -118,5 +119,9 @@ MIT License - see [LICENSE](LICENSE) for details.
  [goreport-url]: https://goreportcard.com/report/github.com/plexusone/omnivoice
  [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/plexusone/omnivoice
  [docs-godoc-url]: https://pkg.go.dev/github.com/plexusone/omnivoice
+ [viz-svg]: https://img.shields.io/badge/visualizaton-Go-blue.svg
+ [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fcoreforge
+ [loc-svg]: https://tokei.rs/b1/github/plexusone/omnivoice
+ [repo-url]: https://github.com/plexusone/omnivoice
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/plexusone/omnivoice/blob/main/LICENSE
+ [license-url]: https://github.com/plexusone/omnivoice/blob/master/LICENSE
