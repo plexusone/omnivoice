@@ -36,17 +36,17 @@ type (
 
 // Re-export STT errors
 var (
-	ErrNoAvailableProvider = stt.ErrNoAvailableProvider
+	ErrNoAvailableProvider   = stt.ErrNoAvailableProvider
 	ErrStreamingNotSupported = stt.ErrStreamingNotSupported
-	ErrInvalidAudio = stt.ErrInvalidAudio
-	ErrInvalidConfig = stt.ErrInvalidConfig
-	ErrAudioTooLong = stt.ErrAudioTooLong
-	ErrAudioTooShort = stt.ErrAudioTooShort
-	ErrRateLimited = stt.ErrRateLimited
-	ErrQuotaExceeded = stt.ErrQuotaExceeded
-	ErrUnsupportedLanguage = stt.ErrUnsupportedLanguage
-	ErrUnsupportedFormat = stt.ErrUnsupportedFormat
-	ErrStreamClosed = stt.ErrStreamClosed
+	ErrInvalidAudio          = stt.ErrInvalidAudio
+	ErrInvalidConfig         = stt.ErrInvalidConfig
+	ErrAudioTooLong          = stt.ErrAudioTooLong
+	ErrAudioTooShort         = stt.ErrAudioTooShort
+	ErrRateLimited           = stt.ErrRateLimited
+	ErrQuotaExceeded         = stt.ErrQuotaExceeded
+	ErrUnsupportedLanguage   = stt.ErrUnsupportedLanguage
+	ErrUnsupportedFormat     = stt.ErrUnsupportedFormat
+	ErrStreamClosed          = stt.ErrStreamClosed
 )
 
 // Re-export STT functions
