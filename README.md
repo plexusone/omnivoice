@@ -94,7 +94,7 @@ func main() {
 |----------|-----|-----|---------|
 | OpenAI | Whisper | TTS-1/TTS-1-HD | `omnivoice-openai` |
 | Deepgram | Nova-2 | Aura | `omnivoice-deepgram` |
-| ElevenLabs | - | Multilingual v2 | `elevenlabs-go` |
+| ElevenLabs | Scribe | Multilingual v2 | `elevenlabs-go` |
 | Twilio | Media Streams | Media Streams | `omnivoice-twilio` |
 
 ## Related Packages
