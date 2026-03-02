@@ -15,15 +15,18 @@
         { "description": "Four providers registered: OpenAI, ElevenLabs, Deepgram, and Twilio" }
       ],
       "added": [
-        { "description": "Unified `STTClient` and `TTSClient` interfaces for speech-to-text and text-to-speech", "commit": "66a341b" },
-        { "description": "`TranscriptionConfig` and `SynthesisConfig` types for provider-agnostic configuration", "commit": "66a341b" },
-        { "description": "`providers/all` package for importing all providers with a single import", "commit": "66a341b" },
-        { "description": "Provider registry with `RegisterTTSProvider` and `RegisterSTTProvider` for self-registration" },
-        { "description": "`GetTTSProvider(name, opts...)` and `GetSTTProvider(name, opts...)` for runtime provider creation" },
-        { "description": "`WithAPIKey`, `WithBaseURL`, and `WithExtension` options for provider configuration" },
-        { "description": "`ListTTSProviders()` and `ListSTTProviders()` to discover registered providers" },
-        { "description": "Subtitle generation re-exported from omnivoice-core (`GenerateSRT`, `GenerateVTT`)" },
-        { "description": "Streaming support for real-time transcription and synthesis", "commit": "66a341b" }
+        { "description": "Unified `STTProvider` and `TTSProvider` type aliases re-exported from omnivoice-core", "commit": "545b928" },
+        { "description": "`TranscriptionConfig` and `SynthesisConfig` types for provider-agnostic configuration", "commit": "545b928" },
+        { "description": "`providers/all` package for importing all providers with a single blank import", "commit": "545b928" },
+        { "description": "Provider registry with `RegisterTTSProvider` and `RegisterSTTProvider` for self-registration", "commit": "545b928" },
+        { "description": "`GetTTSProvider(name, opts...)` and `GetSTTProvider(name, opts...)` for runtime provider creation", "commit": "545b928" },
+        { "description": "`WithAPIKey`, `WithBaseURL`, and `WithExtension` options for provider configuration", "commit": "545b928" },
+        { "description": "`ListTTSProviders()` and `ListSTTProviders()` to discover registered providers", "commit": "545b928" },
+        { "description": "`HasTTSProvider()` and `HasSTTProvider()` to check provider availability", "commit": "545b928" },
+        { "description": "Subtitle generation re-exported from omnivoice-core (`GenerateSRT`, `GenerateVTT`)", "commit": "545b928" }
+      ],
+      "changed": [
+        { "description": "Version v0.5.0 continues from previous omnivoice v0.4.3 (now omnivoice-core) for Go module proxy compatibility" }
       ],
       "build": [
         { "description": "GitHub Actions workflows for CI, linting, and CodeQL security scanning", "commit": "95e8bbb" },
@@ -31,9 +34,18 @@
         { "description": "Dependabot configuration for automated dependency updates", "commit": "95e8bbb" }
       ],
       "documentation": [
-        { "description": "README with quick start guide, usage examples, and provider compatibility table", "commit": "9835ed7" },
-        { "description": "Language codes reference table with BCP-47 examples" },
-        { "description": "Package documentation with godoc examples", "commit": "66a341b" }
+        { "description": "README with quick start guide, usage examples, and provider compatibility table", "commit": "1f2b810" },
+        { "description": "Language codes reference table with BCP-47 examples", "commit": "9835ed7" },
+        { "description": "Package documentation with godoc examples", "commit": "66a341b" },
+        { "description": "CHANGELOG.json and CHANGELOG.md using structured-changelog format", "commit": "545b928" },
+        { "description": "Release notes for v0.5.0", "commit": "545b928" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omnivoice-core` v0.5.0 - Core STT/TTS interfaces", "commit": "545b928" },
+        { "description": "`github.com/plexusone/omnivoice-deepgram` v0.4.0 - Deepgram provider", "commit": "545b928" },
+        { "description": "`github.com/plexusone/omnivoice-openai` v0.1.0 - OpenAI Whisper/TTS provider", "commit": "545b928" },
+        { "description": "`github.com/plexusone/omnivoice-twilio` v0.2.0 - Twilio Media Streams provider", "commit": "545b928" },
+        { "description": "`github.com/plexusone/elevenlabs-go` v0.9.0 - ElevenLabs provider", "commit": "545b928" }
       ]
     }
   ]
