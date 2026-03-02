@@ -15,6 +15,7 @@ For a minimal dependency footprint, use [omnivoice-core](https://github.com/plex
 ## Features
 
 - **Unified Interface**: Single API for all STT and TTS providers
+- **Provider Registry**: Get providers by name - no need to import individual provider packages
 - **Multiple Providers**: OpenAI, Deepgram, ElevenLabs, Twilio
 - **Streaming Support**: Real-time transcription and synthesis
 - **Easy Integration**: Import and use with minimal configuration
@@ -27,21 +28,10 @@ go get github.com/plexusone/omnivoice
 
 ## Quick Start
 
-Import with all providers:
-
 ```go
 import (
     "github.com/plexusone/omnivoice"
-    _ "github.com/plexusone/omnivoice/providers/all"
-)
-```
-
-Or import specific providers:
-
-```go
-import (
-    "github.com/plexusone/omnivoice"
-    openai "github.com/plexusone/omnivoice-openai/omnivoice"
+    _ "github.com/plexusone/omnivoice/providers/all" // Register all providers
 )
 ```
 
@@ -53,49 +43,105 @@ package main
 import (
     "context"
     "log"
+    "os"
 
     "github.com/plexusone/omnivoice"
-    openaistt "github.com/plexusone/omnivoice-openai/omnivoice/stt"
-    openaitts "github.com/plexusone/omnivoice-openai/omnivoice/tts"
+    _ "github.com/plexusone/omnivoice/providers/all"
 )
 
 func main() {
     ctx := context.Background()
 
-    // Create STT provider and client
-    sttProvider := openaistt.NewProvider()
-    sttClient := omnivoice.NewSTTClient(sttProvider)
+    // Get providers by name using the registry
+    sttProvider, err := omnivoice.GetSTTProvider("deepgram",
+        omnivoice.WithAPIKey(os.Getenv("DEEPGRAM_API_KEY")))
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    ttsProvider, err := omnivoice.GetTTSProvider("elevenlabs",
+        omnivoice.WithAPIKey(os.Getenv("ELEVENLABS_API_KEY")))
+    if err != nil {
+        log.Fatal(err)
+    }
 
     // Transcribe audio
-    result, err := sttClient.Transcribe(ctx, audioData, omnivoice.TranscriptionConfig{
-        Language: "en",
+    result, err := sttProvider.TranscribeFile(ctx, "audio.mp3", omnivoice.TranscriptionConfig{
+        Language:             "en",
+        EnableWordTimestamps: true,
     })
     if err != nil {
         log.Fatal(err)
     }
     log.Printf("Transcription: %s", result.Text)
 
-    // Create TTS provider and client
-    ttsProvider := openaitts.NewProvider()
-    ttsClient := omnivoice.NewTTSClient(ttsProvider)
-
     // Synthesize speech
-    audio, err := ttsClient.Synthesize(ctx, "Hello, world!", omnivoice.SynthesisConfig{})
+    audio, err := ttsProvider.Synthesize(ctx, "Hello, world!", omnivoice.SynthesisConfig{
+        VoiceID: "pNInz6obpgDQGcFmaJgB", // Adam
+    })
     if err != nil {
         log.Fatal(err)
     }
-    // audio.Data contains the audio bytes
+    // audio.Audio contains the audio bytes
 }
 ```
 
+## Provider Registry
+
+Get providers by name at runtime - no need to import individual provider packages:
+
+```go
+// Available providers: "openai", "elevenlabs", "deepgram", "twilio"
+ttsProvider, _ := omnivoice.GetTTSProvider("elevenlabs", omnivoice.WithAPIKey(key))
+sttProvider, _ := omnivoice.GetSTTProvider("deepgram", omnivoice.WithAPIKey(key))
+
+// List registered providers
+fmt.Println(omnivoice.ListTTSProviders()) // [openai elevenlabs deepgram twilio]
+fmt.Println(omnivoice.ListSTTProviders()) // [openai elevenlabs deepgram twilio]
+```
+
+## Language Codes
+
+OmniVoice accepts language codes in [BCP-47](https://www.rfc-editor.org/info/bcp47) format, which includes ISO 639-1 two-letter codes and regional variants.
+
+**Common codes:**
+
+| Code | Language |
+|------|----------|
+| `en` | English |
+| `en-US` | English (US) |
+| `en-GB` | English (UK) |
+| `es` | Spanish |
+| `es-MX` | Spanish (Mexico) |
+| `fr` | French |
+| `de` | German |
+| `it` | Italian |
+| `pt` | Portuguese |
+| `pt-BR` | Portuguese (Brazil) |
+| `ja` | Japanese |
+| `ko` | Korean |
+| `zh` | Chinese |
+| `zh-CN` | Chinese (Simplified) |
+| `zh-TW` | Chinese (Traditional) |
+| `ar` | Arabic |
+| `hi` | Hindi |
+| `ru` | Russian |
+
+**Notes:**
+
+- Use simple codes (`en`) for broad compatibility across providers
+- Use regional variants (`en-US`) when accent/dialect matters for TTS
+- Provider support varies; see provider documentation for full language lists
+- STT providers generally support automatic language detection when no code is specified
+
 ## Included Providers
 
-| Provider | STT | TTS | Package |
-|----------|-----|-----|---------|
-| OpenAI | Whisper | TTS-1/TTS-1-HD | `omnivoice-openai` |
-| Deepgram | Nova-2 | Aura | `omnivoice-deepgram` |
-| ElevenLabs | Scribe | Multilingual v2 | `elevenlabs-go` |
-| Twilio | Media Streams | Media Streams | `omnivoice-twilio` |
+| Provider | STT | TTS | Registry Name |
+|----------|-----|-----|---------------|
+| OpenAI | Whisper | TTS-1/TTS-1-HD | `"openai"` |
+| ElevenLabs | Scribe | Multilingual v2 | `"elevenlabs"` |
+| Deepgram | Nova-2 | Aura | `"deepgram"` |
+| Twilio | Media Streams | Media Streams | `"twilio"` |
 
 ## Related Packages
 

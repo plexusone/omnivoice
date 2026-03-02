@@ -1,0 +1,40 @@
+{
+  "irVersion": "1.0",
+  "project": "omnivoice",
+  "repository": "https://github.com/plexusone/omnivoice",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["plexusone", "johncwang@gmail.com"],
+  "releases": [
+    {
+      "version": "v0.5.0",
+      "date": "2026-03-01",
+      "highlights": [
+        { "description": "Batteries-included voice pipeline framework for Go with unified STT and TTS interfaces" },
+        { "description": "Provider registry pattern - consumers only need to import omnivoice, not individual provider packages" },
+        { "description": "Four providers registered: OpenAI, ElevenLabs, Deepgram, and Twilio" }
+      ],
+      "added": [
+        { "description": "Unified `STTClient` and `TTSClient` interfaces for speech-to-text and text-to-speech", "commit": "66a341b" },
+        { "description": "`TranscriptionConfig` and `SynthesisConfig` types for provider-agnostic configuration", "commit": "66a341b" },
+        { "description": "`providers/all` package for importing all providers with a single import", "commit": "66a341b" },
+        { "description": "Provider registry with `RegisterTTSProvider` and `RegisterSTTProvider` for self-registration" },
+        { "description": "`GetTTSProvider(name, opts...)` and `GetSTTProvider(name, opts...)` for runtime provider creation" },
+        { "description": "`WithAPIKey`, `WithBaseURL`, and `WithExtension` options for provider configuration" },
+        { "description": "`ListTTSProviders()` and `ListSTTProviders()` to discover registered providers" },
+        { "description": "Subtitle generation re-exported from omnivoice-core (`GenerateSRT`, `GenerateVTT`)" },
+        { "description": "Streaming support for real-time transcription and synthesis", "commit": "66a341b" }
+      ],
+      "build": [
+        { "description": "GitHub Actions workflows for CI, linting, and CodeQL security scanning", "commit": "95e8bbb" },
+        { "description": "golangci-lint configuration with standard Go linting rules", "commit": "95e8bbb" },
+        { "description": "Dependabot configuration for automated dependency updates", "commit": "95e8bbb" }
+      ],
+      "documentation": [
+        { "description": "README with quick start guide, usage examples, and provider compatibility table", "commit": "9835ed7" },
+        { "description": "Language codes reference table with BCP-47 examples" },
+        { "description": "Package documentation with godoc examples", "commit": "66a341b" }
+      ]
+    }
+  ]
+}
