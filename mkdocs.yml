@@ -1,0 +1,66 @@
+site_name: OmniVoice
+site_url: https://plexusone.github.io/omnivoice/
+site_description: Batteries-included voice pipeline framework for Go
+site_author: PlexusOne
+
+repo_name: plexusone/omnivoice
+repo_url: https://github.com/plexusone/omnivoice
+
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.suggest
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Guides:
+      - Text-to-Speech: guides/tts.md
+      - Speech-to-Text: guides/stt.md
+      - Voice Calls: guides/voice-calls.md
+      - SMS Messaging: guides/sms.md
+      - Streaming: guides/streaming.md
+      - Subtitles: guides/subtitles.md
+      - Voice Agents: guides/voice-agents.md
+  - Providers:
+      - Overview: providers/index.md
+      - OpenAI: providers/openai.md
+      - ElevenLabs: providers/elevenlabs.md
+      - Deepgram: providers/deepgram.md
+      - Twilio: providers/twilio.md
+      - Telnyx: providers/telnyx.md
+  - Reference:
+      - Provider Registry: reference/registry.md
+      - Multi-Provider Failover: reference/failover.md
+  - Changelog: changelog.md
+
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
