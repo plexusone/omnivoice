@@ -14,11 +14,11 @@ For a minimal dependency footprint, use [omnivoice-core](https://github.com/plex
 
 ## Features
 
-- **Unified Interface**: Single API for all STT and TTS providers
-- **Provider Registry**: Get providers by name - no need to import individual provider packages
-- **Multiple Providers**: OpenAI, Deepgram, ElevenLabs, Twilio
-- **Streaming Support**: Real-time transcription and synthesis
-- **Easy Integration**: Import and use with minimal configuration
+- 🎯 **Unified Interface**: Single API for all STT and TTS providers
+- 🗂️ **Provider Registry**: Get providers by name - no need to import individual provider packages
+- 🔌 **Multiple Providers**: OpenAI, Deepgram, ElevenLabs, Twilio, Telnyx
+- ⚡ **Streaming Support**: Real-time transcription and synthesis
+- 🚀 **Easy Integration**: Import and use with minimal configuration
 
 ## Installation
 
