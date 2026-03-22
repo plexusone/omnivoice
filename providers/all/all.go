@@ -19,6 +19,8 @@ import (
 	deepgramstt "github.com/plexusone/omnivoice-deepgram/omnivoice/stt"
 	deepgramtts "github.com/plexusone/omnivoice-deepgram/omnivoice/tts"
 	openaiomni "github.com/plexusone/omnivoice-openai/omnivoice"
+	telnyxcallsystem "github.com/plexusone/omnivoice-telnyx/callsystem"
+	twiliocallsystem "github.com/plexusone/omnivoice-twilio/callsystem"
 	twiliostt "github.com/plexusone/omnivoice-twilio/stt"
 	twiliotts "github.com/plexusone/omnivoice-twilio/tts"
 )
@@ -109,5 +111,67 @@ func init() {
 			opts = append(opts, twiliostt.WithProfanityFilter(filter))
 		}
 		return twiliostt.New(opts...)
+	})
+
+	// Register Twilio CallSystem
+	omnivoice.RegisterCallSystemProvider("twilio", func(config omnivoice.ProviderConfig) (omnivoice.CallSystem, error) {
+		var opts []twiliocallsystem.Option
+
+		// Account SID is required
+		accountSID, _ := config.Extensions["accountSID"].(string)
+		if accountSID == "" {
+			return nil, fmt.Errorf("twilio: accountSID is required")
+		}
+		opts = append(opts, twiliocallsystem.WithAccountSID(accountSID))
+
+		// Auth token from APIKey or extensions
+		authToken := config.APIKey
+		if authToken == "" {
+			authToken, _ = config.Extensions["authToken"].(string)
+		}
+		if authToken == "" {
+			return nil, fmt.Errorf("twilio: authToken is required")
+		}
+		opts = append(opts, twiliocallsystem.WithAuthToken(authToken))
+
+		// Optional phone number
+		if phoneNumber, ok := config.Extensions["phoneNumber"].(string); ok && phoneNumber != "" {
+			opts = append(opts, twiliocallsystem.WithPhoneNumber(phoneNumber))
+		}
+
+		// Optional webhook URL
+		if webhookURL, ok := config.Extensions["webhookURL"].(string); ok && webhookURL != "" {
+			opts = append(opts, twiliocallsystem.WithWebhookURL(webhookURL))
+		}
+
+		return twiliocallsystem.New(opts...)
+	})
+
+	// Register Telnyx CallSystem
+	omnivoice.RegisterCallSystemProvider("telnyx", func(config omnivoice.ProviderConfig) (omnivoice.CallSystem, error) {
+		var opts []telnyxcallsystem.Option
+
+		// API key is required
+		if config.APIKey == "" {
+			return nil, fmt.Errorf("telnyx: API key is required")
+		}
+		opts = append(opts, telnyxcallsystem.WithAPIKey(config.APIKey))
+
+		// Optional phone number
+		if phoneNumber, ok := config.Extensions["phoneNumber"].(string); ok && phoneNumber != "" {
+			opts = append(opts, telnyxcallsystem.WithPhoneNumber(phoneNumber))
+		}
+
+		// Optional webhook URL
+		if webhookURL, ok := config.Extensions["webhookURL"].(string); ok && webhookURL != "" {
+			opts = append(opts, telnyxcallsystem.WithWebhookURL(webhookURL))
+		}
+
+		// Optional connection ID
+		if connectionID, ok := config.Extensions["connectionID"].(string); ok && connectionID != "" {
+			opts = append(opts, telnyxcallsystem.WithConnectionID(connectionID))
+		}
+
+		return telnyxcallsystem.New(opts...)
 	})
 }
