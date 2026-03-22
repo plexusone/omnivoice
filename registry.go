@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/plexusone/omnivoice-core/callsystem"
 	"github.com/plexusone/omnivoice-core/stt"
 	"github.com/plexusone/omnivoice-core/tts"
 )
@@ -47,22 +48,55 @@ func WithExtension(key string, value any) ProviderOption {
 	}
 }
 
+// CallSystem-specific option functions.
+// These are convenience wrappers that set Extension values with standardized keys.
+
+// WithAccountSID sets the account SID (Twilio).
+func WithAccountSID(sid string) ProviderOption {
+	return WithExtension("accountSID", sid)
+}
+
+// WithAuthToken sets the auth token (Twilio).
+func WithAuthToken(token string) ProviderOption {
+	return WithExtension("authToken", token)
+}
+
+// WithPhoneNumber sets the default outbound phone number.
+func WithPhoneNumber(number string) ProviderOption {
+	return WithExtension("phoneNumber", number)
+}
+
+// WithWebhookURL sets the webhook URL for incoming calls.
+func WithWebhookURL(url string) ProviderOption {
+	return WithExtension("webhookURL", url)
+}
+
+// WithRegion sets the service region.
+func WithRegion(region string) ProviderOption {
+	return WithExtension("region", region)
+}
+
 // TTSProviderFactory creates a TTS provider with the given configuration.
 type TTSProviderFactory func(config ProviderConfig) (tts.Provider, error)
 
 // STTProviderFactory creates an STT provider with the given configuration.
 type STTProviderFactory func(config ProviderConfig) (stt.Provider, error)
 
+// CallSystemProviderFactory creates a CallSystem provider with the given configuration.
+type CallSystemProviderFactory func(config ProviderConfig) (callsystem.CallSystem, error)
+
 // registry holds registered provider factories.
 var registry = &providerRegistry{
-	ttsFactories: make(map[string]TTSProviderFactory),
-	sttFactories: make(map[string]STTProviderFactory),
+	ttsFactories:        make(map[string]TTSProviderFactory),
+	sttFactories:        make(map[string]STTProviderFactory),
+	callSystemFactories: make(map[string]CallSystemProviderFactory),
 }
 
 type providerRegistry struct {
-	mu           sync.RWMutex
-	ttsFactories map[string]TTSProviderFactory
-	sttFactories map[string]STTProviderFactory
+	mu                  sync.RWMutex
+	ttsFactories        map[string]TTSProviderFactory
+	sttFactories        map[string]STTProviderFactory
+	callSystemFactories map[string]CallSystemProviderFactory
 }
 
 // RegisterTTSProvider registers a TTS provider factory by name.
@@ -162,5 +196,60 @@ func HasSTTProvider(name string) bool {
 	registry.mu.RLock()
 	defer registry.mu.RUnlock()
 	_, ok := registry.sttFactories[name]
+	return ok
+}
+
+// RegisterCallSystemProvider registers a CallSystem provider factory by name.
+// This is typically called from provider init() functions.
+func RegisterCallSystemProvider(name string, factory CallSystemProviderFactory) {
+	registry.mu.Lock()
+	defer registry.mu.Unlock()
+	registry.callSystemFactories[name] = factory
+}
+
+// GetCallSystemProvider creates a CallSystem provider by name with the given options.
+//
+// Example:
+//
+//	cs, err := omnivoice.GetCallSystemProvider("twilio",
+//	    omnivoice.WithAccountSID(accountSID),
+//	    omnivoice.WithAuthToken(authToken),
+//	    omnivoice.WithPhoneNumber(phoneNumber),
+//	    omnivoice.WithWebhookURL(webhookURL),
+//	)
+func GetCallSystemProvider(name string, opts ...ProviderOption) (callsystem.CallSystem, error) {
+	registry.mu.RLock()
+	factory, ok := registry.callSystemFactories[name]
+	registry.mu.RUnlock()
+
+	if !ok {
+		return nil, fmt.Errorf("unknown CallSystem provider: %s (available: %v)", name, ListCallSystemProviders())
+	}
+
+	config := ProviderConfig{}
+	for _, opt := range opts {
+		opt(&config)
+	}
+
+	return factory(config)
+}
+
+// ListCallSystemProviders returns the names of all registered CallSystem providers.
+func ListCallSystemProviders() []string {
+	registry.mu.RLock()
+	defer registry.mu.RUnlock()
+
+	names := make([]string, 0, len(registry.callSystemFactories))
+	for name := range registry.callSystemFactories {
+		names = append(names, name)
+	}
+	return names
+}
+
+// HasCallSystemProvider checks if a CallSystem provider is registered.
+func HasCallSystemProvider(name string) bool {
+	registry.mu.RLock()
+	defer registry.mu.RUnlock()
+	_, ok := registry.callSystemFactories[name]
 	return ok
 }
