@@ -15,6 +15,9 @@ type (
 	// CallSystem defines the interface for telephony/meeting integrations.
 	CallSystem = callsystem.CallSystem
 
+	// CallSystemClient manages multiple CallSystem providers with fallback support.
+	CallSystemClient = callsystem.Client
+
 	// CallStatus represents the call state.
 	CallStatus = callsystem.CallStatus
 
@@ -56,3 +59,7 @@ var (
 	WithAgent            = callsystem.WithAgent
 	WithStatusCallback   = callsystem.WithStatusCallback
 )
+
+// NewCallSystemClient creates a new CallSystem client with the given providers.
+// The first provider becomes the primary by default.
+var NewCallSystemClient = callsystem.NewClient
