@@ -50,6 +50,10 @@ nav:
   - Reference:
       - Provider Registry: reference/registry.md
       - Multi-Provider Failover: reference/failover.md
+  - Releases:
+      - v0.7.0: releases/v0.7.0.md
+      - v0.6.0: releases/v0.6.0.md
+      - v0.5.0: releases/v0.5.0.md
   - Changelog: changelog.md
 
 markdown_extensions:
