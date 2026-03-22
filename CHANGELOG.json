@@ -7,6 +7,54 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.7.0",
+      "date": "2026-03-22",
+      "highlights": [
+        { "description": "CallSystem provider registry with Twilio and Telnyx support" },
+        { "description": "CallSystemClient for multi-provider management with failover" }
+      ],
+      "added": [
+        { "description": "`CallSystemProviderFactory` type for CallSystem provider creation", "commit": "6c68e8c" },
+        { "description": "`RegisterCallSystemProvider` and `GetCallSystemProvider` for runtime provider discovery", "commit": "6c68e8c" },
+        { "description": "`ListCallSystemProviders` and `HasCallSystemProvider` to query registered providers", "commit": "6c68e8c" },
+        { "description": "Convenience options: `WithAccountSID`, `WithAuthToken`, `WithPhoneNumber`, `WithWebhookURL`, `WithRegion`", "commit": "6c68e8c" },
+        { "description": "`CallSystemClient` type alias for multi-provider management with failover", "commit": "ed1cf59" },
+        { "description": "`NewCallSystemClient` function to create clients with multiple providers", "commit": "ed1cf59" },
+        { "description": "Twilio CallSystem provider registration (requires accountSID, authToken)", "commit": "23449b6" },
+        { "description": "Telnyx CallSystem provider registration (requires apiKey)", "commit": "23449b6" }
+      ],
+      "documentation": [
+        { "description": "Add UTF-8 icons to Features section in README", "commit": "60b79f3" },
+        { "description": "Add Telnyx to list of supported providers", "commit": "60b79f3" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omnivoice-core` v0.5.0 → v0.6.0", "commit": "0119038" },
+        { "description": "`github.com/plexusone/omnivoice-twilio` v0.2.0 → v0.3.0", "commit": "0119038" },
+        { "description": "`github.com/plexusone/elevenlabs-go` v0.9.0 → v0.9.1", "commit": "0119038" },
+        { "description": "`github.com/plexusone/omnivoice-deepgram` v0.4.0 → v0.4.1", "commit": "0119038" },
+        { "description": "`github.com/plexusone/omnivoice-openai` v0.1.0 → v0.1.1", "commit": "0119038" },
+        { "description": "Add `github.com/plexusone/omnivoice-telnyx` v0.1.0", "commit": "0119038" }
+      ]
+    },
+    {
+      "version": "v0.6.0",
+      "date": "2026-03-07",
+      "highlights": [
+        { "description": "Re-export callsystem types from omnivoice-core for unified imports" }
+      ],
+      "added": [
+        { "description": "`callsystem.go` re-exporting `Call`, `CallSystem`, `CallStatus`, and related types from omnivoice-core", "commit": "33e7ceb" },
+        { "description": "`CallHandler`, `CallOptions`, `CallDirection` type aliases", "commit": "33e7ceb" },
+        { "description": "`WithFrom`, `WithTimeout`, `WithAgent`, `WithStatusCallback` call options", "commit": "33e7ceb" }
+      ],
+      "documentation": [
+        { "description": "Update README shields", "commit": "e337759" }
+      ],
+      "dependencies": [
+        { "description": "Update omnivoice-core and provider dependencies", "commit": "f4ffd9a" }
+      ]
+    },
+    {
       "version": "v0.5.0",
       "date": "2026-03-01",
       "highlights": [
