@@ -1,6 +1,6 @@
 module github.com/plexusone/omnivoice
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/plexusone/elevenlabs-go v0.10.0
