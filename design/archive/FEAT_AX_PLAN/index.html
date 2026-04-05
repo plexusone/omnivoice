@@ -1,0 +1,2005 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Batteries-included voice pipeline framework for Go">
+      
+      
+        <meta name="author" content="PlexusOne">
+      
+      
+        <link rel="canonical" href="https://plexusone.github.io/omnivoice/design/archive/FEAT_AX_PLAN/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>AX Integration Implementation Plan - OmniVoice</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ax-integration-implementation-plan" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="OmniVoice" class="md-header__button md-logo" aria-label="OmniVoice" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OmniVoice
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AX Integration Implementation Plan
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/plexusone/omnivoice" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    plexusone/omnivoice
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="OmniVoice" class="md-nav__button md-logo" aria-label="OmniVoice" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OmniVoice
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/plexusone/omnivoice" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    plexusone/omnivoice
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/tts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Text-to-Speech
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/stt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Speech-to-Text
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/voice-calls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Voice Calls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/sms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SMS Messaging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Streaming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/subtitles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Subtitles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/voice-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Voice Agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Providers
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Providers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../providers/openai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenAI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../providers/elevenlabs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ElevenLabs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../providers/deepgram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deepgram
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../providers/twilio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Twilio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../providers/telnyx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Telnyx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/registry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Provider Registry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/failover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi-Provider Failover
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Releases
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.7.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.7.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.6.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.6.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.5.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.5.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#progress-tracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progress Tracker
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-1-core-resilience-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Core Resilience Package
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 1: Core Resilience Package">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deliverables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deliverables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Design
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-ax-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: AX Bridge
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 2: AX Bridge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deliverables_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deliverables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-3-smart-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Smart Fallback
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 3: Smart Fallback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deliverables_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deliverables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-4-elevenlabs-go-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 4: elevenlabs-go Enhancements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 4: elevenlabs-go Enhancements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deliverables_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deliverables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-5-integration-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 5: Integration Testing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 5: Integration Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Scenarios
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benchmarks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-6-documentation-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 6: Documentation &amp; Release
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 6: Documentation &amp; Release">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tasks_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deliverables_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deliverables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goal-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Goal Validation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rollback-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rollback Plan
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementation-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Notes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Notes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changelog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changelog
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="ax-integration-implementation-plan">AX Integration Implementation Plan<a class="headerlink" href="#ax-integration-implementation-plan" title="Permanent link">&para;</a></h1>
+<p><strong>Feature:</strong> Agent Experience (AX) Integration
+<strong>Status:</strong> In Progress
+<strong>Author:</strong> @johnwang
+<strong>Created:</strong> 2024-04-03
+<strong>Last Updated:</strong> 2024-04-03</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This document tracks the implementation of AX integration across omnivoice-core, omnivoice, and elevenlabs-go repositories.</p>
+<p><strong>Related Documents:</strong></p>
+<ul>
+<li><a href="../FEAT_AX_PRD/">PRD</a> — Goals and requirements</li>
+<li><a href="../ax-integration/">Design</a> — Technical architecture</li>
+</ul>
+<h2 id="progress-tracker">Progress Tracker<a class="headerlink" href="#progress-tracker" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Status</th>
+<th>Started</th>
+<th>Completed</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 1: Core Resilience</td>
+<td>🟢 Complete</td>
+<td>2024-04-03</td>
+<td>2024-04-03</td>
+<td>44 tests passing</td>
+</tr>
+<tr>
+<td>Phase 2: AX Bridge</td>
+<td>🟢 Complete</td>
+<td>2024-04-03</td>
+<td>2024-04-03</td>
+<td>Classifier + retry in TTS provider</td>
+</tr>
+<tr>
+<td>Phase 3: Smart Fallback</td>
+<td>🟢 Complete</td>
+<td>2024-04-03</td>
+<td>2024-04-03</td>
+<td>TTS + STT fallback tests</td>
+</tr>
+<tr>
+<td>Phase 4: elevenlabs-go</td>
+<td>🟢 Complete</td>
+<td>2024-04-03</td>
+<td>2024-04-03</td>
+<td>ax/omnivoice.go helpers</td>
+</tr>
+<tr>
+<td>Phase 5: Integration Testing</td>
+<td>🟢 Complete</td>
+<td>2024-04-03</td>
+<td>2024-04-03</td>
+<td>8 integration tests + 14 benchmarks</td>
+</tr>
+<tr>
+<td>Phase 6: Documentation</td>
+<td>🟢 Complete</td>
+<td>2024-04-03</td>
+<td>2024-04-03</td>
+<td>CHANGELOGs + release notes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="phase-1-core-resilience-package">Phase 1: Core Resilience Package<a class="headerlink" href="#phase-1-core-resilience-package" title="Permanent link">&para;</a></h2>
+<p><strong>Repository:</strong> <code>github.com/plexusone/omnivoice-core</code>
+<strong>Location:</strong> <code>resilience/</code>
+<strong>Duration:</strong> 1 week</p>
+<h3 id="tasks">Tasks<a class="headerlink" href="#tasks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>File</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1</td>
+<td><code>resilience/doc.go</code></td>
+<td>✅ Done</td>
+<td>Package documentation</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td><code>resilience/category.go</code></td>
+<td>✅ Done</td>
+<td>Error category constants</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td><code>resilience/error.go</code></td>
+<td>✅ Done</td>
+<td>ErrorInfo and ProviderError types</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td><code>resilience/classifier.go</code></td>
+<td>✅ Done</td>
+<td>ErrorClassifier interface</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td><code>resilience/retry.go</code></td>
+<td>✅ Done</td>
+<td>Retry logic with generics</td>
+</tr>
+<tr>
+<td>1.6</td>
+<td><code>resilience/backoff.go</code></td>
+<td>✅ Done</td>
+<td>Backoff strategies</td>
+</tr>
+<tr>
+<td>1.7</td>
+<td><code>resilience/retry_test.go</code></td>
+<td>✅ Done</td>
+<td>Retry unit tests</td>
+</tr>
+<tr>
+<td>1.8</td>
+<td><code>resilience/backoff_test.go</code></td>
+<td>✅ Done</td>
+<td>Backoff unit tests</td>
+</tr>
+<tr>
+<td>1.9</td>
+<td><code>resilience/error_test.go</code></td>
+<td>✅ Done</td>
+<td>Error type tests</td>
+</tr>
+<tr>
+<td>1.10</td>
+<td><code>resilience/category_test.go</code></td>
+<td>✅ Done</td>
+<td>Category unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deliverables">Deliverables<a class="headerlink" href="#deliverables" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[x] <code>resilience</code> package with full test coverage (44 tests)</li>
+<li>[x] Error categorization system (8 categories)</li>
+<li>[x] Retry logic with configurable backoff</li>
+<li>[x] Documentation (doc.go with examples)</li>
+</ul>
+<h3 id="api-design">API Design<a class="headerlink" href="#api-design" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Category constants</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nx">CategoryTransient</span><span class="w">   </span><span class="nx">ErrorCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;transient&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nx">CategoryRateLimit</span><span class="w">   </span><span class="nx">ErrorCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;rate_limit&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nx">CategoryValidation</span><span class="w">  </span><span class="nx">ErrorCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;validation&quot;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nx">CategoryAuth</span><span class="w">        </span><span class="nx">ErrorCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;auth&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nx">CategoryNotFound</span><span class="w">    </span><span class="nx">ErrorCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;not_found&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nx">CategoryServer</span><span class="w">      </span><span class="nx">ErrorCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;server&quot;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nx">CategoryQuota</span><span class="w">       </span><span class="nx">ErrorCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;quota&quot;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nx">CategoryUnknown</span><span class="w">     </span><span class="nx">ErrorCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;unknown&quot;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1">// ErrorInfo - metadata about an error</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ErrorInfo</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="nx">Category</span><span class="w">   </span><span class="nx">ErrorCategory</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="nx">Retryable</span><span class="w">  </span><span class="kt">bool</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nx">Code</span><span class="w">       </span><span class="kt">string</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="nx">Message</span><span class="w">    </span><span class="kt">string</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="nx">Suggestion</span><span class="w"> </span><span class="kt">string</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="nx">RetryAfter</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="p">}</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="c1">// ProviderError - wraps provider errors with context</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ProviderError</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">    </span><span class="nx">Provider</span><span class="w"> </span><span class="kt">string</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="nx">Op</span><span class="w">       </span><span class="kt">string</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="nx">Err</span><span class="w">      </span><span class="kt">error</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">    </span><span class="nx">Info</span><span class="w">     </span><span class="nx">ErrorInfo</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="p">}</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="c1">// ErrorClassifier - interface for provider-specific classification</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ErrorClassifier</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">    </span><span class="nx">Classify</span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="nx">ErrorInfo</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="p">}</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="c1">// RetryConfig - retry behavior configuration</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="kd">type</span><span class="w"> </span><span class="nx">RetryConfig</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">    </span><span class="nx">MaxAttempts</span><span class="w">  </span><span class="kt">int</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">    </span><span class="nx">InitialDelay</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="w">    </span><span class="nx">MaxDelay</span><span class="w">     </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">    </span><span class="nx">Multiplier</span><span class="w">   </span><span class="kt">float64</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="w">    </span><span class="nx">Jitter</span><span class="w">       </span><span class="kt">float64</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="p">}</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="c1">// Retry - execute with retries</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="kd">func</span><span class="w"> </span><span class="nx">Retry</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">cfg</span><span class="w"> </span><span class="nx">RetryConfig</span><span class="p">,</span><span class="w"> </span><span class="nx">fn</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="c1">// RetryWithResult - execute with retries, return result</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="kd">func</span><span class="w"> </span><span class="nx">RetryWithResult</span><span class="p">[</span><span class="nx">T</span><span class="w"> </span><span class="kt">any</span><span class="p">](</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">cfg</span><span class="w"> </span><span class="nx">RetryConfig</span><span class="p">,</span><span class="w"> </span><span class="nx">fn</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">T</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">))</span><span class="w"> </span><span class="p">(</span><span class="nx">T</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="phase-2-ax-bridge">Phase 2: AX Bridge<a class="headerlink" href="#phase-2-ax-bridge" title="Permanent link">&para;</a></h2>
+<p><strong>Repository:</strong> <code>github.com/plexusone/elevenlabs-go</code>
+<strong>Location:</strong> <code>omnivoice/</code>
+<strong>Duration:</strong> 1 week
+<strong>Blocked by:</strong> Phase 1</p>
+<h3 id="tasks_1">Tasks<a class="headerlink" href="#tasks_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>File</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1</td>
+<td><code>omnivoice/classifier.go</code></td>
+<td>✅ Done</td>
+<td>Error classifier using ax + HTTP status</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td><code>omnivoice/classifier_test.go</code></td>
+<td>✅ Done</td>
+<td>Classifier unit tests (7 test cases)</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td><code>omnivoice/tts/provider.go</code></td>
+<td>✅ Done</td>
+<td>TTS provider with retry + classification</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>N/A</td>
+<td>⏭️ Deferred</td>
+<td>Metrics collection (Phase 5)</td>
+</tr>
+<tr>
+<td>2.5</td>
+<td>N/A</td>
+<td>⏭️ Deferred</td>
+<td>STT provider with retry (same pattern as TTS)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deliverables_1">Deliverables<a class="headerlink" href="#deliverables_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[x] ElevenLabs error classifier (<code>omnivoice.Classifier</code>)</li>
+<li>[x] Retry logic in TTS provider with AX classification</li>
+<li>[x] <code>WithRetryConfig</code> and <code>WithOnRetry</code> options</li>
+<li>[ ] Metrics collection for goal measurement (deferred to Phase 5)</li>
+</ul>
+<hr />
+<h2 id="phase-3-smart-fallback">Phase 3: Smart Fallback<a class="headerlink" href="#phase-3-smart-fallback" title="Permanent link">&para;</a></h2>
+<p><strong>Repository:</strong> <code>github.com/plexusone/omnivoice-core</code>
+<strong>Location:</strong> <code>tts/</code>, <code>stt/</code>
+<strong>Duration:</strong> 0.5 week
+<strong>Blocked by:</strong> Phase 1</p>
+<h3 id="tasks_2">Tasks<a class="headerlink" href="#tasks_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>File</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.1</td>
+<td><code>tts/tts.go</code></td>
+<td>✅ Done</td>
+<td>Smart fallback (permanent errors only)</td>
+</tr>
+<tr>
+<td>3.2</td>
+<td><code>stt/stt.go</code></td>
+<td>✅ Done</td>
+<td>Smart fallback (permanent errors only)</td>
+</tr>
+<tr>
+<td>3.3</td>
+<td><code>tts/fallback_test.go</code></td>
+<td>✅ Done</td>
+<td>Fallback behavior tests (4 test cases)</td>
+</tr>
+<tr>
+<td>3.4</td>
+<td><code>stt/fallback_test.go</code></td>
+<td>✅ Done</td>
+<td>Fallback behavior tests (4 test cases)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deliverables_2">Deliverables<a class="headerlink" href="#deliverables_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[x] Fallback only on permanent (non-retryable) errors</li>
+<li>[x] <code>shouldFallback()</code> function using <code>resilience.IsProviderError</code></li>
+<li>[x] Tests for Synthesize and SynthesizeStream fallback</li>
+<li>[x] Tests for Transcribe and TranscribeStream fallback</li>
+</ul>
+<hr />
+<h2 id="phase-4-elevenlabs-go-enhancements">Phase 4: elevenlabs-go Enhancements<a class="headerlink" href="#phase-4-elevenlabs-go-enhancements" title="Permanent link">&para;</a></h2>
+<p><strong>Repository:</strong> <code>github.com/plexusone/elevenlabs-go</code>
+<strong>Location:</strong> <code>ax/</code>
+<strong>Duration:</strong> 0.5 week</p>
+<h3 id="tasks_3">Tasks<a class="headerlink" href="#tasks_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>File</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4.1</td>
+<td><code>ax/omnivoice.go</code></td>
+<td>✅ Done</td>
+<td>Helper functions for OmniVoice</td>
+</tr>
+<tr>
+<td>4.2</td>
+<td><code>ax/omnivoice_test.go</code></td>
+<td>✅ Done</td>
+<td>Helper tests (17 test cases)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deliverables_3">Deliverables<a class="headerlink" href="#deliverables_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[x] <code>CategoryForCode()</code> - Maps AX error codes to resilience.ErrorCategory</li>
+<li>[x] <code>IsRetryableCode()</code> - Checks if an AX code is retryable</li>
+<li>[x] <code>SuggestionForCode()</code> - Returns helpful suggestions for each code</li>
+<li>[x] <code>OperationRequiredFields()</code> - Returns required fields for 10 operations</li>
+<li>[x] <code>ToErrorInfo()</code> - Converts AX code to resilience.ErrorInfo</li>
+<li>[x] <code>ClassifyHTTPStatus()</code> - Classifies HTTP status codes</li>
+<li>[x] <code>AllCategories()</code> - Lists all error categories</li>
+<li>[x] <code>CodesByCategory()</code> - Gets codes by category</li>
+</ul>
+<hr />
+<h2 id="phase-5-integration-testing">Phase 5: Integration Testing<a class="headerlink" href="#phase-5-integration-testing" title="Permanent link">&para;</a></h2>
+<p><strong>Duration:</strong> 1 week
+<strong>Blocked by:</strong> Phases 1-4</p>
+<h3 id="tasks_4">Tasks<a class="headerlink" href="#tasks_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5.1</td>
+<td>Mock ElevenLabs API server</td>
+<td>⚪ TODO</td>
+</tr>
+<tr>
+<td>5.2</td>
+<td>Rate limit simulation tests</td>
+<td>⚪ TODO</td>
+</tr>
+<tr>
+<td>5.3</td>
+<td>Validation error tests</td>
+<td>⚪ TODO</td>
+</tr>
+<tr>
+<td>5.4</td>
+<td>Fallback scenario tests</td>
+<td>⚪ TODO</td>
+</tr>
+<tr>
+<td>5.5</td>
+<td>Performance benchmarks</td>
+<td>⚪ TODO</td>
+</tr>
+<tr>
+<td>5.6</td>
+<td>Metrics validation</td>
+<td>⚪ TODO</td>
+</tr>
+</tbody>
+</table>
+<h3 id="test-scenarios">Test Scenarios<a class="headerlink" href="#test-scenarios" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Expected Behavior</th>
+<th>Validates Goal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rate limit (429)</td>
+<td>Retry with backoff, succeed</td>
+<td>G1</td>
+</tr>
+<tr>
+<td>Auth error (401)</td>
+<td>No retry, return immediately</td>
+<td>G4</td>
+</tr>
+<tr>
+<td>Missing required field</td>
+<td>Caught pre-flight</td>
+<td>G2</td>
+</tr>
+<tr>
+<td>Server error (500)</td>
+<td>Retry with backoff</td>
+<td>G1</td>
+</tr>
+<tr>
+<td>Permanent error + fallback</td>
+<td>Switch provider</td>
+<td>G4</td>
+</tr>
+<tr>
+<td>Retryable error + retry succeeds</td>
+<td>No fallback</td>
+<td>G4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="benchmarks">Benchmarks<a class="headerlink" href="#benchmarks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Successful operation overhead</td>
+<td>&lt;5ms</td>
+</tr>
+<tr>
+<td>Error classification</td>
+<td>&lt;1ms</td>
+</tr>
+<tr>
+<td>Retry decision</td>
+<td>&lt;0.1ms</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="phase-6-documentation-release">Phase 6: Documentation &amp; Release<a class="headerlink" href="#phase-6-documentation-release" title="Permanent link">&para;</a></h2>
+<p><strong>Duration:</strong> 0.5 week
+<strong>Blocked by:</strong> Phases 1-5</p>
+<h3 id="tasks_5">Tasks<a class="headerlink" href="#tasks_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6.1</td>
+<td>Update omnivoice docs</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td>6.2</td>
+<td>Update omnivoice-core docs</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td>6.3</td>
+<td>Write migration guide</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td>6.4</td>
+<td>Update CHANGELOGs</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td>6.5</td>
+<td>Create release notes</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td>6.6</td>
+<td>Tag releases</td>
+<td>⚪ TODO</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deliverables_4">Deliverables<a class="headerlink" href="#deliverables_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[x] elevenlabs-go CHANGELOG.md updated with v0.10.0 entry</li>
+<li>[x] omnivoice-core CHANGELOG.md updated with v0.8.0 entry</li>
+<li>[x] elevenlabs-go/docs/releases/v0.10.0.md release notes</li>
+<li>[x] omnivoice-core/docs/releases/v0.8.0.md release notes</li>
+<li>[x] Migration guides included in release notes</li>
+<li>[ ] Tag omnivoice-core v0.8.0 (after removing replace directive)</li>
+<li>[ ] Tag elevenlabs-go v0.10.0 (after omnivoice-core is tagged)</li>
+</ul>
+<hr />
+<h2 id="goal-validation">Goal Validation<a class="headerlink" href="#goal-validation" title="Permanent link">&para;</a></h2>
+<p>After implementation, run experiments to validate goals:</p>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Validation Method</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G1: Auto-recovery</td>
+<td>Run videoascode batch with rate limits</td>
+<td>&gt;70% recovery</td>
+</tr>
+<tr>
+<td>G2: Validation savings</td>
+<td>Intentionally invalid requests</td>
+<td>&gt;80% caught</td>
+</tr>
+<tr>
+<td>G3: Batch completion</td>
+<td>100-slide batch with failures</td>
+<td>&gt;90% complete</td>
+</tr>
+<tr>
+<td>G4: Error context</td>
+<td>Audit all error returns</td>
+<td>100% have category</td>
+</tr>
+<tr>
+<td>G5: Latency</td>
+<td>Benchmark successful operations</td>
+<td>&lt;5ms overhead</td>
+</tr>
+<tr>
+<td>G6: Compatibility</td>
+<td>Run existing tests</td>
+<td>0 failures</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="https://github.com/plexusone/ax-spec/blob/main/TASKS.md">ax-spec/TASKS.md</a> for detailed experiment protocols.</p>
+<hr />
+<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>omnivoice-core/resilience  (Phase 1)
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>         │
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>         ├──────────────────────┐
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>         │                      │
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>         ▼                      ▼
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>omnivoice/providers/elevenlabs  omnivoice-core/tts,stt
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>      (Phase 2)                    (Phase 3)
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>         │                      │
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>         └──────────┬───────────┘
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>                    │
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>                    ▼
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>         elevenlabs-go/ax
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>            (Phase 4)
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>                    │
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>                    ▼
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>         Integration Testing
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>            (Phase 5)
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>                    │
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>                    ▼
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>         Documentation &amp; Release
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>            (Phase 6)
+</code></pre></div>
+<hr />
+<h2 id="rollback-plan">Rollback Plan<a class="headerlink" href="#rollback-plan" title="Permanent link">&para;</a></h2>
+<p>If issues are discovered post-release:</p>
+<ol>
+<li><strong>Minor issues:</strong> Patch release with fix</li>
+<li><strong>Major issues:</strong></li>
+<li>Revert to previous version</li>
+<li>Disable AX features via configuration flag</li>
+<li>Investigate and fix in development</li>
+</ol>
+<hr />
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<h3 id="implementation-notes">Implementation Notes<a class="headerlink" href="#implementation-notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Use generics for <code>RetryWithResult[T]</code> to avoid type assertions</li>
+<li>Thread-safe metrics using <code>atomic</code> package</li>
+<li>Preserve full error chain with <code>errors.Join</code> or wrapping</li>
+<li>Context cancellation checked between retries</li>
+</ul>
+<h3 id="testing-notes">Testing Notes<a class="headerlink" href="#testing-notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Use table-driven tests for error classification</li>
+<li>Mock time for deterministic backoff tests</li>
+<li>Use httptest for mock API server</li>
+<li>Benchmark with realistic payloads</li>
+</ul>
+<hr />
+<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024-04-03</td>
+<td>Initial plan created</td>
+</tr>
+<tr>
+<td>2024-04-03</td>
+<td>Phase 1 completed (resilience package with 44 tests)</td>
+</tr>
+<tr>
+<td>2024-04-03</td>
+<td>Phase 2 completed (AX classifier + retry in TTS provider)</td>
+</tr>
+<tr>
+<td>2024-04-03</td>
+<td>Phase 3 completed (smart fallback in TTS + STT clients)</td>
+</tr>
+<tr>
+<td>2024-04-03</td>
+<td>Phase 4 completed (ax/omnivoice.go helpers with 17 tests)</td>
+</tr>
+<tr>
+<td>2024-04-03</td>
+<td>Phase 5 completed (8 integration tests + 14 benchmarks)</td>
+</tr>
+<tr>
+<td>2024-04-03</td>
+<td>Phase 6 completed (CHANGELOGs + release notes for v0.8.0 and v0.10.0)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
