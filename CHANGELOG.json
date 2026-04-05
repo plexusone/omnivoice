@@ -7,6 +7,27 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.7.1",
+      "date": "2026-04-05",
+      "highlights": [
+        { "description": "AX-enabled dependencies with smart fallback and error classification" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omnivoice-core` v0.6.0 → v0.8.0 (resilience package, smart fallback)", "commit": "144c394" },
+        { "description": "`github.com/plexusone/elevenlabs-go` v0.9.1 → v0.10.0 (AX integration)", "commit": "144c394" },
+        { "description": "`github.com/plexusone/omnivoice-deepgram` v0.4.1 → v0.5.0 (error classification)", "commit": "144c394" },
+        { "description": "`github.com/plexusone/omnivoice-openai` v0.1.1 → v0.1.2", "commit": "144c394" },
+        { "description": "`github.com/plexusone/omnivoice-telnyx` v0.1.0 → v0.1.1", "commit": "144c394" }
+      ],
+      "documentation": [
+        { "description": "Archive AX integration design documents to `docs/design/archive/`", "commit": "259e278" }
+      ],
+      "build": [
+        { "description": "Update Go version in `go.mod`", "commit": "04ff43c" },
+        { "description": "Add `site/` to `.gitignore` for MkDocs build output", "commit": "1c0da43" }
+      ]
+    },
+    {
       "version": "v0.7.0",
       "date": "2026-03-22",
       "highlights": [
