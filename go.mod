@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/plexusone/elevenlabs-go v0.9.1
-	github.com/plexusone/omnivoice-core v0.6.0
+	github.com/plexusone/omnivoice-core v0.7.0
 	github.com/plexusone/omnivoice-deepgram v0.4.1
 	github.com/plexusone/omnivoice-openai v0.1.1
 	github.com/plexusone/omnivoice-telnyx v0.1.0
