@@ -4,11 +4,11 @@ go 1.26.0
 
 require (
 	github.com/plexusone/elevenlabs-go v0.10.0
+	github.com/plexusone/omni-openai v0.2.0
 	github.com/plexusone/omnivoice-core v0.8.0
 	github.com/plexusone/omnivoice-deepgram v0.5.0
-	github.com/plexusone/omnivoice-openai v0.1.2
 	github.com/plexusone/omnivoice-telnyx v0.1.1
-	github.com/plexusone/omnivoice-twilio v0.3.1
+	github.com/plexusone/twilio-go v0.4.0
 )
 
 require (
@@ -42,7 +42,7 @@ require (
 	github.com/tidwall/match v1.2.0 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/tidwall/sjson v1.2.5 // indirect
-	github.com/twilio/twilio-go v1.30.4 // indirect
+	github.com/twilio/twilio-go v1.30.5 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/otel v1.43.0 // indirect
 	go.opentelemetry.io/otel/metric v1.43.0 // indirect

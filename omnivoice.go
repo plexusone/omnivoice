@@ -16,7 +16,7 @@
 //
 //	import (
 //	    "github.com/plexusone/omnivoice"
-//	    openai "github.com/plexusone/omnivoice-openai/omnivoice"
+//	    openai "github.com/plexusone/omni-openai/omnivoice"
 //	)
 //
 // # Creating Providers
