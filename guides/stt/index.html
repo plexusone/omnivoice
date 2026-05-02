@@ -653,6 +653,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#transcript-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transcript Format
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       Best Practices
@@ -1503,6 +1512,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#transcript-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transcript Format
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       Best Practices
@@ -1829,6 +1847,37 @@
 </tr>
 </tbody>
 </table>
+<h2 id="transcript-format">Transcript Format<a class="headerlink" href="#transcript-format" title="Permanent link">&para;</a></h2>
+<p>For persisting or sharing transcription results, use the canonical Transcript format:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice&quot;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1">// Convert result to canonical Transcript</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nx">transcript</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">NewTranscript</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;deepgram&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nova-2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;audio.mp3&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="c1">// Save to JSON (durations serialize as milliseconds)</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">transcript</span><span class="p">.</span><span class="nx">SaveJSON</span><span class="p">(</span><span class="s">&quot;output.transcript.json&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1">// Load from JSON</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="nx">loaded</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">LoadTranscript</span><span class="p">(</span><span class="s">&quot;output.transcript.json&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="c1">// Access timing information</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Duration: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">transcript</span><span class="p">.</span><span class="nx">TotalDuration</span><span class="p">())</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">seg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">transcript</span><span class="p">.</span><span class="nx">Segments</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;[%v - %v] %s\n&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="w">        </span><span class="nx">seg</span><span class="p">.</span><span class="nx">Start</span><span class="p">.</span><span class="nx">Duration</span><span class="p">(),</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="w">        </span><span class="nx">seg</span><span class="p">.</span><span class="nx">End</span><span class="p">.</span><span class="nx">Duration</span><span class="p">(),</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="w">        </span><span class="nx">seg</span><span class="p">.</span><span class="nx">Text</span><span class="p">)</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="p">}</span>
+</code></pre></div>
+<p>The JSON format includes:</p>
+<ul>
+<li>Full text and segments with timing</li>
+<li>Word-level timestamps (when enabled)</li>
+<li>Speaker identification (when enabled)</li>
+<li>Provider metadata and options used</li>
+<li>JSON Schema URL for validation</li>
+</ul>
+<p>See the <a href="../cli/">CLI Guide</a> for generating transcripts from the command line with <code>omnivoice transcribe -f json</code>.</p>
 <h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Use appropriate models</strong> - Nova-2 for accuracy, Base for speed</li>
@@ -1836,9 +1885,11 @@
 <li><strong>Handle streaming errors</strong> - Reconnect on connection drops</li>
 <li><strong>Choose the right provider</strong> - Deepgram for real-time, OpenAI for accuracy</li>
 <li><strong>Preprocess audio</strong> - Normalize volume, remove silence</li>
+<li><strong>Save as Transcript JSON</strong> - Use canonical format for interoperability</li>
 </ol>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ul>
+<li><a href="../cli/">CLI Guide</a> - Transcribe from the command line</li>
 <li><a href="../streaming/">Streaming Guide</a> - Real-time transcription</li>
 <li><a href="../subtitles/">Subtitles Guide</a> - Generate SRT/VTT captions</li>
 <li><a href="../voice-agents/">Voice Agents</a> - Build conversational agents</li>
