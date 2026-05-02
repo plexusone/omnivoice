@@ -10,6 +10,8 @@ Batteries-included voice pipeline framework for Go. Single import, all providers
 - ⚡ **Streaming Support** - Real-time transcription and synthesis
 - 📞 **Voice Calls** - Make and receive phone calls with CallSystem
 - 💬 **SMS** - Send text messages via SMSProvider
+- 🖥️ **CLI Tool** - Transcribe audio from the command line
+- 📄 **Transcript Format** - Canonical JSON format with timestamps and metadata
 
 ## Quick Example
 
@@ -58,6 +60,7 @@ go get github.com/plexusone/omnivoice
 
 | Use Case | Guide | Providers |
 |----------|-------|-----------|
+| CLI Transcription | [CLI Guide](guides/cli.md) | All STT providers |
 | Text-to-Speech | [TTS Guide](guides/tts.md) | OpenAI, ElevenLabs, Deepgram, Twilio |
 | Speech-to-Text | [STT Guide](guides/stt.md) | OpenAI, ElevenLabs, Deepgram, Twilio |
 | Voice Calls | [Voice Calls](guides/voice-calls.md) | Twilio, Telnyx |

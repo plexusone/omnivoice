@@ -247,6 +247,42 @@ if err != nil {
 | WebM | `.webm` | Deepgram, OpenAI |
 | M4A | `.m4a` | Deepgram, OpenAI |
 
+## Transcript Format
+
+For persisting or sharing transcription results, use the canonical Transcript format:
+
+```go
+import "github.com/plexusone/omnivoice"
+
+// Convert result to canonical Transcript
+transcript := omnivoice.NewTranscript(result, "deepgram", "nova-2", "audio.mp3", config)
+
+// Save to JSON (durations serialize as milliseconds)
+err := transcript.SaveJSON("output.transcript.json")
+
+// Load from JSON
+loaded, err := omnivoice.LoadTranscript("output.transcript.json")
+
+// Access timing information
+fmt.Printf("Duration: %v\n", transcript.TotalDuration())
+for _, seg := range transcript.Segments {
+    fmt.Printf("[%v - %v] %s\n",
+        seg.Start.Duration(),
+        seg.End.Duration(),
+        seg.Text)
+}
+```
+
+The JSON format includes:
+
+- Full text and segments with timing
+- Word-level timestamps (when enabled)
+- Speaker identification (when enabled)
+- Provider metadata and options used
+- JSON Schema URL for validation
+
+See the [CLI Guide](cli.md) for generating transcripts from the command line with `omnivoice transcribe -f json`.
+
 ## Best Practices
 
 1. **Use appropriate models** - Nova-2 for accuracy, Base for speed
@@ -254,9 +290,11 @@ if err != nil {
 3. **Handle streaming errors** - Reconnect on connection drops
 4. **Choose the right provider** - Deepgram for real-time, OpenAI for accuracy
 5. **Preprocess audio** - Normalize volume, remove silence
+6. **Save as Transcript JSON** - Use canonical format for interoperability
 
 ## Next Steps
 
+- [CLI Guide](cli.md) - Transcribe from the command line
 - [Streaming Guide](streaming.md) - Real-time transcription
 - [Subtitles Guide](subtitles.md) - Generate SRT/VTT captions
 - [Voice Agents](voice-agents.md) - Build conversational agents
