@@ -1238,7 +1238,7 @@
 <p><strong>When to use:</strong> When the provider has an official Go SDK that we wrap.</p>
 <p><strong>Examples:</strong>
 - <code>omni-openai</code> — Uses <code>github.com/openai/openai-go</code>
-- <code>omnivoice-deepgram</code> — Uses Deepgram's SDK
+- <code>omni-deepgram</code> — Uses Deepgram's SDK
 - <code>omni-openai/omnillm</code> — Uses <code>github.com/openai/openai-go</code>
 - <code>omnillm-anthropic</code> — Uses <code>github.com/anthropics/anthropic-sdk-go</code></p>
 <p><strong>Dependencies:</strong>
@@ -1285,9 +1285,9 @@
 - Like <a href="https://github.com/rclone/rclone">rclone</a> pattern</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// omnivoice/registry.go</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omni-openai&quot;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice-deepgram&quot;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/elevenlabs-go/omnivoice&quot;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omni-openai/omnivoice&quot;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omni-deepgram/omnivoice/tts&quot;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/elevenlabs-go/omnivoice/tts&quot;</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">)</span>
 </code></pre></div>
 <h2 id="decision-tree">Decision Tree<a class="headerlink" href="#decision-tree" title="Permanent link">&para;</a></h2>
