@@ -46,7 +46,59 @@ For a minimal dependency footprint, use [omnivoice-core](https://github.com/plex
 go get github.com/plexusone/omnivoice
 ```
 
-## Quick Start
+## CLI
+
+OmniVoice includes a command-line tool for transcription.
+
+### Install CLI
+
+```bash
+go install github.com/plexusone/omnivoice/cmd/omnivoice@latest
+```
+
+### Usage
+
+```bash
+# Set your API key
+export DEEPGRAM_API_KEY="your-api-key"
+
+# Basic transcription (stdout)
+omnivoice transcribe podcast.mp3
+
+# Save to file
+omnivoice transcribe -p deepgram -o transcript.txt podcast.mp3
+
+# JSON output with full metadata (OmniVoice Transcript format)
+omnivoice transcribe -p deepgram --diarize --timestamps -f json -o transcript.json podcast.mp3
+
+# Generate SRT subtitles
+omnivoice transcribe -p deepgram -f srt -o subtitles.srt podcast.mp3
+
+# Generate WebVTT subtitles
+omnivoice transcribe -p deepgram -f vtt -o subtitles.vtt podcast.mp3
+
+# List available providers
+omnivoice providers list
+```
+
+### Output Formats
+
+| Format | Description |
+|--------|-------------|
+| `text` | Plain transcript text (default) |
+| `json` | OmniVoice Transcript format with full metadata |
+| `srt`  | SubRip subtitles |
+| `vtt`  | WebVTT subtitles |
+
+### Environment Variables
+
+| Variable | Provider |
+|----------|----------|
+| `DEEPGRAM_API_KEY` | Deepgram |
+| `OPENAI_API_KEY` | OpenAI |
+| `ELEVENLABS_API_KEY` | ElevenLabs |
+
+## Quick Start (Library)
 
 ```go
 import (
