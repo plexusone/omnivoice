@@ -7,6 +7,31 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.8.0",
+      "date": "2026-05-02",
+      "highlights": [
+        { "description": "CLI tool for speech-to-text transcription" },
+        { "description": "Canonical Transcript format re-exported from omnivoice-core" }
+      ],
+      "added": [
+        { "description": "`cmd/omnivoice` CLI with `transcribe` and `providers list` commands" },
+        { "description": "Output formats: text (default), json (OmniVoice Transcript), srt, vtt" },
+        { "description": "Speaker diarization (`--diarize`) and word timestamps (`--timestamps`) flags" },
+        { "description": "Multi-provider support via environment variables (DEEPGRAM_API_KEY, OPENAI_API_KEY, ELEVENLABS_API_KEY)" },
+        { "description": "`transcript.go` re-exporting `Transcript`, `TranscriptSegment`, `TranscriptWord` types from omnivoice-core" },
+        { "description": "`NewTranscript()` convenience function for creating transcripts from `TranscriptionResult`" },
+        { "description": "`LoadTranscript()` for loading transcripts from JSON files" },
+        { "description": "`schema` package re-exporting `TranscriptV1Schema` from omnivoice-core" }
+      ],
+      "documentation": [
+        { "description": "CLI guide with usage examples, flags, and output format documentation" },
+        { "description": "README updated with CLI installation and usage section" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omnivoice-core` v0.8.0 → v0.9.0 (canonical Transcript format, DurationMilliseconds)" }
+      ]
+    },
+    {
       "version": "v0.7.1",
       "date": "2026-04-05",
       "highlights": [
