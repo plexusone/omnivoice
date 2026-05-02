@@ -15,7 +15,7 @@ Deepgram provides ultra-low latency STT and TTS optimized for real-time applicat
 ```go
 import (
     "github.com/plexusone/omnivoice"
-    _ "github.com/plexusone/omnivoice/providers/deepgram"
+    _ "github.com/plexusone/omnivoice/providers/all"
 )
 
 // STT Provider

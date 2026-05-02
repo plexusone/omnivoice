@@ -21,13 +21,15 @@ import _ "github.com/plexusone/omnivoice/providers/all"
 
 ### Import Specific Providers
 
+For selective imports, use the provider modules directly:
+
 ```go
 import (
-    _ "github.com/plexusone/omnivoice/providers/openai"
-    _ "github.com/plexusone/omnivoice/providers/elevenlabs"
-    _ "github.com/plexusone/omnivoice/providers/deepgram"
-    _ "github.com/plexusone/omnivoice/providers/twilio"
-    _ "github.com/plexusone/omnivoice/providers/telnyx"
+    _ "github.com/plexusone/omni-openai/omnivoice"
+    _ "github.com/plexusone/elevenlabs-go/omnivoice/tts"
+    _ "github.com/plexusone/omni-deepgram/omnivoice/tts"
+    _ "github.com/plexusone/twilio-go/omnivoice/callsystem"
+    _ "github.com/plexusone/omni-telnyx/omnivoice/callsystem"
 )
 ```
 

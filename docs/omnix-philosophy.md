@@ -47,7 +47,7 @@ type Provider interface {
 
 **Examples:**
 - `omni-openai` — Uses `github.com/openai/openai-go`
-- `omnivoice-deepgram` — Uses Deepgram's SDK
+- `omni-deepgram` — Uses Deepgram's SDK
 - `omni-openai/omnillm` — Uses `github.com/openai/openai-go`
 - `omnillm-anthropic` — Uses `github.com/anthropics/anthropic-sdk-go`
 
@@ -113,9 +113,9 @@ elevenlabs-go/
 ```go
 // omnivoice/registry.go
 import (
-    _ "github.com/plexusone/omni-openai"
-    _ "github.com/plexusone/omnivoice-deepgram"
-    _ "github.com/plexusone/elevenlabs-go/omnivoice"
+    _ "github.com/plexusone/omni-openai/omnivoice"
+    _ "github.com/plexusone/omni-deepgram/omnivoice/tts"
+    _ "github.com/plexusone/elevenlabs-go/omnivoice/tts"
 )
 ```
 

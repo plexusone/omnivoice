@@ -15,7 +15,7 @@ ElevenLabs provides premium voice synthesis with natural, expressive voices.
 ```go
 import (
     "github.com/plexusone/omnivoice"
-    _ "github.com/plexusone/omnivoice/providers/elevenlabs"
+    _ "github.com/plexusone/omnivoice/providers/all"
 )
 
 // TTS Provider

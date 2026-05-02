@@ -15,7 +15,7 @@ Telnyx provides programmable voice calls and SMS messaging with competitive pric
 ```go
 import (
     "github.com/plexusone/omnivoice"
-    _ "github.com/plexusone/omnivoice/providers/telnyx"
+    _ "github.com/plexusone/omnivoice/providers/all"
 )
 
 provider, err := omnivoice.GetCallSystemProvider("telnyx",

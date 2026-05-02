@@ -15,7 +15,7 @@ Twilio provides programmable voice calls and SMS messaging.
 ```go
 import (
     "github.com/plexusone/omnivoice"
-    _ "github.com/plexusone/omnivoice/providers/twilio"
+    _ "github.com/plexusone/omnivoice/providers/all"
 )
 
 provider, err := omnivoice.GetCallSystemProvider("twilio",

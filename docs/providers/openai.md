@@ -14,7 +14,7 @@ OpenAI provides TTS via their text-to-speech API and STT via Whisper.
 ```go
 import (
     "github.com/plexusone/omnivoice"
-    _ "github.com/plexusone/omnivoice/providers/openai"
+    _ "github.com/plexusone/omnivoice/providers/all"
 )
 
 // TTS Provider
