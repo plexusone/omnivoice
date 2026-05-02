@@ -38,6 +38,7 @@ nav:
   - Home: index.md
   - Getting Started: getting-started.md
   - Guides:
+      - CLI: guides/cli.md
       - Text-to-Speech: guides/tts.md
       - Speech-to-Text: guides/stt.md
       - Voice Calls: guides/voice-calls.md
@@ -56,6 +57,8 @@ nav:
       - Provider Registry: reference/registry.md
       - Multi-Provider Failover: reference/failover.md
   - Releases:
+      - v0.8.0: releases/v0.8.0.md
+      - v0.7.1: releases/v0.7.1.md
       - v0.7.0: releases/v0.7.0.md
       - v0.6.0: releases/v0.6.0.md
       - v0.5.0: releases/v0.5.0.md
