@@ -16,10 +16,10 @@ import (
 	// Provider packages
 	elevenlabsstt "github.com/plexusone/elevenlabs-go/omnivoice/stt"
 	elevenlabstts "github.com/plexusone/elevenlabs-go/omnivoice/tts"
+	deepgramstt "github.com/plexusone/omni-deepgram/omnivoice/stt"
+	deepgramtts "github.com/plexusone/omni-deepgram/omnivoice/tts"
 	openaiomni "github.com/plexusone/omni-openai/omnivoice"
-	deepgramstt "github.com/plexusone/omnivoice-deepgram/omnivoice/stt"
-	deepgramtts "github.com/plexusone/omnivoice-deepgram/omnivoice/tts"
-	telnyxcallsystem "github.com/plexusone/omnivoice-telnyx/callsystem"
+	telnyxcallsystem "github.com/plexusone/omni-telnyx/omnivoice/callsystem"
 	twiliocallsystem "github.com/plexusone/twilio-go/omnivoice/callsystem"
 	twiliostt "github.com/plexusone/twilio-go/omnivoice/stt"
 	twiliotts "github.com/plexusone/twilio-go/omnivoice/tts"
