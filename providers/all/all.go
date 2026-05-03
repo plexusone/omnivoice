@@ -20,9 +20,9 @@ import (
 	deepgramtts "github.com/plexusone/omni-deepgram/omnivoice/tts"
 	openaiomni "github.com/plexusone/omni-openai/omnivoice"
 	telnyxcallsystem "github.com/plexusone/omni-telnyx/omnivoice/callsystem"
-	twiliocallsystem "github.com/plexusone/twilio-go/omnivoice/callsystem"
-	twiliostt "github.com/plexusone/twilio-go/omnivoice/stt"
-	twiliotts "github.com/plexusone/twilio-go/omnivoice/tts"
+	twiliocallsystem "github.com/plexusone/omni-twilio/omnivoice/callsystem"
+	twiliostt "github.com/plexusone/omni-twilio/omnivoice/stt"
+	twiliotts "github.com/plexusone/omni-twilio/omnivoice/tts"
 )
 
 func init() {

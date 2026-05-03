@@ -7,8 +7,8 @@ require (
 	github.com/plexusone/omni-deepgram v0.6.0
 	github.com/plexusone/omni-openai v0.2.1
 	github.com/plexusone/omni-telnyx v0.2.0
+	github.com/plexusone/omni-twilio v0.5.0
 	github.com/plexusone/omnivoice-core v0.9.0
-	github.com/plexusone/twilio-go v0.4.1
 	github.com/spf13/cobra v1.10.2
 )
 

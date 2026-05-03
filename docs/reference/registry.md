@@ -28,7 +28,7 @@ import (
     _ "github.com/plexusone/omni-openai/omnivoice"
     _ "github.com/plexusone/elevenlabs-go/omnivoice/tts"
     _ "github.com/plexusone/omni-deepgram/omnivoice/tts"
-    _ "github.com/plexusone/twilio-go/omnivoice/callsystem"
+    _ "github.com/plexusone/omni-twilio/omnivoice/callsystem"
     _ "github.com/plexusone/omni-telnyx/omnivoice/callsystem"
 )
 ```

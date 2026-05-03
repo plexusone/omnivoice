@@ -88,7 +88,7 @@ import (
 
 // Telephony providers
 import (
-    _ "github.com/plexusone/twilio-go/omnivoice/callsystem"
+    _ "github.com/plexusone/omni-twilio/omnivoice/callsystem"
     _ "github.com/plexusone/omni-telnyx/omnivoice/callsystem"
 )
 ```

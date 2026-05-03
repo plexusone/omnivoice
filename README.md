@@ -221,7 +221,7 @@ OmniVoice accepts language codes in [BCP-47](https://www.rfc-editor.org/info/bcp
 - [omni-openai](https://github.com/plexusone/omni-openai) - OpenAI provider
 - [omni-deepgram](https://github.com/plexusone/omni-deepgram) - Deepgram provider
 - [omni-telnyx](https://github.com/plexusone/omni-telnyx) - Telnyx provider
-- [twilio-go](https://github.com/plexusone/twilio-go) - Twilio provider
+- [omni-twilio](https://github.com/plexusone/omni-twilio) - Twilio provider
 - [elevenlabs-go](https://github.com/plexusone/elevenlabs-go) - ElevenLabs SDK
 
 ## License
