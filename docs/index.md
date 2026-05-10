@@ -77,7 +77,7 @@ go get github.com/plexusone/omnivoice
 │                        (batteries-included)                             │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
-│   import _ "github.com/plexusone/omnivoice/providers/all"              │
+│   import _ "github.com/plexusone/omnivoice/providers/all"               │
 │                                                                         │
 │   ┌─────────────────────────────────────────────────────────────────┐   │
 │   │                      Provider Registry                          │   │
