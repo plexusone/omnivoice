@@ -1,8 +1,26 @@
 # Voice Calls
 
-Make and receive phone calls using Twilio or Telnyx via the CallSystem interface.
+OmniVoice supports two types of voice connections:
 
-## Quick Start
+1. **PSTN (Phone Calls)** - Traditional phone calls via Twilio, Telnyx, Vonage, or Plivo
+2. **WebRTC (Browser/Mobile)** - Direct connections via LiveKit for web and mobile apps
+
+## PSTN Providers (Phone Calls)
+
+| Provider | Registry Name | Audio Format | Auth Method |
+|----------|---------------|--------------|-------------|
+| Twilio | `"twilio"` | mulaw 8kHz | Account SID + Token |
+| Telnyx | `"telnyx"` | L16 16kHz | API Key |
+| Vonage | `"vonage"` | L16 16kHz | JWT (RS256) |
+| Plivo | `"plivo"` | L16 16kHz | Auth ID + Token |
+
+## WebRTC Providers (Browser/Mobile)
+
+| Provider | Registry Name | Audio Format | Best For |
+|----------|---------------|--------------|----------|
+| LiveKit | `"livekit"` | Opus (configurable) | Custom apps, low latency |
+
+## Quick Start (PSTN)
 
 ```go
 provider, _ := omnivoice.GetCallSystemProvider("twilio",
@@ -15,12 +33,27 @@ call, _ := provider.MakeCall(ctx, "+15559876543")
 fmt.Printf("Call ID: %s\n", call.ID())
 ```
 
-## Available Providers
+## Quick Start (WebRTC)
 
-| Provider | Registry Name | Features |
-|----------|---------------|----------|
-| Twilio | `"twilio"` | PSTN, Media Streams, TwiML |
-| Telnyx | `"telnyx"` | PSTN, Media Streaming, Call Control |
+```go
+import "github.com/plexusone/omni-livekit/omnivoice/gateway"
+
+gw, _ := gateway.New(gateway.Config{
+    LiveKitURL:    os.Getenv("LIVEKIT_URL"),
+    LiveKitAPIKey: os.Getenv("LIVEKIT_API_KEY"),
+    LiveKitSecret: os.Getenv("LIVEKIT_API_SECRET"),
+    RoomName:      "voice-agent",
+    AgentIdentity: "ai-agent",
+    SampleRate:    24000,
+})
+
+gw.OnParticipantJoined(func(p *gateway.ParticipantInfo) error {
+    log.Printf("User joined: %s", p.Identity)
+    return nil
+})
+
+gw.Start(ctx)
+```
 
 ## Making Outbound Calls
 

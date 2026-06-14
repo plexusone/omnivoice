@@ -4,13 +4,28 @@ OmniVoice supports multiple providers for each capability. Choose based on your 
 
 ## Provider Matrix
 
-| Provider | TTS | STT | Streaming | CallSystem | SMS |
-|----------|-----|-----|-----------|------------|-----|
-| [OpenAI](openai.md) | ✓ | ✓ | ✓ | - | - |
-| [ElevenLabs](elevenlabs.md) | ✓ | ✓ | ✓ | - | - |
-| [Deepgram](deepgram.md) | ✓ | ✓ | ✓ | - | - |
-| [Twilio](twilio.md) | - | - | - | ✓ | ✓ |
-| [Telnyx](telnyx.md) | - | - | - | ✓ | ✓ |
+### STT/TTS Providers
+
+| Provider | TTS | STT | Streaming | Notes |
+|----------|-----|-----|-----------|-------|
+| [OpenAI](openai.md) | ✓ | ✓ | ✓ | Whisper for STT, TTS-1 for TTS |
+| [ElevenLabs](elevenlabs.md) | ✓ | ✓ | ✓ | Premium voice synthesis |
+| [Deepgram](deepgram.md) | ✓ | ✓ | ✓ | Real-time transcription |
+
+### Voice Gateway Providers (PSTN)
+
+| Provider | Voice | SMS | Audio Format | Notes |
+|----------|-------|-----|--------------|-------|
+| [Twilio](twilio.md) | ✓ | ✓ | mulaw 8kHz | Most popular, Media Streams |
+| [Telnyx](telnyx.md) | ✓ | ✓ | L16 16kHz | Competitive pricing |
+| Vonage | ✓ | ✓ | L16 16kHz | JWT auth, NCCO call control |
+| Plivo | ✓ | ✓ | L16 16kHz | Good international coverage |
+
+### Voice Gateway Providers (WebRTC)
+
+| Provider | Protocol | Latency | Notes |
+|----------|----------|---------|-------|
+| LiveKit | WebRTC | <200ms | Browser/mobile, open source |
 
 ## Comparison by Use Case
 
@@ -30,12 +45,20 @@ OmniVoice supports multiple providers for each capability. Choose based on your 
 | **OpenAI** | High | Excellent | - | Batch transcription |
 | **ElevenLabs** | Low | Very Good | ✓ | Voice apps with ElevenLabs TTS |
 
-### Phone/SMS (CallSystem)
+### PSTN Voice Gateway
 
 | Provider | Call Quality | Geographic Coverage | Pricing |
 |----------|-------------|---------------------|---------|
 | **Twilio** | Excellent | Global | Pay-per-use |
 | **Telnyx** | Excellent | Global | Lower cost |
+| **Vonage** | Excellent | Global | Competitive |
+| **Plivo** | Excellent | Global | Simple pricing |
+
+### WebRTC Voice Gateway
+
+| Provider | Latency | Use Case | Pricing |
+|----------|---------|----------|---------|
+| **LiveKit** | <200ms | Custom web/mobile apps | Infrastructure only |
 
 ## Quick Comparison
 
@@ -95,13 +118,28 @@ import (
 
 ## Environment Variables
 
+### STT/TTS Providers
+
 | Provider | Required Variables |
 |----------|-------------------|
 | OpenAI | `OPENAI_API_KEY` |
 | ElevenLabs | `ELEVENLABS_API_KEY` |
 | Deepgram | `DEEPGRAM_API_KEY` |
+
+### PSTN Voice Gateway
+
+| Provider | Required Variables |
+|----------|-------------------|
 | Twilio | `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN` |
-| Telnyx | `TELNYX_API_KEY` |
+| Telnyx | `TELNYX_API_KEY`, `TELNYX_CONNECTION_ID` |
+| Vonage | `VONAGE_APPLICATION_ID`, `VONAGE_PRIVATE_KEY` |
+| Plivo | `PLIVO_AUTH_ID`, `PLIVO_AUTH_TOKEN` |
+
+### WebRTC Voice Gateway
+
+| Provider | Required Variables |
+|----------|-------------------|
+| LiveKit | `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET` |
 
 ## Multi-Provider Patterns
 
@@ -140,8 +178,19 @@ func selectProvider(priority string) omnivoice.TTSProvider {
 
 ## Next Steps
 
+### STT/TTS
+
 - [OpenAI](openai.md) - OpenAI TTS and Whisper STT
 - [ElevenLabs](elevenlabs.md) - Premium voice synthesis
 - [Deepgram](deepgram.md) - Real-time transcription
+
+### PSTN Voice Gateway
+
 - [Twilio](twilio.md) - Phone calls and SMS
 - [Telnyx](telnyx.md) - Phone calls and SMS
+- Vonage - JWT auth, NCCO call control
+- Plivo - Simple pricing, international coverage
+
+### WebRTC Voice Gateway
+
+- [LiveKit](https://github.com/plexusone/omni-livekit) - Browser/mobile apps

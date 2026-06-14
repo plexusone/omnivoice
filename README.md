@@ -32,6 +32,22 @@ Batteries-included voice pipeline framework for Go. This package provides a unif
 
 For a minimal dependency footprint, use [omnivoice-core](https://github.com/plexusone/omnivoice-core) instead.
 
+## Voice Architecture
+
+OmniVoice supports two approaches for real-time voice:
+
+| Approach | Latency | Use Case |
+|----------|---------|----------|
+| **Traditional Pipeline** (STT→LLM→TTS) | 500-1500ms | Custom voices, domain-specific STT |
+| **Native Voice-to-Voice** | 100-200ms | Low latency, natural conversation |
+
+This package provides the **Traditional Pipeline** components. For native voice-to-voice, see:
+
+- [omni-openai/omnivoice/realtime](https://github.com/plexusone/omni-openai) - OpenAI Realtime API (~100ms)
+- [omni-google/omnivoice](https://github.com/plexusone/omni-google) - Gemini Live API (~200ms)
+
+See the [Voice Architecture Guide](https://plexusone.dev/omnivoice-core/voice-architecture) for detailed comparison.
+
 ## Features
 
 - 🎯 **Unified Interface**: Single API for all STT and TTS providers
@@ -217,12 +233,28 @@ OmniVoice accepts language codes in [BCP-47](https://www.rfc-editor.org/info/bcp
 
 ## Related Packages
 
+### Core
+
 - [omnivoice-core](https://github.com/plexusone/omnivoice-core) - Core interfaces (minimal dependencies)
-- [omni-openai](https://github.com/plexusone/omni-openai) - OpenAI provider
-- [omni-deepgram](https://github.com/plexusone/omni-deepgram) - Deepgram provider
-- [omni-telnyx](https://github.com/plexusone/omni-telnyx) - Telnyx provider
-- [omni-twilio](https://github.com/plexusone/omni-twilio) - Twilio provider
+
+### Native Voice-to-Voice (Recommended for Low Latency)
+
+- [omni-openai/omnivoice/realtime](https://github.com/plexusone/omni-openai) - OpenAI Realtime API (~100ms latency)
+- [omni-google/omnivoice](https://github.com/plexusone/omni-google) - Gemini Live API (~200ms latency)
+
+### STT/TTS Providers
+
+- [omni-openai](https://github.com/plexusone/omni-openai) - OpenAI provider (Whisper, TTS-1)
+- [omni-deepgram](https://github.com/plexusone/omni-deepgram) - Deepgram provider (Nova-2, Aura)
 - [elevenlabs-go](https://github.com/plexusone/elevenlabs-go) - ElevenLabs SDK
+
+### Voice Gateway Providers
+
+- [omni-twilio](https://github.com/plexusone/omni-twilio) - Twilio Media Streams
+- [omni-telnyx](https://github.com/plexusone/omni-telnyx) - Telnyx Media Streaming
+- [omni-vonage](https://github.com/plexusone/omni-vonage) - Vonage Voice WebSocket
+- [omni-plivo](https://github.com/plexusone/omni-plivo) - Plivo Stream API
+- [omni-livekit](https://github.com/plexusone/omni-livekit) - LiveKit WebRTC (web/mobile)
 
 ## License
 
