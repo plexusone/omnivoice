@@ -5,6 +5,7 @@ go 1.26.0
 require (
 	github.com/plexusone/elevenlabs-go v0.10.1
 	github.com/plexusone/omni-deepgram v0.6.0
+	github.com/plexusone/omni-google v0.5.0
 	github.com/plexusone/omni-openai v0.3.0
 	github.com/plexusone/omni-telnyx v0.3.0
 	github.com/plexusone/omni-twilio v0.6.0
