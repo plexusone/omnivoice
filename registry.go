@@ -5,6 +5,7 @@ import (
 	"sync"
 
 	"github.com/plexusone/omnivoice-core/callsystem"
+	"github.com/plexusone/omnivoice-core/realtime"
 	"github.com/plexusone/omnivoice-core/stt"
 	"github.com/plexusone/omnivoice-core/tts"
 )
@@ -85,11 +86,15 @@ type STTProviderFactory func(config ProviderConfig) (stt.Provider, error)
 // CallSystemProviderFactory creates a CallSystem provider with the given configuration.
 type CallSystemProviderFactory func(config ProviderConfig) (callsystem.CallSystem, error)
 
+// RealtimeProviderFactory creates a Realtime provider with the given configuration.
+type RealtimeProviderFactory func(config ProviderConfig) (realtime.Provider, error)
+
 // registry holds registered provider factories.
 var registry = &providerRegistry{
 	ttsFactories:        make(map[string]TTSProviderFactory),
 	sttFactories:        make(map[string]STTProviderFactory),
 	callSystemFactories: make(map[string]CallSystemProviderFactory),
+	realtimeFactories:   make(map[string]RealtimeProviderFactory),
 }
 
 type providerRegistry struct {
@@ -97,6 +102,7 @@ type providerRegistry struct {
 	ttsFactories        map[string]TTSProviderFactory
 	sttFactories        map[string]STTProviderFactory
 	callSystemFactories map[string]CallSystemProviderFactory
+	realtimeFactories   map[string]RealtimeProviderFactory
 }
 
 // RegisterTTSProvider registers a TTS provider factory by name.
@@ -251,5 +257,61 @@ func HasCallSystemProvider(name string) bool {
 	registry.mu.RLock()
 	defer registry.mu.RUnlock()
 	_, ok := registry.callSystemFactories[name]
+	return ok
+}
+
+// RegisterRealtimeProvider registers a Realtime provider factory by name.
+// This is typically called from provider init() functions.
+func RegisterRealtimeProvider(name string, factory RealtimeProviderFactory) {
+	registry.mu.Lock()
+	defer registry.mu.Unlock()
+	registry.realtimeFactories[name] = factory
+}
+
+// GetRealtimeProvider creates a Realtime provider by name with the given options.
+//
+// Realtime providers enable native voice-to-voice conversations with low latency
+// (~100-300ms). Available providers include:
+//   - "openai-realtime": OpenAI Realtime API (~100ms latency)
+//   - "gemini-live": Google Gemini Live API (~200ms latency)
+//
+// Example:
+//
+//	provider, err := omnivoice.GetRealtimeProvider("openai-realtime",
+//	    omnivoice.WithAPIKey(os.Getenv("OPENAI_API_KEY")))
+func GetRealtimeProvider(name string, opts ...ProviderOption) (realtime.Provider, error) {
+	registry.mu.RLock()
+	factory, ok := registry.realtimeFactories[name]
+	registry.mu.RUnlock()
+
+	if !ok {
+		return nil, fmt.Errorf("unknown Realtime provider: %s (available: %v)", name, ListRealtimeProviders())
+	}
+
+	config := ProviderConfig{}
+	for _, opt := range opts {
+		opt(&config)
+	}
+
+	return factory(config)
+}
+
+// ListRealtimeProviders returns the names of all registered Realtime providers.
+func ListRealtimeProviders() []string {
+	registry.mu.RLock()
+	defer registry.mu.RUnlock()
+
+	names := make([]string, 0, len(registry.realtimeFactories))
+	for name := range registry.realtimeFactories {
+		names = append(names, name)
+	}
+	return names
+}
+
+// HasRealtimeProvider checks if a Realtime provider is registered.
+func HasRealtimeProvider(name string) bool {
+	registry.mu.RLock()
+	defer registry.mu.RUnlock()
+	_, ok := registry.realtimeFactories[name]
 	return ok
 }
