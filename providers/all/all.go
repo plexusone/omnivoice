@@ -18,7 +18,9 @@ import (
 	elevenlabstts "github.com/plexusone/elevenlabs-go/omnivoice/tts"
 	deepgramstt "github.com/plexusone/omni-deepgram/omnivoice/stt"
 	deepgramtts "github.com/plexusone/omni-deepgram/omnivoice/tts"
+	googlerealtime "github.com/plexusone/omni-google/omnivoice/realtime"
 	openaiomni "github.com/plexusone/omni-openai/omnivoice"
+	openairealtime "github.com/plexusone/omni-openai/omnivoice/realtime"
 	telnyxcallsystem "github.com/plexusone/omni-telnyx/omnivoice/callsystem"
 	twiliocallsystem "github.com/plexusone/omni-twilio/omnivoice/callsystem"
 	twiliostt "github.com/plexusone/omni-twilio/omnivoice/stt"
@@ -173,5 +175,39 @@ func init() {
 		}
 
 		return telnyxcallsystem.New(opts...)
+	})
+
+	// Register OpenAI Realtime provider
+	omnivoice.RegisterRealtimeProvider("openai-realtime", func(config omnivoice.ProviderConfig) (omnivoice.RealtimeProvider, error) {
+		if config.APIKey == "" {
+			return nil, fmt.Errorf("openai-realtime: API key is required")
+		}
+		var opts []openairealtime.Option
+		// Check for voice in extensions
+		if voice, ok := config.Extensions["voice"].(string); ok && voice != "" {
+			opts = append(opts, openairealtime.WithVoice(voice))
+		}
+		// Check for instructions in extensions
+		if instructions, ok := config.Extensions["instructions"].(string); ok && instructions != "" {
+			opts = append(opts, openairealtime.WithInstructions(instructions))
+		}
+		return openairealtime.NewProvider(config.APIKey, opts...), nil
+	})
+
+	// Register Gemini Live provider
+	omnivoice.RegisterRealtimeProvider("gemini-live", func(config omnivoice.ProviderConfig) (omnivoice.RealtimeProvider, error) {
+		if config.APIKey == "" {
+			return nil, fmt.Errorf("gemini-live: API key is required")
+		}
+		var opts []googlerealtime.Option
+		// Check for voice in extensions
+		if voice, ok := config.Extensions["voice"].(string); ok && voice != "" {
+			opts = append(opts, googlerealtime.WithVoice(voice))
+		}
+		// Check for instructions in extensions
+		if instructions, ok := config.Extensions["instructions"].(string); ok && instructions != "" {
+			opts = append(opts, googlerealtime.WithInstructions(instructions))
+		}
+		return googlerealtime.NewRealtimeProvider(config.APIKey, opts...), nil
 	})
 }
