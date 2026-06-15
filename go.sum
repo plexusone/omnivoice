@@ -58,12 +58,12 @@ github.com/openai/openai-go v1.12.0 h1:NBQCnXzqOTv5wsgNC36PrFEiskGfO5wccfCWDo9S1
 github.com/openai/openai-go v1.12.0/go.mod h1:g461MYGXEXBVdV5SaR/5tNzNbSfwTBBefwc+LlDCK0Y=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
-github.com/plexusone/elevenlabs-go v0.10.1 h1:h2cSVUZsGrjKA0p9bBKUJrpti9tzZPufQC0OkRzzUhQ=
-github.com/plexusone/elevenlabs-go v0.10.1/go.mod h1:5s/xsyuc47yf1/PSvNuot9XAyz3YXX/t8q8krSOyjTc=
+github.com/plexusone/elevenlabs-go v0.11.0 h1:M+lamTrDDuYAVKHR8svt4jbKl9Lq3A2Cw5TGb3ZctKw=
+github.com/plexusone/elevenlabs-go v0.11.0/go.mod h1:u1Ws4exTHuDILmwlpTZ+4xkhWyChmPU6YMXCQSzZeVQ=
 github.com/plexusone/ogen-tools v0.2.1 h1:S9QAKhWzjlJD1t5GbRhoxQziORiQZKBo/W0/49OiXKY=
 github.com/plexusone/ogen-tools v0.2.1/go.mod h1:vVWHWJbGjYjowi7aZu3DoZTDK4MVf9x05pk4p+cYnAI=
-github.com/plexusone/omni-deepgram v0.6.0 h1:3H8UfeZqRtrcbUDhGz2DraoIkNQJpg9FMXgM0kOGzLU=
-github.com/plexusone/omni-deepgram v0.6.0/go.mod h1:XTqvLRXw241vNmaEv1RjB2nCWyWAkNkd3imL0Pawyec=
+github.com/plexusone/omni-deepgram v0.6.1 h1:it+NVzGDEFkpir1MvSiCdzyefJiaW9U9cBxZI6OQNp4=
+github.com/plexusone/omni-deepgram v0.6.1/go.mod h1:9x8nOXRsQKS5H+6nVLNg7jsvNsNCSQ5vYkQno82gw08=
 github.com/plexusone/omni-google v0.5.0 h1:06jKfyleNlFtJpX8zmMS1qiT9yu7jebHZ2PTCw1z0k8=
 github.com/plexusone/omni-google v0.5.0/go.mod h1:tkOmLCodc11FIlmeDVH/PB+ll208/ktKYNe8JyfPpiY=
 github.com/plexusone/omni-openai v0.3.0 h1:NJBHpj62GDVNDqQgpozlPMQNWTeFaAIPWnqY3GIck/s=
@@ -72,8 +72,8 @@ github.com/plexusone/omni-telnyx v0.3.0 h1:+qPb/5WdhfF+6JAGRjBJw1VqTMj31++kYWptA
 github.com/plexusone/omni-telnyx v0.3.0/go.mod h1:0kyk9CnOERq1N2xuB7u0+yUMUlXSvLiLFvIqsR7lCcA=
 github.com/plexusone/omni-twilio v0.6.0 h1:VqUKpp0CuKeuKp4PWHj6dFX4XjzWi2sYHmkb2Hlw+kM=
 github.com/plexusone/omni-twilio v0.6.0/go.mod h1:RdZ2NqL02CfReCceNCzyQtH9bw6zGbqqzEeEhFEL8Ek=
-github.com/plexusone/omnivoice-core v0.12.1 h1:CWTNC4uVK9TKsiXhSa0u315FwGWhb0dEIi9KJ2C9lU4=
-github.com/plexusone/omnivoice-core v0.12.1/go.mod h1:ghbU63vSkn09vz1Mb9uQrePVcNLpXXBB9IMZ2wkzePM=
+github.com/plexusone/omnivoice-core v0.13.0 h1:JMncJ79Qh9wIM0coUb+6M/1sV42QGs442xIacLaIIqY=
+github.com/plexusone/omnivoice-core v0.13.0/go.mod h1:ghbU63vSkn09vz1Mb9uQrePVcNLpXXBB9IMZ2wkzePM=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rogpeppe/go-internal v1.14.1 h1:UQB4HGPB6osV0SQTLymcB4TgvyWu6ZyliaW0tI/otEQ=
