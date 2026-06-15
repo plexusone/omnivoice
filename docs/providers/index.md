@@ -16,8 +16,8 @@ OmniVoice supports multiple providers for each capability. Choose based on your 
 
 | Provider | Latency | Registry Name | Notes |
 |----------|---------|---------------|-------|
-| OpenAI Realtime | ~100ms | `openai-realtime` | GPT-4o voice model |
-| Gemini Live | ~200ms | `gemini-live` | Gemini 2.0 Flash |
+| OpenAI Realtime | ~100ms | `openai` | GPT-4o voice model |
+| Gemini Live | ~200ms | `gemini` | Gemini 2.0 Flash |
 
 ### Voice Gateway Providers (PSTN)
 
@@ -80,8 +80,8 @@ OmniVoice supports multiple providers for each capability. Choose based on your 
 
 ```go
 // For voice agents requiring <500ms response time
-rt, _ := omnivoice.GetRealtimeProvider("openai-realtime", ...)  // ~100ms
-rt, _ := omnivoice.GetRealtimeProvider("gemini-live", ...)      // ~200ms
+rt, _ := omnivoice.GetRealtimeProvider("openai", ...)  // ~100ms
+rt, _ := omnivoice.GetRealtimeProvider("gemini", ...)  // ~200ms
 ```
 
 ### Lowest Latency (Traditional Pipeline)

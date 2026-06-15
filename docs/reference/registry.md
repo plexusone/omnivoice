@@ -66,7 +66,7 @@ if omnivoice.HasTTSProvider("elevenlabs") {
 ```go
 omnivoice.RegisterTTSProvider("custom", func(config omnivoice.ProviderConfig) (omnivoice.TTSProvider, error) {
     return &myCustomTTS{apiKey: config.APIKey}, nil
-})
+}, omnivoice.PriorityThick)
 ```
 
 ## STT Registry
@@ -102,7 +102,7 @@ if omnivoice.HasSTTProvider("deepgram") {
 ```go
 omnivoice.RegisterSTTProvider("custom", func(config omnivoice.ProviderConfig) (omnivoice.STTProvider, error) {
     return &myCustomSTT{apiKey: config.APIKey}, nil
-})
+}, omnivoice.PriorityThick)
 ```
 
 ## CallSystem Registry
@@ -141,10 +141,75 @@ if omnivoice.HasCallSystemProvider("twilio") {
 ```go
 omnivoice.RegisterCallSystemProvider("custom", func(config omnivoice.ProviderConfig) (omnivoice.CallSystem, error) {
     return &myCustomCallSystem{
-        accountSID: config.AccountSID,
-        authToken:  config.AuthToken,
+        accountSID: config.Extensions["accountSID"].(string),
+        authToken:  config.APIKey,
     }, nil
-})
+}, omnivoice.PriorityThick)
+```
+
+## Gateway Registry
+
+Voice gateways handle full-duplex voice calls via telephony providers.
+
+### Get Provider
+
+```go
+gw, err := omnivoice.GetGatewayProvider("twilio",
+    omnivoice.WithAccountSID(accountSID),
+    omnivoice.WithAuthToken(authToken),
+    omnivoice.WithPublicURL("https://your-server.com"),
+    omnivoice.WithListenAddr(":8080"),
+)
+if err != nil {
+    log.Fatal(err)
+}
+```
+
+### List Providers
+
+```go
+providers := omnivoice.ListGatewayProviders()
+fmt.Println(providers)  // ["twilio", "telnyx"]
+```
+
+### Check Provider
+
+```go
+if omnivoice.HasGatewayProvider("twilio") {
+    gw, _ := omnivoice.GetGatewayProvider("twilio", ...)
+}
+```
+
+## Realtime Registry
+
+Realtime providers enable native voice-to-voice with ~100-200ms latency.
+
+### Get Provider
+
+```go
+rt, err := omnivoice.GetRealtimeProvider("openai",
+    omnivoice.WithAPIKey(apiKey),
+    omnivoice.WithVoice("alloy"),
+    omnivoice.WithInstructions("You are a helpful assistant."),
+)
+if err != nil {
+    log.Fatal(err)
+}
+```
+
+### List Providers
+
+```go
+providers := omnivoice.ListRealtimeProviders()
+fmt.Println(providers)  // ["openai", "gemini"]
+```
+
+### Check Provider
+
+```go
+if omnivoice.HasRealtimeProvider("openai") {
+    rt, _ := omnivoice.GetRealtimeProvider("openai", ...)
+}
 ```
 
 ## Provider Options
@@ -181,18 +246,37 @@ tts, err := omnivoice.GetTTSProvider("elevenlabs",
 
 ## ProviderConfig
 
-The full configuration structure:
+The configuration structure (from `omnivoice-core/registry`):
 
 ```go
 type ProviderConfig struct {
-    APIKey      string
-    AccountSID  string
-    AuthToken   string
-    PhoneNumber string
-    WebhookURL  string
-    Extensions  map[string]any
+    APIKey     string         // Authentication key
+    BaseURL    string         // Custom API endpoint
+    Extensions map[string]any // Provider-specific configuration
 }
 ```
+
+Provider-specific options set Extensions values:
+
+```go
+omnivoice.WithAccountSID(sid)    // Extensions["accountSID"]
+omnivoice.WithAuthToken(token)   // Extensions["authToken"]
+omnivoice.WithPhoneNumber(num)   // Extensions["phoneNumber"]
+omnivoice.WithWebhookURL(url)    // Extensions["webhookURL"]
+omnivoice.WithVoice(voice)       // Extensions["voice"]
+omnivoice.WithInstructions(text) // Extensions["instructions"]
+```
+
+## Priority System
+
+Providers register with a priority level:
+
+| Priority | Constant | Description |
+|----------|----------|-------------|
+| 0 | `PriorityThin` | Stdlib-only implementations |
+| 10 | `PriorityThick` | Official SDK implementations |
+
+Higher priority providers override lower priority registrations for the same name.
 
 ## Dynamic Provider Selection
 
