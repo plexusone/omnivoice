@@ -12,13 +12,13 @@
         <meta name="author" content="PlexusOne">
       
       
-        <link rel="canonical" href="https://plexusone.github.io/omnivoice/releases/v0.8.0/">
+        <link rel="canonical" href="https://plexusone.github.io/omnivoice/releases/v0.10.0/">
       
       
-        <link rel="prev" href="../v0.9.0/">
+        <link rel="prev" href="../../reference/failover/">
       
       
-        <link rel="next" href="../v0.7.1/">
+        <link rel="next" href="../v0.9.0/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>v0.8.0 - OmniVoice</title>
+        <title>v0.10.0 - OmniVoice</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#release-notes-v080" class="md-skip">
+        <a href="#release-notes-v0100" class="md-skip">
           Skip to content
         </a>
       
@@ -121,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              v0.8.0
+              v0.10.0
             
           </span>
         </div>
@@ -880,52 +880,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../v0.10.0/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    v0.10.0
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../v0.9.0/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    v0.9.0
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -943,7 +897,7 @@
   
   
   <span class="md-ellipsis">
-    v0.8.0
+    v0.10.0
     
   </span>
   
@@ -956,7 +910,7 @@
   
   
   <span class="md-ellipsis">
-    v0.8.0
+    v0.10.0
     
   </span>
   
@@ -988,6 +942,30 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breaking Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Breaking Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#provider-name-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provider Name Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#new-features" class="md-nav__link">
     <span class="md-ellipsis">
       New Features
@@ -998,52 +976,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cli-tool" class="md-nav__link">
+  <a href="#gateway-provider-registry" class="md-nav__link">
     <span class="md-ellipsis">
-      CLI Tool
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="CLI Tool">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      Commands
+      Gateway Provider Registry
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#output-formats" class="md-nav__link">
+  <a href="#gateway-registry-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Output Formats
+      Gateway Registry Functions
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#gateway-type-aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gateway Type Aliases
+    </span>
+  </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#transcript-format" class="md-nav__link">
+  <a href="#pipeline-mode-constants" class="md-nav__link">
     <span class="md-ellipsis">
-      Transcript Format
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Transcript Format">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#type-aliases" class="md-nav__link">
-    <span class="md-ellipsis">
-      Type Aliases
+      Pipeline Mode Constants
     </span>
   </a>
   
@@ -1053,11 +1015,30 @@
     </nav>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture Changes">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#schema-package" class="md-nav__link">
+  <a href="#unified-registry" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Package
+      Unified Registry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-registration-for-realtimegateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto-Registration for Realtime/Gateway
     </span>
   </a>
   
@@ -1097,9 +1078,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#from-v071" class="md-nav__link">
+  <a href="#from-v09x" class="md-nav__link">
     <span class="md-ellipsis">
-      From v0.7.1
+      From v0.9.x
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Start
     </span>
   </a>
   
@@ -1123,6 +1113,52 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../v0.9.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.9.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../v0.8.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.8.0
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1285,6 +1321,30 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breaking Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Breaking Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#provider-name-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provider Name Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#new-features" class="md-nav__link">
     <span class="md-ellipsis">
       New Features
@@ -1295,52 +1355,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cli-tool" class="md-nav__link">
+  <a href="#gateway-provider-registry" class="md-nav__link">
     <span class="md-ellipsis">
-      CLI Tool
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="CLI Tool">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      Commands
+      Gateway Provider Registry
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#output-formats" class="md-nav__link">
+  <a href="#gateway-registry-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Output Formats
+      Gateway Registry Functions
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#gateway-type-aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gateway Type Aliases
+    </span>
+  </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#transcript-format" class="md-nav__link">
+  <a href="#pipeline-mode-constants" class="md-nav__link">
     <span class="md-ellipsis">
-      Transcript Format
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Transcript Format">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#type-aliases" class="md-nav__link">
-    <span class="md-ellipsis">
-      Type Aliases
+      Pipeline Mode Constants
     </span>
   </a>
   
@@ -1350,11 +1394,30 @@
     </nav>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture Changes">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#schema-package" class="md-nav__link">
+  <a href="#unified-registry" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Package
+      Unified Registry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-registration-for-realtimegateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto-Registration for Realtime/Gateway
     </span>
   </a>
   
@@ -1394,9 +1457,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#from-v071" class="md-nav__link">
+  <a href="#from-v09x" class="md-nav__link">
     <span class="md-ellipsis">
-      From v0.7.1
+      From v0.9.x
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Start
     </span>
   </a>
   
@@ -1435,90 +1507,101 @@
   
 
 
-<h1 id="release-notes-v080">Release Notes: v0.8.0<a class="headerlink" href="#release-notes-v080" title="Permanent link">&para;</a></h1>
-<p><strong>Release Date:</strong> 2026-05-02</p>
+<h1 id="release-notes-v0100">Release Notes: v0.10.0<a class="headerlink" href="#release-notes-v0100" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date:</strong> 2026-06-15</p>
 <h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>CLI Tool</strong>: Command-line interface for speech-to-text transcription</li>
-<li><strong>Canonical Transcript Format</strong>: Re-exported from omnivoice-core for unified imports</li>
+<li><strong>Unified Registry</strong>: Single source of truth via delegation to omnivoice-core</li>
+<li><strong>Gateway Provider Registry</strong>: Full-duplex voice gateway support for telephony</li>
+<li><strong>Simplified Provider Names</strong>: <code>"openai"</code> and <code>"gemini"</code> replace <code>"openai-realtime"</code> and <code>"gemini-live"</code></li>
 </ul>
+<h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
+<h3 id="provider-name-changes">Provider Name Changes<a class="headerlink" href="#provider-name-changes" title="Permanent link">&para;</a></h3>
+<p>Provider names have been simplified for consistency:</p>
+<table>
+<thead>
+<tr>
+<th>Old Name</th>
+<th>New Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openai-realtime</code></td>
+<td><code>openai</code></td>
+</tr>
+<tr>
+<td><code>gemini-live</code></td>
+<td><code>gemini</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Migration:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Before (v0.9.x)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;openai-realtime&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;gemini-live&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1">// After (v0.10.0)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;openai&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;gemini&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">&para;</a></h2>
-<h3 id="cli-tool">CLI Tool<a class="headerlink" href="#cli-tool" title="Permanent link">&para;</a></h3>
-<p>OmniVoice now includes a CLI for transcription without writing code:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Install</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>go<span class="w"> </span>install<span class="w"> </span>github.com/plexusone/omnivoice/cmd/omnivoice@latest
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Basic transcription</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DEEPGRAM_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-api-key&quot;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>podcast.mp3
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># JSON output with full metadata</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>--diarize<span class="w"> </span>--timestamps<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>-o<span class="w"> </span>transcript.json<span class="w"> </span>podcast.mp3
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Generate subtitles</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>-f<span class="w"> </span>srt<span class="w"> </span>-o<span class="w"> </span>subtitles.srt<span class="w"> </span>podcast.mp3
-</code></pre></div>
-<h4 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h4>
-<table>
-<thead>
-<tr>
-<th>Command</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>transcribe</code></td>
-<td>Transcribe audio files to text</td>
-</tr>
-<tr>
-<td><code>providers list</code></td>
-<td>List available STT providers</td>
-</tr>
-</tbody>
-</table>
-<h4 id="output-formats">Output Formats<a class="headerlink" href="#output-formats" title="Permanent link">&para;</a></h4>
-<table>
-<thead>
-<tr>
-<th>Format</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>text</code></td>
-<td>Plain transcript text (default)</td>
-</tr>
-<tr>
-<td><code>json</code></td>
-<td>OmniVoice Transcript format with full metadata</td>
-</tr>
-<tr>
-<td><code>srt</code></td>
-<td>SubRip subtitles</td>
-</tr>
-<tr>
-<td><code>vtt</code></td>
-<td>WebVTT subtitles</td>
-</tr>
-</tbody>
-</table>
-<p>See the <a href="../../guides/cli/">CLI Guide</a> for full documentation.</p>
-<h3 id="transcript-format">Transcript Format<a class="headerlink" href="#transcript-format" title="Permanent link">&para;</a></h3>
-<p>The canonical Transcript format is now available in omnivoice:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice&quot;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">// Create transcript from transcription result</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nx">transcript</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">NewTranscript</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;deepgram&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nova-2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;audio.mp3&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span>
+<h3 id="gateway-provider-registry">Gateway Provider Registry<a class="headerlink" href="#gateway-provider-registry" title="Permanent link">&para;</a></h3>
+<p>Voice gateway providers for full-duplex telephony are now available via the registry:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="s">&quot;github.com/plexusone/omnivoice&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice/providers/all&quot;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">)</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">// Save to JSON (durations as milliseconds)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">transcript</span><span class="p">.</span><span class="nx">SaveJSON</span><span class="p">(</span><span class="s">&quot;output.transcript.json&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1">// Load from JSON</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nx">loaded</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">LoadTranscript</span><span class="p">(</span><span class="s">&quot;output.transcript.json&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">// Get Twilio gateway</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nx">gw</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetGatewayProvider</span><span class="p">(</span><span class="s">&quot;twilio&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithAccountSID</span><span class="p">(</span><span class="nx">accountSID</span><span class="p">),</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithAuthToken</span><span class="p">(</span><span class="nx">authToken</span><span class="p">),</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithPublicURL</span><span class="p">(</span><span class="s">&quot;https://your-server.com&quot;</span><span class="p">),</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithListenAddr</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">))</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1">// Get Telnyx gateway</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nx">gw</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetGatewayProvider</span><span class="p">(</span><span class="s">&quot;telnyx&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithAPIKey</span><span class="p">(</span><span class="nx">apiKey</span><span class="p">),</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithConnectionID</span><span class="p">(</span><span class="nx">connectionID</span><span class="p">),</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithPublicURL</span><span class="p">(</span><span class="s">&quot;https://your-server.com&quot;</span><span class="p">))</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="c1">// List registered gateways</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">ListGatewayProviders</span><span class="p">())</span><span class="w"> </span><span class="c1">// [twilio telnyx]</span>
 </code></pre></div>
-<h4 id="type-aliases">Type Aliases<a class="headerlink" href="#type-aliases" title="Permanent link">&para;</a></h4>
+<h3 id="gateway-registry-functions">Gateway Registry Functions<a class="headerlink" href="#gateway-registry-functions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RegisterGatewayProvider</code></td>
+<td>Register a gateway factory</td>
+</tr>
+<tr>
+<td><code>GetGatewayProvider</code></td>
+<td>Create gateway by name</td>
+</tr>
+<tr>
+<td><code>ListGatewayProviders</code></td>
+<td>List registered gateways</td>
+</tr>
+<tr>
+<td><code>HasGatewayProvider</code></td>
+<td>Check if gateway exists</td>
+</tr>
+<tr>
+<td><code>GetGatewayProviderPriority</code></td>
+<td>Get gateway priority</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gateway-type-aliases">Gateway Type Aliases<a class="headerlink" href="#gateway-type-aliases" title="Permanent link">&para;</a></h3>
+<p>New types re-exported from omnivoice-core:</p>
 <table>
 <thead>
 <tr>
@@ -1528,50 +1611,155 @@
 </thead>
 <tbody>
 <tr>
-<td><code>Transcript</code></td>
-<td>Full transcription with metadata</td>
+<td><code>Gateway</code></td>
+<td>Full gateway interface</td>
 </tr>
 <tr>
-<td><code>TranscriptSegment</code></td>
-<td>Segment with timing</td>
+<td><code>GatewayMinimal</code></td>
+<td>Minimal gateway interface for registry</td>
 </tr>
 <tr>
-<td><code>TranscriptWord</code></td>
-<td>Word with timing</td>
+<td><code>GatewayConfig</code></td>
+<td>Gateway configuration</td>
 </tr>
 <tr>
-<td><code>TranscriptMetadata</code></td>
-<td>Provider provenance</td>
+<td><code>GatewaySession</code></td>
+<td>Active voice session</td>
 </tr>
 <tr>
-<td><code>TranscriptOptions</code></td>
-<td>Transcription options</td>
+<td><code>RealtimeConfig</code></td>
+<td>Configuration for realtime mode</td>
+</tr>
+<tr>
+<td><code>PipelineConfig</code></td>
+<td>Configuration for pipeline mode</td>
 </tr>
 </tbody>
 </table>
-<h3 id="schema-package">Schema Package<a class="headerlink" href="#schema-package" title="Permanent link">&para;</a></h3>
-<p>Embedded JSON Schema for validation:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice/schema&quot;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nx">schemaJSON</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">TranscriptV1Schema</span>
+<h3 id="pipeline-mode-constants">Pipeline Mode Constants<a class="headerlink" href="#pipeline-mode-constants" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PipelineModeText</code></td>
+<td>Traditional STT-&gt;LLM-&gt;TTS pipeline</td>
+</tr>
+<tr>
+<td><code>PipelineModeRealtime</code></td>
+<td>Native voice-to-voice mode</td>
+</tr>
+</tbody>
+</table>
+<h2 id="architecture-changes">Architecture Changes<a class="headerlink" href="#architecture-changes" title="Permanent link">&para;</a></h2>
+<h3 id="unified-registry">Unified Registry<a class="headerlink" href="#unified-registry" title="Permanent link">&para;</a></h3>
+<p>The omnivoice package now delegates all registry operations to omnivoice-core:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>omnivoice-core           ← Core interfaces + global registry
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>     ↑
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>provider packages        ← Implement interfaces, register via init()
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>     ↑
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>omnivoice               ← Imports all providers, delegates to core registry
+</code></pre></div>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>Single source of truth for provider registration</li>
+<li>Provider packages register with omnivoice-core, not omnivoice</li>
+<li>Both packages share the same registry state</li>
+<li>Consistent priority-based registration</li>
+</ul>
+<h3 id="auto-registration-for-realtimegateway">Auto-Registration for Realtime/Gateway<a class="headerlink" href="#auto-registration-for-realtimegateway" title="Permanent link">&para;</a></h3>
+<p>Realtime and Gateway providers now use side-effect imports for automatic registration:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// In providers/all/all.go</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="c1">// Auto-register via init()</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omni-google/omnivoice/realtime&quot;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omni-openai/omnivoice/realtime&quot;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omni-telnyx/omnivoice/gateway&quot;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omni-twilio/omnivoice/gateway&quot;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">)</span>
 </code></pre></div>
 <h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
-<ul>
-<li><code>github.com/plexusone/omnivoice-core</code> v0.8.0 → v0.9.0</li>
-<li>Canonical Transcript format with <code>DurationMilliseconds</code></li>
-<li>Embedded JSON Schema</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>omnivoice-core</code></td>
+<td>v0.13.0 -&gt; v0.14.0 (unified registry)</td>
+</tr>
+<tr>
+<td><code>omni-openai</code></td>
+<td>v0.4.0 -&gt; v0.4.1 (registry support)</td>
+</tr>
+<tr>
+<td><code>omni-google</code></td>
+<td>v0.5.0 -&gt; v0.6.0 (registry support)</td>
+</tr>
+<tr>
+<td><code>omni-twilio</code></td>
+<td>v0.7.0 -&gt; v0.8.0 (gateway registry)</td>
+</tr>
+<tr>
+<td><code>omni-telnyx</code></td>
+<td>v0.3.0 -&gt; v0.4.0 (gateway registry)</td>
+</tr>
+</tbody>
+</table>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/plexusone/omnivoice@v0.8.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/plexusone/omnivoice@v0.10.0
 </code></pre></div>
 <h2 id="migration-guide">Migration Guide<a class="headerlink" href="#migration-guide" title="Permanent link">&para;</a></h2>
-<h3 id="from-v071">From v0.7.1<a class="headerlink" href="#from-v071" title="Permanent link">&para;</a></h3>
-<p>No breaking changes. New features are additive:</p>
+<h3 id="from-v09x">From v0.9.x<a class="headerlink" href="#from-v09x" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>CLI</strong>: Install with <code>go install github.com/plexusone/omnivoice/cmd/omnivoice@latest</code></li>
-<li><strong>Transcript types</strong>: Import from <code>github.com/plexusone/omnivoice</code> (re-exported from omnivoice-core)</li>
-<li><strong>Schema</strong>: Import from <code>github.com/plexusone/omnivoice/schema</code></li>
+<li><strong>Update provider names</strong> (breaking change):</li>
+<li><code>"openai-realtime"</code> → <code>"openai"</code></li>
+<li>
+<p><code>"gemini-live"</code> → <code>"gemini"</code></p>
+</li>
+<li>
+<p><strong>Gateway support</strong> (new feature):</p>
+</li>
+<li>Use <code>GetGatewayProvider()</code> for telephony gateways</li>
+<li>Import gateway types from omnivoice</li>
 </ol>
+<h3 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="s">&quot;context&quot;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="s">&quot;os&quot;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="s">&quot;github.com/plexusone/omnivoice&quot;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice/providers/all&quot;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">()</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="c1">// Native voice-to-voice (Realtime)</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;openai&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">        </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithAPIKey</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Getenv</span><span class="p">(</span><span class="s">&quot;OPENAI_API_KEY&quot;</span><span class="p">)))</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="c1">// Full-duplex telephony (Gateway)</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="nx">gw</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetGatewayProvider</span><span class="p">(</span><span class="s">&quot;twilio&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">        </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithAccountSID</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Getenv</span><span class="p">(</span><span class="s">&quot;TWILIO_ACCOUNT_SID&quot;</span><span class="p">)),</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">        </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithAuthToken</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Getenv</span><span class="p">(</span><span class="s">&quot;TWILIO_AUTH_TOKEN&quot;</span><span class="p">)),</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">        </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithPublicURL</span><span class="p">(</span><span class="s">&quot;https://your-server.com&quot;</span><span class="p">),</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">        </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">WithListenAddr</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">))</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">    </span><span class="c1">// Use providers...</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">rt</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">gw</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="p">}</span>
+</code></pre></div>
 <h2 id="full-changelog">Full Changelog<a class="headerlink" href="#full-changelog" title="Permanent link">&para;</a></h2>
 <p>See <a href="../../changelog/">CHANGELOG.md</a> for the complete list of changes.</p>
 
