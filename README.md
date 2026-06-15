@@ -183,13 +183,17 @@ Get providers by name at runtime - no need to import individual provider package
 ttsProvider, _ := omnivoice.GetTTSProvider("elevenlabs", omnivoice.WithAPIKey(key))
 sttProvider, _ := omnivoice.GetSTTProvider("deepgram", omnivoice.WithAPIKey(key))
 
-// Realtime providers: "openai-realtime", "gemini-live"
-rtProvider, _ := omnivoice.GetRealtimeProvider("openai-realtime", omnivoice.WithAPIKey(key))
+// Realtime providers: "openai", "gemini"
+rtProvider, _ := omnivoice.GetRealtimeProvider("openai", omnivoice.WithAPIKey(key))
+
+// Gateway providers: "twilio", "telnyx"
+gateway, _ := omnivoice.GetGatewayProvider("twilio", omnivoice.WithAccountSID(sid), omnivoice.WithAuthToken(token))
 
 // List registered providers
 fmt.Println(omnivoice.ListTTSProviders())      // [openai elevenlabs deepgram twilio]
 fmt.Println(omnivoice.ListSTTProviders())      // [openai elevenlabs deepgram twilio]
-fmt.Println(omnivoice.ListRealtimeProviders()) // [openai-realtime gemini-live]
+fmt.Println(omnivoice.ListRealtimeProviders()) // [openai gemini]
+fmt.Println(omnivoice.ListGatewayProviders())  // [twilio telnyx]
 ```
 
 ## Language Codes
@@ -241,8 +245,15 @@ OmniVoice accepts language codes in [BCP-47](https://www.rfc-editor.org/info/bcp
 
 | Provider | Latency | Registry Name |
 |----------|---------|---------------|
-| OpenAI Realtime | ~100ms | `"openai-realtime"` |
-| Gemini Live | ~200ms | `"gemini-live"` |
+| OpenAI Realtime | ~100ms | `"openai"` |
+| Gemini Live | ~200ms | `"gemini"` |
+
+### Voice Gateway
+
+| Provider | Registry Name |
+|----------|---------------|
+| Twilio | `"twilio"` |
+| Telnyx | `"telnyx"` |
 
 ## Related Packages
 
