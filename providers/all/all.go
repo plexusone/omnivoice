@@ -12,39 +12,48 @@ import (
 	"fmt"
 
 	"github.com/plexusone/omnivoice"
+	"github.com/plexusone/omnivoice-core/registry"
 
-	// Provider packages
+	// STT/TTS provider packages (manual registration)
 	elevenlabsstt "github.com/plexusone/elevenlabs-go/omnivoice/stt"
 	elevenlabstts "github.com/plexusone/elevenlabs-go/omnivoice/tts"
 	deepgramstt "github.com/plexusone/omni-deepgram/omnivoice/stt"
 	deepgramtts "github.com/plexusone/omni-deepgram/omnivoice/tts"
-	googlerealtime "github.com/plexusone/omni-google/omnivoice/realtime"
 	openaiomni "github.com/plexusone/omni-openai/omnivoice"
-	openairealtime "github.com/plexusone/omni-openai/omnivoice/realtime"
-	telnyxcallsystem "github.com/plexusone/omni-telnyx/omnivoice/callsystem"
-	twiliocallsystem "github.com/plexusone/omni-twilio/omnivoice/callsystem"
 	twiliostt "github.com/plexusone/omni-twilio/omnivoice/stt"
 	twiliotts "github.com/plexusone/omni-twilio/omnivoice/tts"
+
+	// CallSystem provider packages (manual registration)
+	telnyxcallsystem "github.com/plexusone/omni-telnyx/omnivoice/callsystem"
+	twiliocallsystem "github.com/plexusone/omni-twilio/omnivoice/callsystem"
+
+	// Realtime providers - auto-register via init()
+	_ "github.com/plexusone/omni-google/omnivoice/realtime"
+	_ "github.com/plexusone/omni-openai/omnivoice/realtime"
+
+	// Gateway providers - auto-register via init()
+	_ "github.com/plexusone/omni-telnyx/omnivoice/gateway"
+	_ "github.com/plexusone/omni-twilio/omnivoice/gateway"
 )
 
 func init() {
-	// Register OpenAI providers
-	omnivoice.RegisterTTSProvider("openai", func(config omnivoice.ProviderConfig) (omnivoice.TTSProvider, error) {
+	// Register OpenAI STT/TTS providers
+	omnivoice.RegisterTTSProvider("openai", func(config registry.ProviderConfig) (omnivoice.TTSProvider, error) {
 		if config.APIKey == "" {
 			return nil, fmt.Errorf("openai: API key is required")
 		}
 		return openaiomni.NewTTSProvider(config.APIKey), nil
-	})
+	}, omnivoice.PriorityThick)
 
-	omnivoice.RegisterSTTProvider("openai", func(config omnivoice.ProviderConfig) (omnivoice.STTProvider, error) {
+	omnivoice.RegisterSTTProvider("openai", func(config registry.ProviderConfig) (omnivoice.STTProvider, error) {
 		if config.APIKey == "" {
 			return nil, fmt.Errorf("openai: API key is required")
 		}
 		return openaiomni.NewSTTProvider(config.APIKey), nil
-	})
+	}, omnivoice.PriorityThick)
 
 	// Register ElevenLabs providers
-	omnivoice.RegisterTTSProvider("elevenlabs", func(config omnivoice.ProviderConfig) (omnivoice.TTSProvider, error) {
+	omnivoice.RegisterTTSProvider("elevenlabs", func(config registry.ProviderConfig) (omnivoice.TTSProvider, error) {
 		var opts []elevenlabstts.Option
 		if config.APIKey != "" {
 			opts = append(opts, elevenlabstts.WithAPIKey(config.APIKey))
@@ -53,9 +62,9 @@ func init() {
 			opts = append(opts, elevenlabstts.WithBaseURL(config.BaseURL))
 		}
 		return elevenlabstts.New(opts...)
-	})
+	}, omnivoice.PriorityThick)
 
-	omnivoice.RegisterSTTProvider("elevenlabs", func(config omnivoice.ProviderConfig) (omnivoice.STTProvider, error) {
+	omnivoice.RegisterSTTProvider("elevenlabs", func(config registry.ProviderConfig) (omnivoice.STTProvider, error) {
 		var opts []elevenlabsstt.Option
 		if config.APIKey != "" {
 			opts = append(opts, elevenlabsstt.WithAPIKey(config.APIKey))
@@ -64,28 +73,28 @@ func init() {
 			opts = append(opts, elevenlabsstt.WithBaseURL(config.BaseURL))
 		}
 		return elevenlabsstt.New(opts...)
-	})
+	}, omnivoice.PriorityThick)
 
 	// Register Deepgram providers
-	omnivoice.RegisterTTSProvider("deepgram", func(config omnivoice.ProviderConfig) (omnivoice.TTSProvider, error) {
+	omnivoice.RegisterTTSProvider("deepgram", func(config registry.ProviderConfig) (omnivoice.TTSProvider, error) {
 		var opts []deepgramtts.Option
 		if config.APIKey != "" {
 			opts = append(opts, deepgramtts.WithAPIKey(config.APIKey))
 		}
 		return deepgramtts.New(opts...)
-	})
+	}, omnivoice.PriorityThick)
 
-	omnivoice.RegisterSTTProvider("deepgram", func(config omnivoice.ProviderConfig) (omnivoice.STTProvider, error) {
+	omnivoice.RegisterSTTProvider("deepgram", func(config registry.ProviderConfig) (omnivoice.STTProvider, error) {
 		var opts []deepgramstt.Option
 		if config.APIKey != "" {
 			opts = append(opts, deepgramstt.WithAPIKey(config.APIKey))
 		}
 		return deepgramstt.New(opts...)
-	})
+	}, omnivoice.PriorityThick)
 
-	// Register Twilio providers
+	// Register Twilio STT/TTS providers
 	// Note: Twilio doesn't require an API key for TTS/STT - it uses TwiML within calls
-	omnivoice.RegisterTTSProvider("twilio", func(config omnivoice.ProviderConfig) (omnivoice.TTSProvider, error) {
+	omnivoice.RegisterTTSProvider("twilio", func(config registry.ProviderConfig) (omnivoice.TTSProvider, error) {
 		var opts []twiliotts.Option
 		// Check for voice in extensions
 		if voice, ok := config.Extensions["twilio.voice"].(string); ok && voice != "" {
@@ -96,9 +105,9 @@ func init() {
 			opts = append(opts, twiliotts.WithLanguage(lang))
 		}
 		return twiliotts.New(opts...)
-	})
+	}, omnivoice.PriorityThick)
 
-	omnivoice.RegisterSTTProvider("twilio", func(config omnivoice.ProviderConfig) (omnivoice.STTProvider, error) {
+	omnivoice.RegisterSTTProvider("twilio", func(config registry.ProviderConfig) (omnivoice.STTProvider, error) {
 		var opts []twiliostt.Option
 		// Check for language in extensions
 		if lang, ok := config.Extensions["twilio.language"].(string); ok && lang != "" {
@@ -113,10 +122,10 @@ func init() {
 			opts = append(opts, twiliostt.WithProfanityFilter(filter))
 		}
 		return twiliostt.New(opts...)
-	})
+	}, omnivoice.PriorityThick)
 
 	// Register Twilio CallSystem
-	omnivoice.RegisterCallSystemProvider("twilio", func(config omnivoice.ProviderConfig) (omnivoice.CallSystem, error) {
+	omnivoice.RegisterCallSystemProvider("twilio", func(config registry.ProviderConfig) (omnivoice.CallSystem, error) {
 		var opts []twiliocallsystem.Option
 
 		// Account SID is required
@@ -147,10 +156,10 @@ func init() {
 		}
 
 		return twiliocallsystem.New(opts...)
-	})
+	}, omnivoice.PriorityThick)
 
 	// Register Telnyx CallSystem
-	omnivoice.RegisterCallSystemProvider("telnyx", func(config omnivoice.ProviderConfig) (omnivoice.CallSystem, error) {
+	omnivoice.RegisterCallSystemProvider("telnyx", func(config registry.ProviderConfig) (omnivoice.CallSystem, error) {
 		var opts []telnyxcallsystem.Option
 
 		// API key is required
@@ -175,39 +184,9 @@ func init() {
 		}
 
 		return telnyxcallsystem.New(opts...)
-	})
+	}, omnivoice.PriorityThick)
 
-	// Register OpenAI Realtime provider
-	omnivoice.RegisterRealtimeProvider("openai-realtime", func(config omnivoice.ProviderConfig) (omnivoice.RealtimeProvider, error) {
-		if config.APIKey == "" {
-			return nil, fmt.Errorf("openai-realtime: API key is required")
-		}
-		var opts []openairealtime.Option
-		// Check for voice in extensions
-		if voice, ok := config.Extensions["voice"].(string); ok && voice != "" {
-			opts = append(opts, openairealtime.WithVoice(voice))
-		}
-		// Check for instructions in extensions
-		if instructions, ok := config.Extensions["instructions"].(string); ok && instructions != "" {
-			opts = append(opts, openairealtime.WithInstructions(instructions))
-		}
-		return openairealtime.NewProvider(config.APIKey, opts...), nil
-	})
-
-	// Register Gemini Live provider
-	omnivoice.RegisterRealtimeProvider("gemini-live", func(config omnivoice.ProviderConfig) (omnivoice.RealtimeProvider, error) {
-		if config.APIKey == "" {
-			return nil, fmt.Errorf("gemini-live: API key is required")
-		}
-		var opts []googlerealtime.Option
-		// Check for voice in extensions
-		if voice, ok := config.Extensions["voice"].(string); ok && voice != "" {
-			opts = append(opts, googlerealtime.WithVoice(voice))
-		}
-		// Check for instructions in extensions
-		if instructions, ok := config.Extensions["instructions"].(string); ok && instructions != "" {
-			opts = append(opts, googlerealtime.WithInstructions(instructions))
-		}
-		return googlerealtime.NewRealtimeProvider(config.APIKey, opts...), nil
-	})
+	// Note: Realtime providers (openai, gemini) and Gateway providers (twilio, telnyx)
+	// are auto-registered via side-effect imports above. They register with omnivoice-core
+	// in their init() functions.
 }
