@@ -7,6 +7,24 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.11.0",
+      "date": "2026-06-15",
+      "highlights": [
+        { "description": "Realtime factory API for getting factories by name" },
+        { "description": "Generic gateway tool types for transitive dependency support" }
+      ],
+      "added": [
+        { "description": "`GetRealtimeFactory(name)` to get realtime provider factory by name", "commit": "e8b8dbc" },
+        { "description": "`MustGetRealtimeFactory(name)` panic variant for static configuration", "commit": "e8b8dbc" },
+        { "description": "`ListRealtimeFactories()` and `HasRealtimeFactory()` for discovery", "commit": "e8b8dbc" },
+        { "description": "`ToolDefinition` and `ToolHandler` generic types for gateway tools", "commit": "e8b8dbc" },
+        { "description": "`WithGatewayTools(provider, tools)` to configure gateway tools", "commit": "e8b8dbc" },
+        { "description": "`WithGatewayToolHandlers(provider, handlers)` to configure tool handlers", "commit": "e8b8dbc" },
+        { "description": "`WithRealtimeFactory(factory)` to configure realtime provider factory", "commit": "e8b8dbc" },
+        { "description": "`WithGatewayRealtimeConfig(config)` to configure realtime settings", "commit": "e8b8dbc" }
+      ]
+    },
+    {
       "version": "v0.10.0",
       "date": "2026-06-15",
       "highlights": [
