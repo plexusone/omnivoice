@@ -4,8 +4,14 @@
 package omnivoice
 
 import (
+	"context"
+
 	"github.com/plexusone/omnivoice-core/gateway"
 	"github.com/plexusone/omnivoice-core/registry"
+
+	// Provider packages for gateway-specific options
+	telnyxGateway "github.com/plexusone/omni-telnyx/omnivoice/gateway"
+	twilioGateway "github.com/plexusone/omni-twilio/omnivoice/gateway"
 )
 
 // Re-export Gateway types from omnivoice-core
@@ -97,3 +103,86 @@ var (
 	AudioFormatGeminiInput  = gateway.AudioFormatGeminiInput
 	AudioFormatGeminiOutput = gateway.AudioFormatGeminiOutput
 )
+
+// ToolDefinition defines a tool that can be called during voice conversations.
+// This is a generic type that works with any gateway provider.
+type ToolDefinition struct {
+	Name        string         `json:"name"`
+	Description string         `json:"description"`
+	Parameters  map[string]any `json:"parameters,omitempty"`
+}
+
+// ToolHandler is a function that handles tool calls during voice conversations.
+type ToolHandler func(ctx context.Context, args map[string]any) (string, error)
+
+// WithGatewayTools returns a provider option that configures tools for a gateway.
+// The provider parameter specifies which gateway provider to configure ("twilio" or "telnyx").
+func WithGatewayTools(provider string, tools []ToolDefinition) registry.ProviderOption {
+	switch provider {
+	case "twilio":
+		twilioTools := make([]twilioGateway.ToolDefinition, len(tools))
+		for i, t := range tools {
+			twilioTools[i] = twilioGateway.ToolDefinition{
+				Name:        t.Name,
+				Description: t.Description,
+				Parameters:  t.Parameters,
+			}
+		}
+		return twilioGateway.WithTools(twilioTools)
+	case "telnyx":
+		telnyxTools := make([]telnyxGateway.ToolDefinition, len(tools))
+		for i, t := range tools {
+			telnyxTools[i] = telnyxGateway.ToolDefinition{
+				Name:        t.Name,
+				Description: t.Description,
+				Parameters:  t.Parameters,
+			}
+		}
+		return telnyxGateway.WithTools(telnyxTools)
+	default:
+		// Return no-op option for unknown providers
+		return func(c *registry.ProviderConfig) {}
+	}
+}
+
+// WithGatewayToolHandlers returns a provider option that configures tool handlers for a gateway.
+// The provider parameter specifies which gateway provider to configure ("twilio" or "telnyx").
+func WithGatewayToolHandlers(provider string, handlers map[string]ToolHandler) registry.ProviderOption {
+	switch provider {
+	case "twilio":
+		twilioHandlers := make(map[string]twilioGateway.ToolHandler, len(handlers))
+		for name, handler := range handlers {
+			h := handler // capture for closure
+			twilioHandlers[name] = func(ctx context.Context, args map[string]any) (string, error) {
+				return h(ctx, args)
+			}
+		}
+		return twilioGateway.WithToolHandlers(twilioHandlers)
+	case "telnyx":
+		telnyxHandlers := make(map[string]telnyxGateway.ToolHandler, len(handlers))
+		for name, handler := range handlers {
+			h := handler // capture for closure
+			telnyxHandlers[name] = func(ctx context.Context, args map[string]any) (string, error) {
+				return h(ctx, args)
+			}
+		}
+		return telnyxGateway.WithToolHandlers(telnyxHandlers)
+	default:
+		// Return no-op option for unknown providers
+		return func(c *registry.ProviderConfig) {}
+	}
+}
+
+// WithRealtimeFactory returns a provider option that configures a realtime provider factory.
+// This is used for native voice-to-voice mode with gateways.
+func WithRealtimeFactory(factory gateway.RealtimeProviderFactory) registry.ProviderOption {
+	// Currently only Twilio supports realtime factory configuration
+	return twilioGateway.WithRealtimeProviderFactory(factory)
+}
+
+// WithGatewayRealtimeConfig returns a provider option that configures realtime settings.
+// This is used for native voice-to-voice mode with gateways.
+func WithGatewayRealtimeConfig(config *gateway.RealtimeConfig) registry.ProviderOption {
+	// Currently only Twilio supports realtime config
+	return twilioGateway.WithRealtimeConfig(config)
+}
