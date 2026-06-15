@@ -194,6 +194,10 @@ fmt.Println(omnivoice.ListTTSProviders())      // [openai elevenlabs deepgram tw
 fmt.Println(omnivoice.ListSTTProviders())      // [openai elevenlabs deepgram twilio]
 fmt.Println(omnivoice.ListRealtimeProviders()) // [openai gemini]
 fmt.Println(omnivoice.ListGatewayProviders())  // [twilio telnyx]
+
+// Realtime factory API (for gateway integration)
+factory, _ := omnivoice.GetRealtimeFactory("openai")
+fmt.Println(omnivoice.ListRealtimeFactories()) // [openai gemini]
 ```
 
 ## Language Codes
