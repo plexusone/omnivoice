@@ -1842,13 +1842,13 @@
 <tr>
 <td>OpenAI Realtime</td>
 <td>~100ms</td>
-<td><code>openai-realtime</code></td>
+<td><code>openai</code></td>
 <td>GPT-4o voice model</td>
 </tr>
 <tr>
 <td>Gemini Live</td>
 <td>~200ms</td>
-<td><code>gemini-live</code></td>
+<td><code>gemini</code></td>
 <td>Gemini 2.0 Flash</td>
 </tr>
 </tbody>
@@ -2069,8 +2069,8 @@
 <h2 id="quick-comparison">Quick Comparison<a class="headerlink" href="#quick-comparison" title="Permanent link">&para;</a></h2>
 <h3 id="lowest-latency-native-voice-to-voice">Lowest Latency (Native Voice-to-Voice)<a class="headerlink" href="#lowest-latency-native-voice-to-voice" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// For voice agents requiring &lt;500ms response time</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;openai-realtime&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">  </span><span class="c1">// ~100ms</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;gemini-live&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">      </span><span class="c1">// ~200ms</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;openai&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">  </span><span class="c1">// ~100ms</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;gemini&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">  </span><span class="c1">// ~200ms</span>
 </code></pre></div>
 <h3 id="lowest-latency-traditional-pipeline">Lowest Latency (Traditional Pipeline)<a class="headerlink" href="#lowest-latency-traditional-pipeline" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// For voice agents requiring &lt;500ms response time</span>
