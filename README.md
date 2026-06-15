@@ -179,13 +179,17 @@ func main() {
 Get providers by name at runtime - no need to import individual provider packages:
 
 ```go
-// Available providers: "openai", "elevenlabs", "deepgram", "twilio"
+// STT/TTS providers: "openai", "elevenlabs", "deepgram", "twilio"
 ttsProvider, _ := omnivoice.GetTTSProvider("elevenlabs", omnivoice.WithAPIKey(key))
 sttProvider, _ := omnivoice.GetSTTProvider("deepgram", omnivoice.WithAPIKey(key))
 
+// Realtime providers: "openai-realtime", "gemini-live"
+rtProvider, _ := omnivoice.GetRealtimeProvider("openai-realtime", omnivoice.WithAPIKey(key))
+
 // List registered providers
-fmt.Println(omnivoice.ListTTSProviders()) // [openai elevenlabs deepgram twilio]
-fmt.Println(omnivoice.ListSTTProviders()) // [openai elevenlabs deepgram twilio]
+fmt.Println(omnivoice.ListTTSProviders())      // [openai elevenlabs deepgram twilio]
+fmt.Println(omnivoice.ListSTTProviders())      // [openai elevenlabs deepgram twilio]
+fmt.Println(omnivoice.ListRealtimeProviders()) // [openai-realtime gemini-live]
 ```
 
 ## Language Codes
@@ -224,12 +228,21 @@ OmniVoice accepts language codes in [BCP-47](https://www.rfc-editor.org/info/bcp
 
 ## Included Providers
 
+### STT/TTS Providers
+
 | Provider | STT | TTS | Registry Name |
 |----------|-----|-----|---------------|
 | OpenAI | Whisper | TTS-1/TTS-1-HD | `"openai"` |
 | ElevenLabs | Scribe | Multilingual v2 | `"elevenlabs"` |
 | Deepgram | Nova-2 | Aura | `"deepgram"` |
 | Twilio | Media Streams | Media Streams | `"twilio"` |
+
+### Native Voice-to-Voice (Realtime)
+
+| Provider | Latency | Registry Name |
+|----------|---------|---------------|
+| OpenAI Realtime | ~100ms | `"openai-realtime"` |
+| Gemini Live | ~200ms | `"gemini-live"` |
 
 ## Related Packages
 

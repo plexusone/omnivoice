@@ -41,20 +41,20 @@ func main() {
 
 ## Registered Providers
 
-| Type | Provider | Package |
-|------|----------|---------|
-| STT | `openai` | `omni-openai` |
-| STT | `deepgram` | `omni-deepgram` |
-| STT | `elevenlabs` | `elevenlabs-go` |
-| STT | `twilio` | `omni-twilio` |
-| TTS | `openai` | `omni-openai` |
-| TTS | `deepgram` | `omni-deepgram` |
-| TTS | `elevenlabs` | `elevenlabs-go` |
-| TTS | `twilio` | `omni-twilio` |
-| CallSystem | `twilio` | `omni-twilio` |
-| CallSystem | `telnyx` | `omni-telnyx` |
-| Realtime | `openai-realtime` | `omni-openai` |
-| Realtime | `gemini-live` | `omni-google` |
+| Type | Provider | Package | Latency |
+|------|----------|---------|---------|
+| STT | `openai` | `omni-openai` | - |
+| STT | `deepgram` | `omni-deepgram` | - |
+| STT | `elevenlabs` | `elevenlabs-go` | - |
+| STT | `twilio` | `omni-twilio` | - |
+| TTS | `openai` | `omni-openai` | - |
+| TTS | `deepgram` | `omni-deepgram` | - |
+| TTS | `elevenlabs` | `elevenlabs-go` | - |
+| TTS | `twilio` | `omni-twilio` | - |
+| CallSystem | `twilio` | `omni-twilio` | - |
+| CallSystem | `telnyx` | `omni-telnyx` | - |
+| Realtime | `openai-realtime` | `omni-openai` | ~100ms |
+| Realtime | `gemini-live` | `omni-google` | ~200ms |
 
 ## Dependency Architecture
 

@@ -12,6 +12,13 @@ OmniVoice supports multiple providers for each capability. Choose based on your 
 | [ElevenLabs](elevenlabs.md) | ✓ | ✓ | ✓ | Premium voice synthesis |
 | [Deepgram](deepgram.md) | ✓ | ✓ | ✓ | Real-time transcription |
 
+### Native Voice-to-Voice (Realtime)
+
+| Provider | Latency | Registry Name | Notes |
+|----------|---------|---------------|-------|
+| OpenAI Realtime | ~100ms | `openai-realtime` | GPT-4o voice model |
+| Gemini Live | ~200ms | `gemini-live` | Gemini 2.0 Flash |
+
 ### Voice Gateway Providers (PSTN)
 
 | Provider | Voice | SMS | Audio Format | Notes |
@@ -60,9 +67,24 @@ OmniVoice supports multiple providers for each capability. Choose based on your 
 |----------|---------|----------|---------|
 | **LiveKit** | <200ms | Custom web/mobile apps | Infrastructure only |
 
+### Native Voice-to-Voice (Realtime)
+
+| Provider | Latency | Voice Quality | Best For |
+|----------|---------|---------------|----------|
+| **OpenAI Realtime** | ~100ms | Excellent | Conversational agents |
+| **Gemini Live** | ~200ms | Excellent | Multi-turn dialogue |
+
 ## Quick Comparison
 
-### Lowest Latency (Real-Time)
+### Lowest Latency (Native Voice-to-Voice)
+
+```go
+// For voice agents requiring <500ms response time
+rt, _ := omnivoice.GetRealtimeProvider("openai-realtime", ...)  // ~100ms
+rt, _ := omnivoice.GetRealtimeProvider("gemini-live", ...)      // ~200ms
+```
+
+### Lowest Latency (Traditional Pipeline)
 
 ```go
 // For voice agents requiring <500ms response time
@@ -114,6 +136,12 @@ import (
     _ "github.com/plexusone/omni-twilio/omnivoice/callsystem"
     _ "github.com/plexusone/omni-telnyx/omnivoice/callsystem"
 )
+
+// Realtime (native voice-to-voice) providers
+import (
+    _ "github.com/plexusone/omni-openai/omnivoice/realtime"
+    _ "github.com/plexusone/omni-google/omnivoice/realtime"
+)
 ```
 
 ## Environment Variables
@@ -125,6 +153,13 @@ import (
 | OpenAI | `OPENAI_API_KEY` |
 | ElevenLabs | `ELEVENLABS_API_KEY` |
 | Deepgram | `DEEPGRAM_API_KEY` |
+
+### Native Voice-to-Voice (Realtime)
+
+| Provider | Required Variables |
+|----------|-------------------|
+| OpenAI Realtime | `OPENAI_API_KEY` |
+| Gemini Live | `GOOGLE_API_KEY` |
 
 ### PSTN Voice Gateway
 

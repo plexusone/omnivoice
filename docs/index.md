@@ -12,6 +12,7 @@ Batteries-included voice pipeline framework for Go. Single import, all providers
 - 💬 **SMS** - Send text messages via SMSProvider
 - 🖥️ **CLI Tool** - Transcribe audio from the command line
 - 📄 **Transcript Format** - Canonical JSON format with timestamps and metadata
+- ⚡ **Native Voice-to-Voice** - OpenAI Realtime (~100ms) and Gemini Live (~200ms)
 
 ## Quick Example
 
@@ -68,6 +69,7 @@ go get github.com/plexusone/omnivoice
 | Real-time Streaming | [Streaming](guides/streaming.md) | All providers |
 | Subtitles | [Subtitles](guides/subtitles.md) | All STT providers |
 | Voice Agents | [Voice Agents](guides/voice-agents.md) | Combined stack |
+| Native Voice-to-Voice | [v0.9.0 Release](releases/v0.9.0.md) | OpenAI Realtime, Gemini Live |
 
 ## Architecture
 
@@ -79,16 +81,16 @@ go get github.com/plexusone/omnivoice
 │                                                                         │
 │   import _ "github.com/plexusone/omnivoice/providers/all"               │
 │                                                                         │
-│   ┌─────────────────────────────────────────────────────────────────┐   │
-│   │                      Provider Registry                          │   │
-│   ├─────────────┬─────────────┬─────────────┬───────────────────────┤   │
-│   │     TTS     │     STT     │  CallSystem │    SMSProvider        │   │
-│   ├─────────────┼─────────────┼─────────────┼───────────────────────┤   │
-│   │ elevenlabs  │ elevenlabs  │   twilio    │      twilio           │   │
-│   │ openai      │ openai      │   telnyx    │      telnyx           │   │
-│   │ deepgram    │ deepgram    │             │                       │   │
-│   │ twilio      │ twilio      │             │                       │   │
-│   └─────────────┴─────────────┴─────────────┴───────────────────────┘   │
+│   ┌───────────────────────────────────────────────────────────────────────────┐   │
+│   │                           Provider Registry                               │   │
+│   ├───────────┬───────────┬─────────────┬─────────────┬───────────────────────┤   │
+│   │    TTS    │    STT    │  CallSystem │   Realtime  │     SMSProvider       │   │
+│   ├───────────┼───────────┼─────────────┼─────────────┼───────────────────────┤   │
+│   │elevenlabs │elevenlabs │   twilio    │openai-      │       twilio          │   │
+│   │openai     │openai     │   telnyx    │  realtime   │       telnyx          │   │
+│   │deepgram   │deepgram   │             │gemini-live  │                       │   │
+│   │twilio     │twilio     │             │             │                       │   │
+│   └───────────┴───────────┴─────────────┴─────────────┴───────────────────────┘   │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
