@@ -7,6 +7,40 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.10.0",
+      "date": "2026-06-15",
+      "highlights": [
+        { "description": "Unified registry via delegation to omnivoice-core" },
+        { "description": "Gateway provider registry for full-duplex telephony" },
+        { "description": "Simplified provider names: `openai` and `gemini`" }
+      ],
+      "added": [
+        { "description": "`RegisterGatewayProvider` and `GetGatewayProvider` for gateway discovery", "commit": "f56b7ff" },
+        { "description": "`ListGatewayProviders` and `HasGatewayProvider` to query registered gateways", "commit": "f56b7ff" },
+        { "description": "`GetGatewayProviderPriority` for priority inspection", "commit": "f56b7ff" },
+        { "description": "Gateway type aliases: `Gateway`, `GatewayMinimal`, `GatewayConfig`, `GatewaySession`", "commit": "f56b7ff" },
+        { "description": "Pipeline mode constants: `PipelineModeText`, `PipelineModeRealtime`", "commit": "f56b7ff" },
+        { "description": "`RealtimeProviderMinimal` type alias for registry interface", "commit": "f56b7ff" }
+      ],
+      "changed": [
+        { "description": "Registry functions delegate to omnivoice-core (single source of truth)", "commit": "f56b7ff" },
+        { "description": "Realtime provider names: `openai-realtime` → `openai`, `gemini-live` → `gemini`", "commit": "7cb94c3" },
+        { "description": "Realtime/Gateway providers use side-effect imports for auto-registration", "commit": "7cb94c3" }
+      ],
+      "documentation": [
+        { "description": "Updated registry documentation with Gateway and Realtime sections", "commit": "5264cf1" },
+        { "description": "Provider index updated with correct naming", "commit": "2fb0fe5" },
+        { "description": "CLAUDE.md updated with new architecture", "commit": "2fb0fe5" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omnivoice-core` v0.13.0 → v0.14.0 (unified registry)", "commit": "308540e" },
+        { "description": "`github.com/plexusone/omni-openai` v0.4.0 → v0.4.1 (registry support)", "commit": "308540e" },
+        { "description": "`github.com/plexusone/omni-google` v0.5.0 → v0.6.0 (registry support)", "commit": "308540e" },
+        { "description": "`github.com/plexusone/omni-twilio` v0.7.0 → v0.8.0 (gateway registry)", "commit": "308540e" },
+        { "description": "`github.com/plexusone/omni-telnyx` v0.3.0 → v0.4.0 (gateway registry)", "commit": "308540e" }
+      ]
+    },
+    {
       "version": "v0.9.1",
       "date": "2026-06-15",
       "dependencies": [
