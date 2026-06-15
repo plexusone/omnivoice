@@ -5,12 +5,18 @@ package omnivoice
 
 import (
 	"github.com/plexusone/omnivoice-core/realtime"
+	"github.com/plexusone/omnivoice-core/registry"
 )
 
 // Re-export Realtime types from omnivoice-core
 type (
 	// RealtimeProvider defines the interface for real-time voice-to-voice providers.
+	// This is the full interface from realtime package with ProcessAudioStream.
 	RealtimeProvider = realtime.Provider
+
+	// RealtimeProviderMinimal is the minimal interface used by the registry.
+	// Use type assertion to access the full RealtimeProvider interface.
+	RealtimeProviderMinimal = registry.RealtimeProvider
 
 	// ProcessConfig configures a real-time audio processing session.
 	ProcessConfig = realtime.ProcessConfig

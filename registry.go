@@ -1,317 +1,227 @@
+// Package omnivoice provides a unified interface for speech-to-text and text-to-speech.
+// This is the batteries-included package that imports all providers.
+// For a minimal dependency footprint, use github.com/plexusone/omnivoice-core instead.
 package omnivoice
 
 import (
-	"fmt"
-	"sync"
-
+	core "github.com/plexusone/omnivoice-core"
 	"github.com/plexusone/omnivoice-core/callsystem"
-	"github.com/plexusone/omnivoice-core/realtime"
+	"github.com/plexusone/omnivoice-core/registry"
 	"github.com/plexusone/omnivoice-core/stt"
 	"github.com/plexusone/omnivoice-core/tts"
 )
 
-// ProviderConfig holds common configuration options for creating providers.
-type ProviderConfig struct {
-	// APIKey is the authentication key for the provider.
-	APIKey string //nolint:gosec // G117: This is a config struct, not storing secrets
+// Re-export registry types from omnivoice-core.
+type (
+	// ProviderConfig holds common configuration options for creating providers.
+	ProviderConfig = registry.ProviderConfig
 
-	// BaseURL is an optional custom API endpoint.
-	BaseURL string
+	// ProviderOption configures a ProviderConfig.
+	ProviderOption = registry.ProviderOption
+)
 
-	// Extensions holds provider-specific configuration.
-	Extensions map[string]any
+// Re-export priority constants from omnivoice-core.
+const (
+	// PriorityThin is the priority for thin (stdlib-only) provider implementations.
+	PriorityThin = core.PriorityThin
+
+	// PriorityThick is the priority for thick (official SDK) provider implementations.
+	PriorityThick = core.PriorityThick
+)
+
+// Re-export registry option functions from omnivoice-core.
+var (
+	// Core options
+	WithAPIKey    = registry.WithAPIKey
+	WithBaseURL   = registry.WithBaseURL
+	WithExtension = registry.WithExtension
+
+	// CallSystem options
+	WithAccountSID  = registry.WithAccountSID
+	WithAuthToken   = registry.WithAuthToken
+	WithPhoneNumber = registry.WithPhoneNumber
+	WithWebhookURL  = registry.WithWebhookURL
+	WithRegion      = registry.WithRegion
+
+	// Gateway options
+	WithListener     = registry.WithListener
+	WithPublicURL    = registry.WithPublicURL
+	WithListenAddr   = registry.WithListenAddr
+	WithConnectionID = registry.WithConnectionID
+
+	// Realtime options
+	WithVoice        = registry.WithVoice
+	WithModel        = registry.WithModel
+	WithInstructions = registry.WithInstructions
+
+	// Pipeline options
+	WithSTTProvider     = registry.WithSTTProvider
+	WithSTTAPIKey       = registry.WithSTTAPIKey
+	WithSTTModel        = registry.WithSTTModel
+	WithSTTLanguage     = registry.WithSTTLanguage
+	WithTTSProvider     = registry.WithTTSProvider
+	WithTTSAPIKey       = registry.WithTTSAPIKey
+	WithTTSVoiceID      = registry.WithTTSVoiceID
+	WithTTSModel        = registry.WithTTSModel
+	WithLLMProvider     = registry.WithLLMProvider
+	WithLLMAPIKey       = registry.WithLLMAPIKey
+	WithLLMModel        = registry.WithLLMModel
+	WithLLMSystemPrompt = registry.WithLLMSystemPrompt
+
+	// Session options
+	WithGreeting           = registry.WithGreeting
+	WithMaxSessionDuration = registry.WithMaxSessionDuration
+	WithInterruptionMode   = registry.WithInterruptionMode
+	WithLogger             = registry.WithLogger
+	WithPipelineMode       = registry.WithPipelineMode
+)
+
+// STT Provider Registry - delegates to omnivoice-core
+
+// RegisterSTTProvider registers an STT provider factory with the given name and priority.
+// Higher priority values override lower priority registrations.
+func RegisterSTTProvider(name string, factory registry.STTProviderFactory, priority int) {
+	core.RegisterSTTProvider(name, factory, priority)
 }
 
-// ProviderOption configures a ProviderConfig.
-type ProviderOption func(*ProviderConfig)
-
-// WithAPIKey sets the API key for the provider.
-func WithAPIKey(apiKey string) ProviderOption {
-	return func(c *ProviderConfig) {
-		c.APIKey = apiKey
-	}
-}
-
-// WithBaseURL sets a custom base URL for the provider.
-func WithBaseURL(baseURL string) ProviderOption {
-	return func(c *ProviderConfig) {
-		c.BaseURL = baseURL
-	}
-}
-
-// WithExtension sets a provider-specific configuration value.
-func WithExtension(key string, value any) ProviderOption {
-	return func(c *ProviderConfig) {
-		if c.Extensions == nil {
-			c.Extensions = make(map[string]any)
-		}
-		c.Extensions[key] = value
-	}
-}
-
-// CallSystem-specific option functions.
-// These are convenience wrappers that set Extension values with standardized keys.
-
-// WithAccountSID sets the account SID (Twilio).
-func WithAccountSID(sid string) ProviderOption {
-	return WithExtension("accountSID", sid)
-}
-
-// WithAuthToken sets the auth token (Twilio).
-func WithAuthToken(token string) ProviderOption {
-	return WithExtension("authToken", token)
-}
-
-// WithPhoneNumber sets the default outbound phone number.
-func WithPhoneNumber(number string) ProviderOption {
-	return WithExtension("phoneNumber", number)
-}
-
-// WithWebhookURL sets the webhook URL for incoming calls.
-func WithWebhookURL(url string) ProviderOption {
-	return WithExtension("webhookURL", url)
-}
-
-// WithRegion sets the service region.
-func WithRegion(region string) ProviderOption {
-	return WithExtension("region", region)
-}
-
-// TTSProviderFactory creates a TTS provider with the given configuration.
-type TTSProviderFactory func(config ProviderConfig) (tts.Provider, error)
-
-// STTProviderFactory creates an STT provider with the given configuration.
-type STTProviderFactory func(config ProviderConfig) (stt.Provider, error)
-
-// CallSystemProviderFactory creates a CallSystem provider with the given configuration.
-type CallSystemProviderFactory func(config ProviderConfig) (callsystem.CallSystem, error)
-
-// RealtimeProviderFactory creates a Realtime provider with the given configuration.
-type RealtimeProviderFactory func(config ProviderConfig) (realtime.Provider, error)
-
-// registry holds registered provider factories.
-var registry = &providerRegistry{
-	ttsFactories:        make(map[string]TTSProviderFactory),
-	sttFactories:        make(map[string]STTProviderFactory),
-	callSystemFactories: make(map[string]CallSystemProviderFactory),
-	realtimeFactories:   make(map[string]RealtimeProviderFactory),
-}
-
-type providerRegistry struct {
-	mu                  sync.RWMutex
-	ttsFactories        map[string]TTSProviderFactory
-	sttFactories        map[string]STTProviderFactory
-	callSystemFactories map[string]CallSystemProviderFactory
-	realtimeFactories   map[string]RealtimeProviderFactory
-}
-
-// RegisterTTSProvider registers a TTS provider factory by name.
-// This is typically called from provider init() functions.
-func RegisterTTSProvider(name string, factory TTSProviderFactory) {
-	registry.mu.Lock()
-	defer registry.mu.Unlock()
-	registry.ttsFactories[name] = factory
-}
-
-// RegisterSTTProvider registers an STT provider factory by name.
-// This is typically called from provider init() functions.
-func RegisterSTTProvider(name string, factory STTProviderFactory) {
-	registry.mu.Lock()
-	defer registry.mu.Unlock()
-	registry.sttFactories[name] = factory
-}
-
-// GetTTSProvider creates a TTS provider by name with the given options.
-//
-// Example:
-//
-//	provider, err := omnivoice.GetTTSProvider("elevenlabs", omnivoice.WithAPIKey(apiKey))
-func GetTTSProvider(name string, opts ...ProviderOption) (tts.Provider, error) {
-	registry.mu.RLock()
-	factory, ok := registry.ttsFactories[name]
-	registry.mu.RUnlock()
-
-	if !ok {
-		return nil, fmt.Errorf("unknown TTS provider: %s (available: %v)", name, ListTTSProviders())
-	}
-
-	config := ProviderConfig{}
-	for _, opt := range opts {
-		opt(&config)
-	}
-
-	return factory(config)
-}
-
-// GetSTTProvider creates an STT provider by name with the given options.
-//
-// Example:
-//
-//	provider, err := omnivoice.GetSTTProvider("deepgram", omnivoice.WithAPIKey(apiKey))
+// GetSTTProvider creates an STT provider instance from the registry.
 func GetSTTProvider(name string, opts ...ProviderOption) (stt.Provider, error) {
-	registry.mu.RLock()
-	factory, ok := registry.sttFactories[name]
-	registry.mu.RUnlock()
-
-	if !ok {
-		return nil, fmt.Errorf("unknown STT provider: %s (available: %v)", name, ListSTTProviders())
-	}
-
-	config := ProviderConfig{}
-	for _, opt := range opts {
-		opt(&config)
-	}
-
-	return factory(config)
+	return core.GetSTTProvider(name, opts...)
 }
 
-// ListTTSProviders returns the names of all registered TTS providers.
-func ListTTSProviders() []string {
-	registry.mu.RLock()
-	defer registry.mu.RUnlock()
-
-	names := make([]string, 0, len(registry.ttsFactories))
-	for name := range registry.ttsFactories {
-		names = append(names, name)
-	}
-	return names
-}
-
-// ListSTTProviders returns the names of all registered STT providers.
+// ListSTTProviders returns a list of all registered STT provider names.
 func ListSTTProviders() []string {
-	registry.mu.RLock()
-	defer registry.mu.RUnlock()
-
-	names := make([]string, 0, len(registry.sttFactories))
-	for name := range registry.sttFactories {
-		names = append(names, name)
-	}
-	return names
+	return core.ListSTTProviders()
 }
 
-// HasTTSProvider checks if a TTS provider is registered.
-func HasTTSProvider(name string) bool {
-	registry.mu.RLock()
-	defer registry.mu.RUnlock()
-	_, ok := registry.ttsFactories[name]
-	return ok
-}
-
-// HasSTTProvider checks if an STT provider is registered.
+// HasSTTProvider returns true if an STT provider with the given name is registered.
 func HasSTTProvider(name string) bool {
-	registry.mu.RLock()
-	defer registry.mu.RUnlock()
-	_, ok := registry.sttFactories[name]
-	return ok
+	return core.HasSTTProvider(name)
 }
 
-// RegisterCallSystemProvider registers a CallSystem provider factory by name.
-// This is typically called from provider init() functions.
-func RegisterCallSystemProvider(name string, factory CallSystemProviderFactory) {
-	registry.mu.Lock()
-	defer registry.mu.Unlock()
-	registry.callSystemFactories[name] = factory
+// GetSTTProviderPriority returns the priority of the registered STT provider.
+func GetSTTProviderPriority(name string) int {
+	return core.GetSTTProviderPriority(name)
 }
 
-// GetCallSystemProvider creates a CallSystem provider by name with the given options.
-//
-// Example:
-//
-//	cs, err := omnivoice.GetCallSystemProvider("twilio",
-//	    omnivoice.WithAccountSID(accountSID),
-//	    omnivoice.WithAuthToken(authToken),
-//	    omnivoice.WithPhoneNumber(phoneNumber),
-//	    omnivoice.WithWebhookURL(webhookURL),
-//	)
+// TTS Provider Registry - delegates to omnivoice-core
+
+// RegisterTTSProvider registers a TTS provider factory with the given name and priority.
+// Higher priority values override lower priority registrations.
+func RegisterTTSProvider(name string, factory registry.TTSProviderFactory, priority int) {
+	core.RegisterTTSProvider(name, factory, priority)
+}
+
+// GetTTSProvider creates a TTS provider instance from the registry.
+func GetTTSProvider(name string, opts ...ProviderOption) (tts.Provider, error) {
+	return core.GetTTSProvider(name, opts...)
+}
+
+// ListTTSProviders returns a list of all registered TTS provider names.
+func ListTTSProviders() []string {
+	return core.ListTTSProviders()
+}
+
+// HasTTSProvider returns true if a TTS provider with the given name is registered.
+func HasTTSProvider(name string) bool {
+	return core.HasTTSProvider(name)
+}
+
+// GetTTSProviderPriority returns the priority of the registered TTS provider.
+func GetTTSProviderPriority(name string) int {
+	return core.GetTTSProviderPriority(name)
+}
+
+// CallSystem Provider Registry - delegates to omnivoice-core
+
+// RegisterCallSystemProvider registers a CallSystem provider factory with the given name and priority.
+// Higher priority values override lower priority registrations.
+func RegisterCallSystemProvider(name string, factory registry.CallSystemProviderFactory, priority int) {
+	core.RegisterCallSystemProvider(name, factory, priority)
+}
+
+// GetCallSystemProvider creates a CallSystem provider instance from the registry.
 func GetCallSystemProvider(name string, opts ...ProviderOption) (callsystem.CallSystem, error) {
-	registry.mu.RLock()
-	factory, ok := registry.callSystemFactories[name]
-	registry.mu.RUnlock()
-
-	if !ok {
-		return nil, fmt.Errorf("unknown CallSystem provider: %s (available: %v)", name, ListCallSystemProviders())
-	}
-
-	config := ProviderConfig{}
-	for _, opt := range opts {
-		opt(&config)
-	}
-
-	return factory(config)
+	return core.GetCallSystemProvider(name, opts...)
 }
 
-// ListCallSystemProviders returns the names of all registered CallSystem providers.
+// ListCallSystemProviders returns a list of all registered CallSystem provider names.
 func ListCallSystemProviders() []string {
-	registry.mu.RLock()
-	defer registry.mu.RUnlock()
-
-	names := make([]string, 0, len(registry.callSystemFactories))
-	for name := range registry.callSystemFactories {
-		names = append(names, name)
-	}
-	return names
+	return core.ListCallSystemProviders()
 }
 
-// HasCallSystemProvider checks if a CallSystem provider is registered.
+// HasCallSystemProvider returns true if a CallSystem provider with the given name is registered.
 func HasCallSystemProvider(name string) bool {
-	registry.mu.RLock()
-	defer registry.mu.RUnlock()
-	_, ok := registry.callSystemFactories[name]
-	return ok
+	return core.HasCallSystemProvider(name)
 }
 
-// RegisterRealtimeProvider registers a Realtime provider factory by name.
-// This is typically called from provider init() functions.
-func RegisterRealtimeProvider(name string, factory RealtimeProviderFactory) {
-	registry.mu.Lock()
-	defer registry.mu.Unlock()
-	registry.realtimeFactories[name] = factory
+// GetCallSystemProviderPriority returns the priority of the registered CallSystem provider.
+func GetCallSystemProviderPriority(name string) int {
+	return core.GetCallSystemProviderPriority(name)
 }
 
-// GetRealtimeProvider creates a Realtime provider by name with the given options.
+// Gateway Provider Registry - delegates to omnivoice-core
+
+// RegisterGatewayProvider registers a Gateway provider factory with the given name and priority.
+// Higher priority values override lower priority registrations.
+func RegisterGatewayProvider(name string, factory registry.GatewayProviderFactory, priority int) {
+	core.RegisterGatewayProvider(name, factory, priority)
+}
+
+// GetGatewayProvider creates a Gateway provider instance from the registry.
+func GetGatewayProvider(name string, opts ...ProviderOption) (registry.Gateway, error) {
+	return core.GetGatewayProvider(name, opts...)
+}
+
+// ListGatewayProviders returns a list of all registered Gateway provider names.
+func ListGatewayProviders() []string {
+	return core.ListGatewayProviders()
+}
+
+// HasGatewayProvider returns true if a Gateway provider with the given name is registered.
+func HasGatewayProvider(name string) bool {
+	return core.HasGatewayProvider(name)
+}
+
+// GetGatewayProviderPriority returns the priority of the registered Gateway provider.
+func GetGatewayProviderPriority(name string) int {
+	return core.GetGatewayProviderPriority(name)
+}
+
+// Realtime Provider Registry - delegates to omnivoice-core
+
+// RegisterRealtimeProvider registers a Realtime provider factory with the given name and priority.
+// Higher priority values override lower priority registrations.
+func RegisterRealtimeProvider(name string, factory registry.RealtimeProviderFactory, priority int) {
+	core.RegisterRealtimeProvider(name, factory, priority)
+}
+
+// GetRealtimeProvider creates a Realtime provider instance from the registry.
 //
 // Realtime providers enable native voice-to-voice conversations with low latency
 // (~100-300ms). Available providers include:
-//   - "openai-realtime": OpenAI Realtime API (~100ms latency)
-//   - "gemini-live": Google Gemini Live API (~200ms latency)
+//   - "openai": OpenAI Realtime API (~100ms latency)
+//   - "gemini": Google Gemini Live API (~200ms latency)
 //
 // Example:
 //
-//	provider, err := omnivoice.GetRealtimeProvider("openai-realtime",
+//	provider, err := omnivoice.GetRealtimeProvider("openai",
 //	    omnivoice.WithAPIKey(os.Getenv("OPENAI_API_KEY")))
-func GetRealtimeProvider(name string, opts ...ProviderOption) (realtime.Provider, error) {
-	registry.mu.RLock()
-	factory, ok := registry.realtimeFactories[name]
-	registry.mu.RUnlock()
-
-	if !ok {
-		return nil, fmt.Errorf("unknown Realtime provider: %s (available: %v)", name, ListRealtimeProviders())
-	}
-
-	config := ProviderConfig{}
-	for _, opt := range opts {
-		opt(&config)
-	}
-
-	return factory(config)
+func GetRealtimeProvider(name string, opts ...ProviderOption) (registry.RealtimeProvider, error) {
+	return core.GetRealtimeProvider(name, opts...)
 }
 
-// ListRealtimeProviders returns the names of all registered Realtime providers.
+// ListRealtimeProviders returns a list of all registered Realtime provider names.
 func ListRealtimeProviders() []string {
-	registry.mu.RLock()
-	defer registry.mu.RUnlock()
-
-	names := make([]string, 0, len(registry.realtimeFactories))
-	for name := range registry.realtimeFactories {
-		names = append(names, name)
-	}
-	return names
+	return core.ListRealtimeProviders()
 }
 
-// HasRealtimeProvider checks if a Realtime provider is registered.
+// HasRealtimeProvider returns true if a Realtime provider with the given name is registered.
 func HasRealtimeProvider(name string) bool {
-	registry.mu.RLock()
-	defer registry.mu.RUnlock()
-	_, ok := registry.realtimeFactories[name]
-	return ok
+	return core.HasRealtimeProvider(name)
+}
+
+// GetRealtimeProviderPriority returns the priority of the registered Realtime provider.
+func GetRealtimeProviderPriority(name string) int {
+	return core.GetRealtimeProviderPriority(name)
 }
