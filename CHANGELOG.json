@@ -7,6 +7,34 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.9.0",
+      "date": "2026-06-15",
+      "highlights": [
+        { "description": "RealtimeProvider registry for native voice-to-voice APIs" },
+        { "description": "OpenAI Realtime and Gemini Live provider registration" }
+      ],
+      "added": [
+        { "description": "`RealtimeProviderFactory` type for Realtime provider creation", "commit": "19866ba" },
+        { "description": "`RegisterRealtimeProvider` and `GetRealtimeProvider` for runtime provider discovery", "commit": "19866ba" },
+        { "description": "`ListRealtimeProviders` and `HasRealtimeProvider` to query registered providers", "commit": "19866ba" },
+        { "description": "Re-exported Realtime types from omnivoice-core: `RealtimeProvider`, `ProcessConfig`, `FunctionDeclaration`, `RealtimeAudioChunk`, `RealtimeTranscript`, `RealtimeClient`", "commit": "19866ba" },
+        { "description": "`NewRealtimeClient` function for multi-provider management", "commit": "19866ba" },
+        { "description": "OpenAI Realtime provider registration (`openai-realtime`)", "commit": "97f1b41" },
+        { "description": "Gemini Live provider registration (`gemini-live`)", "commit": "97f1b41" }
+      ],
+      "documentation": [
+        { "description": "Voice architecture guide for realtime providers", "commit": "11015fe" },
+        { "description": "Provider registry documentation for Realtime APIs", "commit": "11015fe" },
+        { "description": "Project guidelines in CLAUDE.md", "commit": "9ce9e0b" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omni-twilio` v0.5.0 → v0.6.0 (migrated from twilio-go)", "commit": "83b4172" },
+        { "description": "`github.com/plexusone/omni-openai` v0.2.2 → v0.3.0 (Realtime API support)", "commit": "d4395e5" },
+        { "description": "Add `github.com/plexusone/omni-google` v0.5.0 (Gemini Live API)", "commit": "d4395e5" },
+        { "description": "`github.com/plexusone/omnivoice-core` v0.9.0 → v0.13.0 (Realtime package)", "commit": "40fe1d2" }
+      ]
+    },
+    {
       "version": "v0.8.0",
       "date": "2026-05-02",
       "highlights": [
