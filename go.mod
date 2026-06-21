@@ -3,9 +3,9 @@ module github.com/plexusone/omnivoice
 go 1.26.0
 
 require (
-	github.com/plexusone/elevenlabs-go v0.11.0
+	github.com/plexusone/elevenlabs-go v0.13.0
 	github.com/plexusone/omni-deepgram v0.6.1
-	github.com/plexusone/omni-google v0.6.0
+	github.com/plexusone/omni-google v0.6.1
 	github.com/plexusone/omni-openai v0.4.1
 	github.com/plexusone/omni-telnyx v0.4.0
 	github.com/plexusone/omni-twilio v0.8.0
@@ -36,15 +36,15 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.15 // indirect
 	github.com/mattn/go-isatty v0.0.22 // indirect
-	github.com/ogen-go/ogen v1.20.3 // indirect
+	github.com/ogen-go/ogen v1.22.0 // indirect
 	github.com/openai/openai-go v1.12.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/plexusone/ogen-tools v0.2.1 // indirect
+	github.com/plexusone/ogen-tools v0.3.0 // indirect
 	github.com/plexusone/omnillm-core v0.17.0 // indirect
 	github.com/segmentio/asm v1.2.1 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
-	github.com/team-telnyx/telnyx-go/v4 v4.78.0 // indirect
+	github.com/team-telnyx/telnyx-go/v4 v4.80.0 // indirect
 	github.com/tidwall/gjson v1.19.0 // indirect
 	github.com/tidwall/match v1.2.0 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
