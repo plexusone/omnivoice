@@ -34,6 +34,7 @@ var (
 	// Core options
 	WithAPIKey    = registry.WithAPIKey
 	WithBaseURL   = registry.WithBaseURL
+	WithEndpoint  = registry.WithEndpoint
 	WithExtension = registry.WithExtension
 
 	// CallSystem options
