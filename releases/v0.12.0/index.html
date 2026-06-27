@@ -12,13 +12,13 @@
         <meta name="author" content="PlexusOne">
       
       
-        <link rel="canonical" href="https://plexusone.github.io/omnivoice/releases/v0.8.0/">
+        <link rel="canonical" href="https://plexusone.github.io/omnivoice/releases/v0.12.0/">
       
       
-        <link rel="prev" href="../v0.9.0/">
+        <link rel="prev" href="../../reference/failover/">
       
       
-        <link rel="next" href="../v0.7.1/">
+        <link rel="next" href="../v0.11.0/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>v0.8.0 - OmniVoice</title>
+        <title>v0.12.0 - OmniVoice</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#release-notes-v080" class="md-skip">
+        <a href="#release-notes-v0120" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              v0.8.0
+              v0.12.0
             
           </span>
         </div>
@@ -1008,10 +1008,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../v0.12.0/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.12.0
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1027,6 +1054,259 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Highlights
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="New Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-providers-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local Providers Support
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grpc-endpoint-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        gRPC Endpoint Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voice-profiles-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Voice Profiles Library
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audio-analysis-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Audio Analysis Utilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#omnictl-voice-testing-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        omnictl Voice Testing Tool
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Updates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependency Updates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#omnivoice-core-v0140-v0150" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        omnivoice-core v0.14.0 → v0.15.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation Updates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Documentation Updates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-providers-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local Providers Guide
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registry-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registry Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readme-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        README Updates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Guide
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-local-providers-no-changes-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Local Providers (No Changes Needed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-local-provider-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding Local Provider Support
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-changelog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full Changelog
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1120,37 +1400,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    v0.8.0
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../v0.8.0/" class="md-nav__link">
         
   
   
@@ -1166,193 +1419,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#highlights" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Highlights
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#new-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        New Features
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="New Features">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#cli-tool" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CLI Tool
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="CLI Tool">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Commands
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#output-formats" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Output Formats
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#transcript-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Transcript Format
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Transcript Format">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#type-aliases" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Type Aliases
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#schema-package" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Schema Package
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Dependencies
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#migration-guide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Migration Guide
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Migration Guide">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#from-v071" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        From v0.7.1
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#full-changelog" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Full Changelog
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1554,22 +1620,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cli-tool" class="md-nav__link">
+  <a href="#local-providers-support" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CLI Tool
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="CLI Tool">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Commands
+        Local Providers Support
       
     </span>
   </a>
@@ -1577,54 +1631,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#output-formats" class="md-nav__link">
+  <a href="#grpc-endpoint-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Output Formats
+        gRPC Endpoint Configuration
       
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
-  <a href="#transcript-format" class="md-nav__link">
+  <a href="#voice-profiles-library" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Transcript Format
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Transcript Format">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#type-aliases" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Type Aliases
+        Voice Profiles Library
       
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#audio-analysis-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Audio Analysis Utilities
+      
+    </span>
+  </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#schema-package" class="md-nav__link">
+  <a href="#omnictl-voice-testing-tool" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Schema Package
+        omnictl Voice Testing Tool
       
     </span>
   </a>
@@ -1637,24 +1680,80 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
+  <a href="#dependency-updates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dependencies
+        Dependency Updates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependency Updates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#omnivoice-core-v0140-v0150" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        omnivoice-core v0.14.0 → v0.15.0
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
+  <a href="#documentation-updates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation
+        Documentation Updates
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Documentation Updates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-providers-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local Providers Guide
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registry-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registry Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readme-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        README Updates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1671,10 +1770,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#from-v071" class="md-nav__link">
+  <a href="#using-local-providers-no-changes-needed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From v0.7.1
+        Using Local Providers (No Changes Needed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-local-provider-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding Local Provider Support
       
     </span>
   </a>
@@ -1683,6 +1793,28 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1717,143 +1849,237 @@
   
 
 
-<h1 id="release-notes-v080">Release Notes: v0.8.0<a class="headerlink" href="#release-notes-v080" title="Permanent link">&para;</a></h1>
-<p><strong>Release Date:</strong> 2026-05-02</p>
+<h1 id="release-notes-v0120">Release Notes: v0.12.0<a class="headerlink" href="#release-notes-v0120" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date:</strong> 2026-06-27</p>
 <h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>CLI Tool</strong>: Command-line interface for speech-to-text transcription</li>
-<li><strong>Canonical Transcript Format</strong>: Re-exported from omnivoice-core for unified imports</li>
+<li><strong>Local TTS/STT Providers</strong>: Run F5-TTS and Whisper on Apple Silicon without cloud dependencies</li>
+<li><strong>gRPC Endpoint Configuration</strong>: New <code>WithEndpoint</code> option for local providers using gRPC</li>
+<li><strong>Voice Profiles Library</strong>: 700+ pre-configured voices via omnivoice-core v0.15.0</li>
+<li><strong>Audio Analysis Tools</strong>: Utilities for analyzing audio properties and characteristics</li>
+<li><strong>omnictl CLI</strong>: Voice testing tool for local and cloud providers</li>
 </ul>
 <h2 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">&para;</a></h2>
-<h3 id="cli-tool">CLI Tool<a class="headerlink" href="#cli-tool" title="Permanent link">&para;</a></h3>
-<p>OmniVoice now includes a CLI for transcription without writing code:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Install</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>go<span class="w"> </span>install<span class="w"> </span>github.com/plexusone/omnivoice/cmd/omnivoice@latest
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Basic transcription</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DEEPGRAM_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-api-key&quot;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>podcast.mp3
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># JSON output with full metadata</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>--diarize<span class="w"> </span>--timestamps<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>-o<span class="w"> </span>transcript.json<span class="w"> </span>podcast.mp3
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Generate subtitles</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>-f<span class="w"> </span>srt<span class="w"> </span>-o<span class="w"> </span>subtitles.srt<span class="w"> </span>podcast.mp3
+<h3 id="local-providers-support">Local Providers Support<a class="headerlink" href="#local-providers-support" title="Permanent link">&para;</a></h3>
+<p>OmniVoice now supports running text-to-speech and speech-to-text completely locally on Apple Silicon machines:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="s">&quot;github.com/plexusone/omnivoice&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="s">&quot;github.com/plexusone/omnivoice-core/registry&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice/providers/all&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1">// Use local F5-TTS provider</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nx">ttsProvider</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetTTSProvider</span><span class="p">(</span><span class="s">&quot;f5tts-mlx&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nx">registry</span><span class="p">.</span><span class="nx">WithEndpoint</span><span class="p">(</span><span class="s">&quot;localhost:50051&quot;</span><span class="p">),</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">}</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1">// Use local Whisper provider</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="nx">sttProvider</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetSTTProvider</span><span class="p">(</span><span class="s">&quot;whisper-mlx&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nx">registry</span><span class="p">.</span><span class="nx">WithEndpoint</span><span class="p">(</span><span class="s">&quot;localhost:50052&quot;</span><span class="p">),</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">)</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="p">}</span>
 </code></pre></div>
-<h4 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h4>
+<p><strong>Available Local Providers:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Command</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>transcribe</code></td>
-<td>Transcribe audio files to text</td>
-</tr>
-<tr>
-<td><code>providers list</code></td>
-<td>List available STT providers</td>
-</tr>
-</tbody>
-</table>
-<h4 id="output-formats">Output Formats<a class="headerlink" href="#output-formats" title="Permanent link">&para;</a></h4>
-<table>
-<thead>
-<tr>
-<th>Format</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>text</code></td>
-<td>Plain transcript text (default)</td>
-</tr>
-<tr>
-<td><code>json</code></td>
-<td>OmniVoice Transcript format with full metadata</td>
-</tr>
-<tr>
-<td><code>srt</code></td>
-<td>SubRip subtitles</td>
-</tr>
-<tr>
-<td><code>vtt</code></td>
-<td>WebVTT subtitles</td>
-</tr>
-</tbody>
-</table>
-<p>See the <a href="../../guides/cli/">CLI Guide</a> for full documentation.</p>
-<h3 id="transcript-format">Transcript Format<a class="headerlink" href="#transcript-format" title="Permanent link">&para;</a></h3>
-<p>The canonical Transcript format is now available in omnivoice:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice&quot;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">// Create transcript from transcription result</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nx">transcript</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">NewTranscript</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;deepgram&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nova-2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;audio.mp3&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">)</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">// Save to JSON (durations as milliseconds)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">transcript</span><span class="p">.</span><span class="nx">SaveJSON</span><span class="p">(</span><span class="s">&quot;output.transcript.json&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1">// Load from JSON</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nx">loaded</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">LoadTranscript</span><span class="p">(</span><span class="s">&quot;output.transcript.json&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h4 id="type-aliases">Type Aliases<a class="headerlink" href="#type-aliases" title="Permanent link">&para;</a></h4>
-<table>
-<thead>
-<tr>
+<th>Provider</th>
 <th>Type</th>
-<th>Description</th>
+<th>Hardware</th>
+<th>Features</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>Transcript</code></td>
-<td>Full transcription with metadata</td>
+<td><strong>F5-TTS MLX</strong></td>
+<td>TTS</td>
+<td>Apple Silicon</td>
+<td>Natural-sounding text-to-speech, multi-voice support</td>
 </tr>
 <tr>
-<td><code>TranscriptSegment</code></td>
-<td>Segment with timing</td>
-</tr>
-<tr>
-<td><code>TranscriptWord</code></td>
-<td>Word with timing</td>
-</tr>
-<tr>
-<td><code>TranscriptMetadata</code></td>
-<td>Provider provenance</td>
-</tr>
-<tr>
-<td><code>TranscriptOptions</code></td>
-<td>Transcription options</td>
+<td><strong>Whisper MLX</strong></td>
+<td>STT</td>
+<td>Apple Silicon</td>
+<td>Accurate speech recognition, multi-language support</td>
 </tr>
 </tbody>
 </table>
-<h3 id="schema-package">Schema Package<a class="headerlink" href="#schema-package" title="Permanent link">&para;</a></h3>
-<p>Embedded JSON Schema for validation:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice/schema&quot;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nx">schemaJSON</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">TranscriptV1Schema</span>
-</code></pre></div>
-<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
+<p><strong>Benefits of Local Providers:</strong></p>
 <ul>
-<li><code>github.com/plexusone/omnivoice-core</code> v0.8.0 → v0.9.0</li>
-<li>Canonical Transcript format with <code>DurationMilliseconds</code></li>
-<li>Embedded JSON Schema</li>
+<li><strong>Privacy</strong>: Audio never leaves your machine</li>
+<li><strong>Cost</strong>: No API calls or monthly bills</li>
+<li><strong>Latency</strong>: Faster response times with local execution</li>
+<li><strong>Offline</strong>: Works without internet connection</li>
 </ul>
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/plexusone/omnivoice@v0.8.0
+<h3 id="grpc-endpoint-configuration">gRPC Endpoint Configuration<a class="headerlink" href="#grpc-endpoint-configuration" title="Permanent link">&para;</a></h3>
+<p>The new <code>WithEndpoint</code> option is now exported for configuring local gRPC providers:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice-core/registry&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">// Configure custom gRPC endpoint</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nx">opts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">registry</span><span class="p">.</span><span class="nx">ProviderOption</span><span class="p">{</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nx">registry</span><span class="p">.</span><span class="nx">WithEndpoint</span><span class="p">(</span><span class="s">&quot;192.168.1.100:50051&quot;</span><span class="p">),</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nx">provider</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetTTSProvider</span><span class="p">(</span><span class="s">&quot;f5tts-mlx&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">opts</span><span class="o">...</span><span class="p">)</span>
 </code></pre></div>
+<p>This enables:</p>
+<ul>
+<li><strong>Custom Endpoints</strong>: Point to locally-running gRPC services</li>
+<li><strong>Network Flexibility</strong>: Use different machines for inference</li>
+<li><strong>Development</strong>: Easy switching between local dev and staging servers</li>
+</ul>
+<h3 id="voice-profiles-library">Voice Profiles Library<a class="headerlink" href="#voice-profiles-library" title="Permanent link">&para;</a></h3>
+<p>omnivoice-core v0.15.0 includes a library of 700+ pre-configured voice profiles:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Access voice profiles programmatically</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nx">profiles</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetVoiceProfiles</span><span class="p">()</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">profile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">profiles</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s (%s): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">profile</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">profile</span><span class="p">.</span><span class="nx">Language</span><span class="p">,</span><span class="w"> </span><span class="nx">profile</span><span class="p">.</span><span class="nx">Gender</span><span class="p">)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Voice Profile Coverage:</strong></p>
+<ul>
+<li>Multiple genders and accents</li>
+<li>50+ languages and locales</li>
+<li>Pitch, speed, and tone customization</li>
+<li>Provider-specific voice mappings</li>
+</ul>
+<h3 id="audio-analysis-utilities">Audio Analysis Utilities<a class="headerlink" href="#audio-analysis-utilities" title="Permanent link">&para;</a></h3>
+<p>New audio analysis tools for understanding audio characteristics:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Analyze audio from reader</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nx">analysis</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">AnalyzeAudio</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">audioReader</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Duration: %dms\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">analysis</span><span class="p">.</span><span class="nx">DurationMs</span><span class="p">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Sample Rate: %dHz\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">analysis</span><span class="p">.</span><span class="nx">SampleRate</span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Channels: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">analysis</span><span class="p">.</span><span class="nx">Channels</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Available Metrics:</strong></p>
+<ul>
+<li>Duration in milliseconds</li>
+<li>Sample rate and bit depth</li>
+<li>Channel configuration (mono, stereo, etc.)</li>
+<li>Format detection</li>
+<li>Loudness analysis</li>
+</ul>
+<h3 id="omnictl-voice-testing-tool">omnictl Voice Testing Tool<a class="headerlink" href="#omnictl-voice-testing-tool" title="Permanent link">&para;</a></h3>
+<p>omnivoice-core v0.15.0 includes the <code>omnictl</code> CLI for testing voice providers:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># List available providers</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>omnictl<span class="w"> </span>providers<span class="w"> </span>list
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Test text-to-speech</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>omnictl<span class="w"> </span>tts<span class="w"> </span>--provider<span class="w"> </span>f5tts-mlx<span class="w"> </span><span class="s2">&quot;Hello, world!&quot;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># Test speech-to-text</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>omnictl<span class="w"> </span>stt<span class="w"> </span>--provider<span class="w"> </span>whisper-mlx<span class="w"> </span>audio.wav
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># Test voice profiles</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>omnictl<span class="w"> </span>voices<span class="w"> </span>list<span class="w"> </span>--filter<span class="w"> </span>f5tts-mlx
+</code></pre></div>
+<h2 id="dependency-updates">Dependency Updates<a class="headerlink" href="#dependency-updates" title="Permanent link">&para;</a></h2>
+<h3 id="omnivoice-core-v0140-v0150">omnivoice-core v0.14.0 → v0.15.0<a class="headerlink" href="#omnivoice-core-v0140-v0150" title="Permanent link">&para;</a></h3>
+<p>The major dependency update includes:</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Version</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Local TTS (F5-TTS MLX)</td>
+<td>New</td>
+<td>Run TTS on Apple Silicon</td>
+</tr>
+<tr>
+<td>Local STT (Whisper MLX)</td>
+<td>New</td>
+<td>Run STT on Apple Silicon</td>
+</tr>
+<tr>
+<td>Voice Profiles</td>
+<td>New</td>
+<td>700+ pre-configured voices</td>
+</tr>
+<tr>
+<td>Audio Analysis</td>
+<td>New</td>
+<td>Analyze audio properties</td>
+</tr>
+<tr>
+<td>omnictl CLI</td>
+<td>New</td>
+<td>Voice testing tool</td>
+</tr>
+</tbody>
+</table>
+<h2 id="documentation-updates">Documentation Updates<a class="headerlink" href="#documentation-updates" title="Permanent link">&para;</a></h2>
+<h3 id="local-providers-guide">Local Providers Guide<a class="headerlink" href="#local-providers-guide" title="Permanent link">&para;</a></h3>
+<p>Added comprehensive documentation for using local providers:</p>
+<ul>
+<li><strong>Location:</strong> <code>docs/providers/index.md</code></li>
+<li><strong>Content:</strong></li>
+<li>Local Providers section with F5-TTS MLX and Whisper MLX</li>
+<li>Setup instructions for Apple Silicon</li>
+<li>gRPC endpoint configuration</li>
+<li>Privacy and cost benefits</li>
+</ul>
+<h3 id="registry-reference">Registry Reference<a class="headerlink" href="#registry-reference" title="Permanent link">&para;</a></h3>
+<p>Updated registry documentation with new endpoint option:</p>
+<ul>
+<li><strong>Location:</strong> <code>docs/reference/registry.md</code></li>
+<li><strong>Content:</strong></li>
+<li><code>WithEndpoint</code> option reference</li>
+<li>gRPC provider configuration</li>
+<li>Examples for local and cloud providers</li>
+</ul>
+<h3 id="readme-updates">README Updates<a class="headerlink" href="#readme-updates" title="Permanent link">&para;</a></h3>
+<p>Enhanced README with local provider information:</p>
+<ul>
+<li><strong>Features:</strong> Added local provider icons and descriptions</li>
+<li><strong>Included Providers:</strong> Listed F5-TTS MLX and Whisper MLX</li>
+<li><strong>Related Packages:</strong> Referenced local provider packages</li>
+</ul>
 <h2 id="migration-guide">Migration Guide<a class="headerlink" href="#migration-guide" title="Permanent link">&para;</a></h2>
-<h3 id="from-v071">From v0.7.1<a class="headerlink" href="#from-v071" title="Permanent link">&para;</a></h3>
-<p>No breaking changes. New features are additive:</p>
-<ol>
-<li><strong>CLI</strong>: Install with <code>go install github.com/plexusone/omnivoice/cmd/omnivoice@latest</code></li>
-<li><strong>Transcript types</strong>: Import from <code>github.com/plexusone/omnivoice</code> (re-exported from omnivoice-core)</li>
-<li><strong>Schema</strong>: Import from <code>github.com/plexusone/omnivoice/schema</code></li>
-</ol>
+<h3 id="using-local-providers-no-changes-needed">Using Local Providers (No Changes Needed)<a class="headerlink" href="#using-local-providers-no-changes-needed" title="Permanent link">&para;</a></h3>
+<p>If you're already using omnivoice with cloud providers, local providers are opt-in. No migration required.</p>
+<h3 id="adding-local-provider-support">Adding Local Provider Support<a class="headerlink" href="#adding-local-provider-support" title="Permanent link">&para;</a></h3>
+<p>To add local provider support to existing code:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// Before: Cloud providers only</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="s">&quot;github.com/plexusone/omnivoice&quot;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice/providers/all&quot;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1">// After: Cloud + Local providers (automatic via imports)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="s">&quot;github.com/plexusone/omnivoice&quot;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omnivoice/providers/all&quot;</span><span class="w">  </span><span class="c1">// Includes local providers</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">)</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c1">// Just use WithEndpoint for local gRPC providers</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="nx">opts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">registry</span><span class="p">.</span><span class="nx">ProviderOption</span><span class="p">{</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="nx">registry</span><span class="p">.</span><span class="nx">WithEndpoint</span><span class="p">(</span><span class="s">&quot;localhost:50051&quot;</span><span class="p">),</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="p">}</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="nx">provider</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetTTSProvider</span><span class="p">(</span><span class="s">&quot;f5tts-mlx&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">opts</span><span class="o">...</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h2>
+<p>None. This is a backward-compatible feature release.</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/plexusone/omnivoice@v0.12.0
+</code></pre></div>
 <h2 id="full-changelog">Full Changelog<a class="headerlink" href="#full-changelog" title="Permanent link">&para;</a></h2>
 <p>See <a href="../../changelog/">CHANGELOG.md</a> for the complete list of changes.</p>
 
