@@ -7,6 +7,31 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.12.0",
+      "date": "2026-06-27",
+      "highlights": [
+        { "description": "Local TTS/STT providers for Apple Silicon (F5-TTS MLX, Whisper MLX)" },
+        { "description": "gRPC endpoint configuration support via WithEndpoint" },
+        { "description": "omnivoice-core v0.15.0 with voice profiles and audio analysis" }
+      ],
+      "added": [
+        { "description": "`WithEndpoint` option for gRPC providers (local TTS/STT)", "commit": "1302636" },
+        { "description": "Support for F5-TTS MLX local text-to-speech provider", "commit": "c0e2bbc" },
+        { "description": "Support for Whisper MLX local speech-to-text provider", "commit": "c0e2bbc" },
+        { "description": "Voice profile library with 700+ voices (via omnivoice-core v0.15.0)", "commit": "c0e2bbc" },
+        { "description": "Audio analysis utilities (via omnivoice-core v0.15.0)", "commit": "c0e2bbc" },
+        { "description": "omnictl CLI tool for voice testing (via omnivoice-core v0.15.0)", "commit": "c0e2bbc" }
+      ],
+      "documentation": [
+        { "description": "Local Providers section in docs/providers/index.md (F5-TTS MLX, Whisper MLX)", "commit": "6a7eb07" },
+        { "description": "WithEndpoint option documentation in docs/reference/registry.md", "commit": "6a7eb07" },
+        { "description": "Updated README.md with local providers in Features and Included Providers sections", "commit": "6a7eb07" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omnivoice-core` v0.14.0 → v0.15.0 (local providers, voice profiles, audio analysis)", "commit": "c0e2bbc" }
+      ]
+    },
+    {
       "version": "v0.11.0",
       "date": "2026-06-15",
       "highlights": [
