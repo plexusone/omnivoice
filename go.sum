@@ -76,8 +76,6 @@ github.com/plexusone/omni-twilio v0.8.0 h1:dLiklDTydunjUVLsppyQ1lxAiKcy9cCFWE7gu
 github.com/plexusone/omni-twilio v0.8.0/go.mod h1:Nuo7WMhztQjQtRP4/k6aKNIS4WTVPl0E4YUVkbdYFf4=
 github.com/plexusone/omnillm-core v0.17.0 h1:mzM1yVt7sSFxHqNmyhoV6GxYsqfFOD/m1tWyv2qFpec=
 github.com/plexusone/omnillm-core v0.17.0/go.mod h1:180U/oa67fly3+T3h1sL/pBMvcjIKR+bvSEkAGnalMY=
-github.com/plexusone/omnivoice-core v0.14.0 h1:6KGvVwJI2RWcK0y1A91pVFn7lyuWsYjFPKxsAzIZPNA=
-github.com/plexusone/omnivoice-core v0.14.0/go.mod h1:ghbU63vSkn09vz1Mb9uQrePVcNLpXXBB9IMZ2wkzePM=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rogpeppe/go-internal v1.14.1 h1:UQB4HGPB6osV0SQTLymcB4TgvyWu6ZyliaW0tI/otEQ=

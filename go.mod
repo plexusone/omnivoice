@@ -9,7 +9,7 @@ require (
 	github.com/plexusone/omni-openai v0.4.1
 	github.com/plexusone/omni-telnyx v0.4.0
 	github.com/plexusone/omni-twilio v0.8.0
-	github.com/plexusone/omnivoice-core v0.14.0
+	github.com/plexusone/omnivoice-core v0.15.0
 	github.com/spf13/cobra v1.10.2
 )
 
