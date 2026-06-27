@@ -220,6 +220,12 @@ if omnivoice.HasRealtimeProvider("openai") {
 // API key (OpenAI, ElevenLabs, Deepgram, Telnyx)
 omnivoice.WithAPIKey(key)
 
+// Custom API endpoint (for proxy or self-hosted)
+omnivoice.WithBaseURL(url)
+
+// gRPC endpoint (for local providers like f5tts-mlx, whisper-mlx)
+omnivoice.WithEndpoint(addr)
+
 // Account credentials (Twilio)
 omnivoice.WithAccountSID(sid)
 omnivoice.WithAuthToken(token)
@@ -229,6 +235,22 @@ omnivoice.WithPhoneNumber(number)
 
 // Webhook URL (Twilio, Telnyx)
 omnivoice.WithWebhookURL(url)
+```
+
+### Local Provider Options
+
+For local providers (f5tts-mlx, whisper-mlx) that use gRPC:
+
+```go
+// Connect to local TTS server
+tts, _ := omnivoice.GetTTSProvider("f5tts-mlx",
+    omnivoice.WithEndpoint("localhost:50051"),
+)
+
+// Connect to local STT server
+stt, _ := omnivoice.GetSTTProvider("whisper-mlx",
+    omnivoice.WithEndpoint("localhost:50052"),
+)
 ```
 
 ### Extensions
@@ -251,7 +273,8 @@ The configuration structure (from `omnivoice-core/registry`):
 ```go
 type ProviderConfig struct {
     APIKey     string         // Authentication key
-    BaseURL    string         // Custom API endpoint
+    BaseURL    string         // Custom API endpoint (HTTP/REST)
+    Endpoint   string         // gRPC endpoint (for local providers)
     Extensions map[string]any // Provider-specific configuration
 }
 ```

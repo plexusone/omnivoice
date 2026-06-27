@@ -34,6 +34,43 @@ OmniVoice supports multiple providers for each capability. Choose based on your 
 |----------|----------|---------|-------|
 | LiveKit | WebRTC | <200ms | Browser/mobile, open source |
 
+### Local Providers (Apple Silicon)
+
+Local providers run entirely on your machine using MLX-optimized models. Available in [omnivoice-core](https://github.com/plexusone/omnivoice-core) v0.15.0+.
+
+| Provider | Type | Registry Name | Requirements |
+|----------|------|---------------|--------------|
+| F5-TTS MLX | TTS | `f5tts-mlx` | Apple Silicon, Python server |
+| Whisper MLX | STT | `whisper-mlx` | Apple Silicon, Python server |
+
+**Benefits:**
+
+- Zero API costs after hardware investment
+- Data stays on your machine (privacy)
+- No internet required after model download
+- ~200ms latency on M1/M2/M3 chips
+
+**Usage:**
+
+```go
+import (
+    _ "github.com/plexusone/omnivoice-core/tts/f5ttsmlx"
+    _ "github.com/plexusone/omnivoice-core/stt/whispermlx"
+)
+
+// Local TTS with gRPC endpoint
+tts, _ := omnivoice.GetTTSProvider("f5tts-mlx",
+    omnivoice.WithEndpoint("localhost:50051"),
+)
+
+// Local STT with gRPC endpoint
+stt, _ := omnivoice.GetSTTProvider("whisper-mlx",
+    omnivoice.WithEndpoint("localhost:50052"),
+)
+```
+
+See [Local TTS Guide](https://plexusone.dev/omnivoice-core/local-tts) for setup instructions.
+
 ## Comparison by Use Case
 
 ### Text-to-Speech (TTS)

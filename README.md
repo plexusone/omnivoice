@@ -50,11 +50,12 @@ See the [Voice Architecture Guide](https://plexusone.dev/omnivoice-core/voice-ar
 
 ## Features
 
-- 🎯 **Unified Interface**: Single API for all STT and TTS providers
-- 🗂️ **Provider Registry**: Get providers by name - no need to import individual provider packages
-- 🔌 **Multiple Providers**: OpenAI, Deepgram, ElevenLabs, Twilio, Telnyx
-- ⚡ **Streaming Support**: Real-time transcription and synthesis
-- 🚀 **Easy Integration**: Import and use with minimal configuration
+- **Unified Interface**: Single API for all STT and TTS providers
+- **Provider Registry**: Get providers by name - no need to import individual provider packages
+- **Multiple Providers**: OpenAI, Deepgram, ElevenLabs, Twilio, Telnyx + local providers
+- **Local Voice**: F5-TTS and Whisper via MLX on Apple Silicon (zero API cost)
+- **Streaming Support**: Real-time transcription and synthesis
+- **Easy Integration**: Import and use with minimal configuration
 
 ## Installation
 
@@ -236,7 +237,7 @@ OmniVoice accepts language codes in [BCP-47](https://www.rfc-editor.org/info/bcp
 
 ## Included Providers
 
-### STT/TTS Providers
+### Cloud STT/TTS Providers
 
 | Provider | STT | TTS | Registry Name |
 |----------|-----|-----|---------------|
@@ -244,6 +245,15 @@ OmniVoice accepts language codes in [BCP-47](https://www.rfc-editor.org/info/bcp
 | ElevenLabs | Scribe | Multilingual v2 | `"elevenlabs"` |
 | Deepgram | Nova-2 | Aura | `"deepgram"` |
 | Twilio | Media Streams | Media Streams | `"twilio"` |
+
+### Local Providers (Apple Silicon)
+
+| Provider | Type | Registry Name | Requirements |
+|----------|------|---------------|--------------|
+| F5-TTS MLX | TTS | `"f5tts-mlx"` | Apple Silicon, Python server |
+| Whisper MLX | STT | `"whisper-mlx"` | Apple Silicon, Python server |
+
+Local providers are opt-in imports from omnivoice-core. See [Local TTS Guide](https://plexusone.dev/omnivoice-core/local-tts).
 
 ### Native Voice-to-Voice (Realtime)
 
@@ -264,6 +274,13 @@ OmniVoice accepts language codes in [BCP-47](https://www.rfc-editor.org/info/bcp
 ### Core
 
 - [omnivoice-core](https://github.com/plexusone/omnivoice-core) - Core interfaces (minimal dependencies)
+
+### Local Providers (Apple Silicon)
+
+Available in omnivoice-core v0.15.0+ for on-device voice processing:
+
+- [f5tts-mlx](https://github.com/plexusone/omnivoice-core/tree/main/tts/f5ttsmlx) - F5-TTS via MLX (zero API cost)
+- [whisper-mlx](https://github.com/plexusone/omnivoice-core/tree/main/stt/whispermlx) - Whisper via MLX (zero API cost)
 
 ### Native Voice-to-Voice (Recommended for Low Latency)
 
