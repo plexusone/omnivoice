@@ -72,8 +72,8 @@ github.com/plexusone/omni-openai v0.4.1 h1:SjbeXGZlgjCGPR2QZrHupuFuhU5vteZazZUcM
 github.com/plexusone/omni-openai v0.4.1/go.mod h1:01QuN0+nmicCsXHm5yEhJ2MoKFTOJgSix+DsSkjCnB0=
 github.com/plexusone/omni-telnyx v0.4.0 h1:Qa/8GB0MAk7ryA742Rb+fgsbc/SsG/GZs6ArgClT0cM=
 github.com/plexusone/omni-telnyx v0.4.0/go.mod h1:DvXKIErUst6r0CYmHQKMh+si8YKdlh0n7x1467x3dLo=
-github.com/plexusone/omni-twilio v0.8.0 h1:dLiklDTydunjUVLsppyQ1lxAiKcy9cCFWE7guQEuJMg=
-github.com/plexusone/omni-twilio v0.8.0/go.mod h1:Nuo7WMhztQjQtRP4/k6aKNIS4WTVPl0E4YUVkbdYFf4=
+github.com/plexusone/omni-twilio v0.9.0 h1:Bumm1HVnN7EYpPgRTKz9h16SUjAZam59XIHD+yayTs8=
+github.com/plexusone/omni-twilio v0.9.0/go.mod h1:CI1n6fwjgaBl3i1Dcx4x9lTgIxdEBVwwb18kC4weo3k=
 github.com/plexusone/omnillm-core v0.17.0 h1:mzM1yVt7sSFxHqNmyhoV6GxYsqfFOD/m1tWyv2qFpec=
 github.com/plexusone/omnillm-core v0.17.0/go.mod h1:180U/oa67fly3+T3h1sL/pBMvcjIKR+bvSEkAGnalMY=
 github.com/plexusone/omnivoice-core v0.15.0 h1:lvzucRbP53bwzBhbZ/x15iRUfJexJqzEeLJvXo74GRM=

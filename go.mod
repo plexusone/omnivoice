@@ -1,6 +1,6 @@
 module github.com/plexusone/omnivoice
 
-go 1.26.0
+go 1.26.4
 
 require (
 	github.com/plexusone/elevenlabs-go v0.13.0
@@ -8,7 +8,7 @@ require (
 	github.com/plexusone/omni-google v0.6.1
 	github.com/plexusone/omni-openai v0.4.1
 	github.com/plexusone/omni-telnyx v0.4.0
-	github.com/plexusone/omni-twilio v0.8.0
+	github.com/plexusone/omni-twilio v0.9.0
 	github.com/plexusone/omnivoice-core v0.15.0
 	github.com/spf13/cobra v1.10.2
 )
