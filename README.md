@@ -48,12 +48,12 @@ See the [Voice Architecture Guide](https://plexusone.dev/omnivoice-core/voice-ar
 
 ## Features
 
-- **Unified Interface**: Single API for all STT and TTS providers
-- **Provider Registry**: Get providers by name - no need to import individual provider packages
-- **Multiple Providers**: OpenAI, Deepgram, ElevenLabs, Twilio, Telnyx + local providers
-- **Local Voice**: F5-TTS and Whisper via MLX on Apple Silicon (zero API cost)
-- **Streaming Support**: Real-time transcription and synthesis
-- **Easy Integration**: Import and use with minimal configuration
+- 🎯 **Unified Interface**: Single API for all STT and TTS providers
+- 📦 **Provider Registry**: Get providers by name - no need to import individual provider packages
+- 🔌 **Multiple Providers**: OpenAI, Deepgram, ElevenLabs, Twilio, Telnyx + local providers
+- 💻 **Local Voice**: F5-TTS and Whisper via MLX on Apple Silicon (zero API cost)
+- ⚡ **Streaming Support**: Real-time transcription and synthesis
+- 🚀 **Easy Integration**: Import and use with minimal configuration
 
 ## Installation
 
@@ -259,6 +259,7 @@ Local providers are opt-in imports from omnivoice-core. See [Local TTS Guide](ht
 |----------|---------|---------------|
 | OpenAI Realtime | ~100ms | `"openai"` |
 | Gemini Live | ~200ms | `"gemini"` |
+| Deepgram Voice Agent | ~100-300ms | `"deepgram"` |
 
 ### Voice Gateway
 
@@ -283,7 +284,8 @@ Available in omnivoice-core v0.15.0+ for on-device voice processing:
 ### Native Voice-to-Voice (Recommended for Low Latency)
 
 - [omni-openai/omnivoice/realtime](https://github.com/plexusone/omni-openai) - OpenAI Realtime API (~100ms latency)
-- [omni-google/omnivoice](https://github.com/plexusone/omni-google) - Gemini Live API (~200ms latency)
+- [omni-google/omnivoice/realtime](https://github.com/plexusone/omni-google) - Gemini Live API (~200ms latency)
+- [omni-deepgram/omnivoice/realtime](https://github.com/plexusone/omni-deepgram) - Deepgram Voice Agent (~100-300ms latency)
 
 ### STT/TTS Providers
 
