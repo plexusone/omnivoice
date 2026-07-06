@@ -7,6 +7,36 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.13.0",
+      "date": "2026-07-05",
+      "highlights": [
+        { "description": "Deepgram Voice Agent realtime provider support" }
+      ],
+      "added": [
+        { "description": "Deepgram Voice Agent as realtime factory (`GetRealtimeFactory(\"deepgram\")`)", "commit": "1b6bbd4" },
+        { "description": "`ListRealtimeFactories()` includes `deepgram`", "commit": "1b6bbd4" },
+        { "description": "`HasRealtimeFactory(\"deepgram\")` returns true", "commit": "1b6bbd4" }
+      ],
+      "documentation": [
+        { "description": "Add Deepgram to realtime provider tables in docs/providers/index.md", "commit": "2434a51" },
+        { "description": "Add deepgram to realtime import examples", "commit": "2434a51" },
+        { "description": "Update README with omni-deepgram/omnivoice/realtime link", "commit": "2434a51" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omni-deepgram` v0.6.1 → v0.7.0 (Voice Agent realtime provider)", "commit": "1b6bbd4" }
+      ]
+    },
+    {
+      "version": "v0.12.1",
+      "date": "2026-06-29",
+      "highlights": [
+        { "description": "Patch release for dependency updates" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omnivoice-core` v0.14.0 → v0.15.0", "commit": "f14c3a8" }
+      ]
+    },
+    {
       "version": "v0.12.0",
       "date": "2026-06-27",
       "highlights": [
