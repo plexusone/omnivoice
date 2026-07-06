@@ -18,6 +18,7 @@ OmniVoice supports multiple providers for each capability. Choose based on your 
 |----------|---------|---------------|-------|
 | OpenAI Realtime | ~100ms | `openai` | GPT-4o voice model |
 | Gemini Live | ~200ms | `gemini` | Gemini 2.0 Flash |
+| Deepgram Voice Agent | ~100-300ms | `deepgram` | Configurable LLM/TTS |
 
 ### Voice Gateway Providers (PSTN)
 
@@ -110,6 +111,7 @@ See [Local TTS Guide](https://plexusone.dev/omnivoice-core/local-tts) for setup 
 |----------|---------|---------------|----------|
 | **OpenAI Realtime** | ~100ms | Excellent | Conversational agents |
 | **Gemini Live** | ~200ms | Excellent | Multi-turn dialogue |
+| **Deepgram Voice Agent** | ~100-300ms | Excellent | Configurable pipelines |
 
 ## Quick Comparison
 
@@ -117,8 +119,9 @@ See [Local TTS Guide](https://plexusone.dev/omnivoice-core/local-tts) for setup 
 
 ```go
 // For voice agents requiring <500ms response time
-rt, _ := omnivoice.GetRealtimeProvider("openai", ...)  // ~100ms
-rt, _ := omnivoice.GetRealtimeProvider("gemini", ...)  // ~200ms
+rt, _ := omnivoice.GetRealtimeProvider("openai", ...)    // ~100ms
+rt, _ := omnivoice.GetRealtimeProvider("gemini", ...)    // ~200ms
+rt, _ := omnivoice.GetRealtimeProvider("deepgram", ...)  // ~100-300ms
 ```
 
 ### Lowest Latency (Traditional Pipeline)
@@ -178,6 +181,7 @@ import (
 import (
     _ "github.com/plexusone/omni-openai/omnivoice/realtime"
     _ "github.com/plexusone/omni-google/omnivoice/realtime"
+    _ "github.com/plexusone/omni-deepgram/omnivoice/realtime"
 )
 ```
 
@@ -197,6 +201,7 @@ import (
 |----------|-------------------|
 | OpenAI Realtime | `OPENAI_API_KEY` |
 | Gemini Live | `GOOGLE_API_KEY` |
+| Deepgram Voice Agent | `DEEPGRAM_API_KEY` |
 
 ### PSTN Voice Gateway
 

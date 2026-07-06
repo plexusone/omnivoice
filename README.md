@@ -41,7 +41,8 @@ OmniVoice supports two approaches for real-time voice:
 This package provides the **Traditional Pipeline** components. For native voice-to-voice, see:
 
 - [omni-openai/omnivoice/realtime](https://github.com/plexusone/omni-openai) - OpenAI Realtime API (~100ms)
-- [omni-google/omnivoice](https://github.com/plexusone/omni-google) - Gemini Live API (~200ms)
+- [omni-google/omnivoice/realtime](https://github.com/plexusone/omni-google) - Gemini Live API (~200ms)
+- [omni-deepgram/omnivoice/realtime](https://github.com/plexusone/omni-deepgram) - Deepgram Voice Agent (~100-300ms)
 
 See the [Voice Architecture Guide](https://plexusone.dev/omnivoice-core/voice-architecture) for detailed comparison.
 
