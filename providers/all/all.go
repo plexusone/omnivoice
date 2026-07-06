@@ -28,6 +28,7 @@ import (
 	twiliocallsystem "github.com/plexusone/omni-twilio/omnivoice/callsystem"
 
 	// Realtime providers - auto-register via init()
+	_ "github.com/plexusone/omni-deepgram/omnivoice/realtime"
 	_ "github.com/plexusone/omni-google/omnivoice/realtime"
 	_ "github.com/plexusone/omni-openai/omnivoice/realtime"
 
@@ -186,7 +187,7 @@ func init() {
 		return telnyxcallsystem.New(opts...)
 	}, omnivoice.PriorityThick)
 
-	// Note: Realtime providers (openai, gemini) and Gateway providers (twilio, telnyx)
+	// Note: Realtime providers (openai, gemini, deepgram) and Gateway providers (twilio, telnyx)
 	// are auto-registered via side-effect imports above. They register with omnivoice-core
 	// in their init() functions.
 }
