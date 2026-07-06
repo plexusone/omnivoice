@@ -201,7 +201,7 @@ if err != nil {
 
 ```go
 providers := omnivoice.ListRealtimeProviders()
-fmt.Println(providers)  // ["openai", "gemini"]
+fmt.Println(providers)  // ["openai", "gemini", "deepgram"]
 ```
 
 ### Check Provider

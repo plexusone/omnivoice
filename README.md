@@ -182,7 +182,7 @@ Get providers by name at runtime - no need to import individual provider package
 ttsProvider, _ := omnivoice.GetTTSProvider("elevenlabs", omnivoice.WithAPIKey(key))
 sttProvider, _ := omnivoice.GetSTTProvider("deepgram", omnivoice.WithAPIKey(key))
 
-// Realtime providers: "openai", "gemini"
+// Realtime providers: "openai", "gemini", "deepgram"
 rtProvider, _ := omnivoice.GetRealtimeProvider("openai", omnivoice.WithAPIKey(key))
 
 // Gateway providers: "twilio", "telnyx"
@@ -191,12 +191,12 @@ gateway, _ := omnivoice.GetGatewayProvider("twilio", omnivoice.WithAccountSID(si
 // List registered providers
 fmt.Println(omnivoice.ListTTSProviders())      // [openai elevenlabs deepgram twilio]
 fmt.Println(omnivoice.ListSTTProviders())      // [openai elevenlabs deepgram twilio]
-fmt.Println(omnivoice.ListRealtimeProviders()) // [openai gemini]
+fmt.Println(omnivoice.ListRealtimeProviders()) // [openai gemini deepgram]
 fmt.Println(omnivoice.ListGatewayProviders())  // [twilio telnyx]
 
 // Realtime factory API (for gateway integration)
 factory, _ := omnivoice.GetRealtimeFactory("openai")
-fmt.Println(omnivoice.ListRealtimeFactories()) // [openai gemini]
+fmt.Println(omnivoice.ListRealtimeFactories()) // [openai gemini deepgram]
 ```
 
 ## Language Codes
