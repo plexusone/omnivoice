@@ -1463,6 +1463,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../releases/v0.13.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.13.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../releases/v0.12.0/" class="md-nav__link">
         
   
@@ -2254,6 +2282,12 @@
 <td><code>gemini</code></td>
 <td>Gemini 2.0 Flash</td>
 </tr>
+<tr>
+<td>Deepgram Voice Agent</td>
+<td>~100-300ms</td>
+<td><code>deepgram</code></td>
+<td>Configurable LLM/TTS</td>
+</tr>
 </tbody>
 </table>
 <h3 id="voice-gateway-providers-pstn">Voice Gateway Providers (PSTN)<a class="headerlink" href="#voice-gateway-providers-pstn" title="Permanent link">&para;</a></h3>
@@ -2517,13 +2551,20 @@
 <td>Excellent</td>
 <td>Multi-turn dialogue</td>
 </tr>
+<tr>
+<td><strong>Deepgram Voice Agent</strong></td>
+<td>~100-300ms</td>
+<td>Excellent</td>
+<td>Configurable pipelines</td>
+</tr>
 </tbody>
 </table>
 <h2 id="quick-comparison">Quick Comparison<a class="headerlink" href="#quick-comparison" title="Permanent link">&para;</a></h2>
 <h3 id="lowest-latency-native-voice-to-voice">Lowest Latency (Native Voice-to-Voice)<a class="headerlink" href="#lowest-latency-native-voice-to-voice" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// For voice agents requiring &lt;500ms response time</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;openai&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">  </span><span class="c1">// ~100ms</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;gemini&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">  </span><span class="c1">// ~200ms</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;openai&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">    </span><span class="c1">// ~100ms</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;gemini&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">    </span><span class="c1">// ~200ms</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nx">rt</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">omnivoice</span><span class="p">.</span><span class="nx">GetRealtimeProvider</span><span class="p">(</span><span class="s">&quot;deepgram&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">  </span><span class="c1">// ~100-300ms</span>
 </code></pre></div>
 <h3 id="lowest-latency-traditional-pipeline">Lowest Latency (Traditional Pipeline)<a class="headerlink" href="#lowest-latency-traditional-pipeline" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// For voice agents requiring &lt;500ms response time</span>
@@ -2566,7 +2607,8 @@
 <a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omni-openai/omnivoice/realtime&quot;</span>
 <a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omni-google/omnivoice/realtime&quot;</span>
-<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="p">)</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omni-deepgram/omnivoice/realtime&quot;</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="p">)</span>
 </code></pre></div>
 <h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
 <h3 id="stttts-providers_1">STT/TTS Providers<a class="headerlink" href="#stttts-providers_1" title="Permanent link">&para;</a></h3>
@@ -2608,6 +2650,10 @@
 <tr>
 <td>Gemini Live</td>
 <td><code>GOOGLE_API_KEY</code></td>
+</tr>
+<tr>
+<td>Deepgram Voice Agent</td>
+<td><code>DEEPGRAM_API_KEY</code></td>
 </tr>
 </tbody>
 </table>
