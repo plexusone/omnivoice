@@ -64,8 +64,8 @@ github.com/plexusone/elevenlabs-go v0.13.0 h1:KrgrhJjLfNbIRFp8F880QmxW1/VSkfpUcX
 github.com/plexusone/elevenlabs-go v0.13.0/go.mod h1:iNDRYo/Ya4oLYuIXKRtGRzNY9fdN/ALaQI2nEb5O540=
 github.com/plexusone/ogen-tools v0.3.0 h1:UVNRxobvfcG8h/dD+Zy/KedtaCveT+V9w50MAEYy2tM=
 github.com/plexusone/ogen-tools v0.3.0/go.mod h1:fj6ekLGUiVQkS6NRSfxMvQTCJtK/xVRarCroMA0iCK0=
-github.com/plexusone/omni-deepgram v0.6.1 h1:it+NVzGDEFkpir1MvSiCdzyefJiaW9U9cBxZI6OQNp4=
-github.com/plexusone/omni-deepgram v0.6.1/go.mod h1:9x8nOXRsQKS5H+6nVLNg7jsvNsNCSQ5vYkQno82gw08=
+github.com/plexusone/omni-deepgram v0.7.0 h1:5CAdKlT5nBMVCSYt259B24sR2zcsM2Q8qtUWJ4mVZUc=
+github.com/plexusone/omni-deepgram v0.7.0/go.mod h1:T/1ADMGTnA+Fert63+KgE3wxaQvoUOyqz1TeVqgYqbQ=
 github.com/plexusone/omni-google v0.7.0 h1:RIYB80bHdW5z26+ncvNzHzhVADT4UyPKqeCYa7pAiJk=
 github.com/plexusone/omni-google v0.7.0/go.mod h1:gsA32NcWqjQ4caUI71+TjkXwo1HZPkGti3T0g40ILk0=
 github.com/plexusone/omni-openai v0.5.0 h1:Np+k0cgMMnp7P9x9V9SvNr/ZKsb+Y7bp99CMam0tG50=

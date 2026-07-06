@@ -8,6 +8,7 @@ import (
 
 	"github.com/plexusone/omnivoice-core/gateway"
 
+	deepgramRealtime "github.com/plexusone/omni-deepgram/omnivoice/realtime"
 	googleRealtime "github.com/plexusone/omni-google/omnivoice/realtime"
 	openaiRealtime "github.com/plexusone/omni-openai/omnivoice/realtime"
 )
@@ -16,6 +17,7 @@ import (
 // Supported providers:
 //   - "openai": OpenAI Realtime API (~100ms latency)
 //   - "gemini": Google Gemini Live API (~200ms latency)
+//   - "deepgram": Deepgram Voice Agent API (~100-300ms latency)
 //
 // Example:
 //
@@ -30,8 +32,10 @@ func GetRealtimeFactory(name string) (gateway.RealtimeProviderFactory, error) {
 		return openaiRealtime.NewFactory(), nil
 	case "gemini":
 		return googleRealtime.NewFactory(), nil
+	case "deepgram":
+		return deepgramRealtime.NewFactory(), nil
 	default:
-		return nil, fmt.Errorf("unknown realtime factory: %s (supported: openai, gemini)", name)
+		return nil, fmt.Errorf("unknown realtime factory: %s (supported: openai, gemini, deepgram)", name)
 	}
 }
 
@@ -47,13 +51,13 @@ func MustGetRealtimeFactory(name string) gateway.RealtimeProviderFactory {
 
 // ListRealtimeFactories returns the names of all available realtime factories.
 func ListRealtimeFactories() []string {
-	return []string{"openai", "gemini"}
+	return []string{"openai", "gemini", "deepgram"}
 }
 
 // HasRealtimeFactory returns true if a realtime factory with the given name exists.
 func HasRealtimeFactory(name string) bool {
 	switch name {
-	case "openai", "gemini":
+	case "openai", "gemini", "deepgram":
 		return true
 	default:
 		return false
