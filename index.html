@@ -1672,25 +1672,25 @@
 </tbody>
 </table>
 <h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>┌─────────────────────────────────────────────────────────────────────────┐
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>│                              OmniVoice                                  │
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│                        (batteries-included)                             │
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├─────────────────────────────────────────────────────────────────────────┤
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│                                                                         │
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│   import _ &quot;github.com/plexusone/omnivoice/providers/all&quot;               │
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│                                                                         │
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>│   ┌───────────────────────────────────────────────────────────────────────────┐   │
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>│   │                           Provider Registry                               │   │
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>│   ├───────────┬───────────┬─────────────┬─────────────┬───────────────────────┤   │
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>│   │    TTS    │    STT    │  CallSystem │   Realtime  │     SMSProvider       │   │
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>│   ├───────────┼───────────┼─────────────┼─────────────┼───────────────────────┤   │
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>│   │elevenlabs │elevenlabs │   twilio    │openai-      │       twilio          │   │
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>│   │openai     │openai     │   telnyx    │  realtime   │       telnyx          │   │
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>│   │deepgram   │deepgram   │             │gemini-live  │                       │   │
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>│   │twilio     │twilio     │             │             │                       │   │
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>│   └───────────┴───────────┴─────────────┴─────────────┴───────────────────────┘   │
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>│                                                                         │
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>└─────────────────────────────────────────────────────────────────────────┘
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>┌─────────────────────────────────────────────────────────────────────────────┐
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>│                                  OmniVoice                                  │
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│                            (batteries-included)                             │
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├─────────────────────────────────────────────────────────────────────────────┤
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│                                                                             │
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│   import _ &quot;github.com/plexusone/omnivoice/providers/all&quot;                   │
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│                                                                             │
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>│   ┌─────────────────────────────────────────────────────────────────────┐   │
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>│   │                           Provider Registry                         │   │
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>│   ├────────────┬────────────┬─────────────┬─────────────┬───────────────┤   │
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>│   │    TTS     │     STT    │  CallSystem │   Realtime  │  SMSProvider  │   │
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>│   ├────────────┼────────────┼─────────────┼─────────────┼───────────────┤   │
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>│   │ elevenlabs │ elevenlabs │   twilio    │ openai-     │    twilio     │   │
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>│   │ openai     │ openai     │   telnyx    │  realtime   │    telnyx     │   │
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>│   │ deepgram   │ deepgram   │             │ gemini-live │               │   │
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>│   │ twilio     │ twilio     │             │             │               │   │
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>│   └────────────┴────────────┴─────────────┴─────────────┴───────────────┘   │
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>│                                                                             │
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>└─────────────────────────────────────────────────────────────────────────────┘
 </code></pre></div>
 <h2 id="minimal-dependencies-alternative">Minimal Dependencies Alternative<a class="headerlink" href="#minimal-dependencies-alternative" title="Permanent link">&para;</a></h2>
 <p>For a minimal dependency footprint, use <a href="https://github.com/plexusone/omnivoice-core">omnivoice-core</a> with only the providers you need:</p>
