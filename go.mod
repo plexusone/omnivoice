@@ -6,7 +6,7 @@ require (
 	github.com/plexusone/elevenlabs-go v0.13.0
 	github.com/plexusone/omni-deepgram v0.7.0
 	github.com/plexusone/omni-google v0.7.0
-	github.com/plexusone/omni-openai v0.6.1
+	github.com/plexusone/omni-openai v0.7.1
 	github.com/plexusone/omni-telnyx v0.4.0
 	github.com/plexusone/omni-twilio v0.9.0
 	github.com/plexusone/omnivoice-core v0.16.1
@@ -40,14 +40,14 @@ require (
 	github.com/openai/openai-go v1.12.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/plexusone/ogen-tools v0.3.0 // indirect
-	github.com/plexusone/omnillm-core v0.18.0 // indirect
+	github.com/plexusone/omnillm-core v0.18.1 // indirect
 	github.com/segmentio/asm v1.2.1 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/team-telnyx/telnyx-go/v4 v4.99.0 // indirect
-	github.com/tidwall/gjson v1.19.0 // indirect
+	github.com/tidwall/gjson v1.20.0 // indirect
 	github.com/tidwall/match v1.2.0 // indirect
-	github.com/tidwall/pretty v1.2.1 // indirect
+	github.com/tidwall/pretty v1.2.2 // indirect
 	github.com/tidwall/sjson v1.2.5 // indirect
 	github.com/twilio/twilio-go v1.31.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
