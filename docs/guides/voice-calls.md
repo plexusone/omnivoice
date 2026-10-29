@@ -171,6 +171,12 @@ fmt.Printf("Start Time: %s\n", call.StartTime())
 
 Connect real-time audio for voice agents:
 
+!!! tip "Raw call audio"
+    To receive a call's audio and decide yourself when to speak, as a meeting
+    attendee or call recorder does, use a voice gateway in audio mode. See
+    [Raw Call Audio](https://plexusone.github.io/omnivoice-core/guides/call-audio/)
+    in the omnivoice-core guides.
+
 ```go
 // Get the transport provider
 transport := provider.Transport()

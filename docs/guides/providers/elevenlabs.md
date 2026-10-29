@@ -94,6 +94,12 @@ result, err := tts.Synthesize(ctx, text, omnivoice.SynthesisConfig{
 | `pcm_44100` | Real-time, high quality |
 | `ulaw_8000` | Telephony (Twilio) |
 
+The generic names map to these: `mulaw` (or `ulaw`) to `ulaw_8000`, `alaw`
+to `alaw_8000`, and `pcm` with a `SampleRate` to the matching `pcm_` format.
+`result.SampleRate` is the rate of the audio returned, which is the rate in
+the ElevenLabs format name: 8000 for `mulaw`, for example, whatever
+`SampleRate` was requested.
+
 ```go
 config := omnivoice.SynthesisConfig{
     VoiceID:      "pNInz6obpgDQGcFmaJgB",

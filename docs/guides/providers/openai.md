@@ -72,12 +72,27 @@ result, err := tts.Synthesize(ctx, text, omnivoice.SynthesisConfig{
 
 ### Output Formats
 
+| `OutputFormat` | Audio | `result.SampleRate` |
+|----------------|-------|--------------------:|
+| `mp3`, `opus`, `aac`, `flac`, `wav` | Encoded by OpenAI | — |
+| `pcm` | 16-bit PCM | 24000 |
+| `pcm` with `SampleRate: 16000` | Resampled 16-bit PCM | 16000 |
+| `mulaw` (or `ulaw`) | mu-law, for phone calls | 8000 |
+| `alaw` | A-law, for phone calls | 8000 |
+
+OpenAI produces raw speech only as 24 kHz PCM, so the provider converts it
+for the other raw formats. Names with the rate appended, such as `ulaw_8000`
+and `pcm_16000`, also work, so a config written for another provider can be
+reused unchanged.
+
 ```go
 config := omnivoice.SynthesisConfig{
     VoiceID:      "alloy",
-    OutputFormat: "mp3",  // mp3, opus, aac, flac
+    OutputFormat: "mulaw", // 8 kHz mu-law for Twilio or Telnyx
 }
 ```
+
+Streamed audio is converted the same way, chunk by chunk.
 
 ### Streaming
 

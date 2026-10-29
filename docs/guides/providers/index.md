@@ -12,6 +12,11 @@ OmniVoice supports multiple providers for each capability. Choose based on your 
 | [ElevenLabs](elevenlabs.md) | ✓ | ✓ | ✓ | Premium voice synthesis |
 | [Deepgram](deepgram.md) | ✓ | ✓ | ✓ | Real-time transcription |
 
+All three TTS providers produce phone-call audio: set `OutputFormat: "mulaw"`
+(or `"alaw"`) and each returns 8 kHz audio that a Twilio or Telnyx call can
+play, with `result.SampleRate` set to 8000. The same `SynthesisConfig` works
+with any of them, so switching providers is a change of registry name.
+
 ### Native Voice-to-Voice (Realtime)
 
 | Provider | Latency | Registry Name | Notes |
