@@ -7,6 +7,26 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.14.0",
+      "date": "2026-10-28",
+      "highlights": [
+        { "description": "OpenAI, ElevenLabs, and Deepgram TTS return 8 kHz mu-law or A-law phone-call audio from the same config, with the correct sample rate" },
+        { "description": "Twilio and Telnyx voice gateways gain an audio mode for raw call audio and keypad digits on answered outbound calls" }
+      ],
+      "documentation": [
+        { "description": "Moved user guides, including the provider pages, registry, and failover, under `docs/guides/`; design and spec documents under `docs/design/architecture/` and `docs/specs/`", "commit": "5a6fd23" },
+        { "description": "Described phone-call output formats and the reported sample rate for OpenAI and ElevenLabs, and pointed the voice calls guide to raw call audio", "commit": "717ffb5" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omni-openai` v0.5.0 → v0.8.0 (mu-law, A-law, and resampled PCM speech)", "commit": "f0ac826" },
+        { "description": "`github.com/plexusone/elevenlabs-go` v0.13.0 → v0.14.0 (correct reported sample rate)", "commit": "f0ac826" },
+        { "description": "`github.com/plexusone/omni-twilio` v0.9.0 → v0.12.0 (audio mode, keypad digits, hangup)", "commit": "f0ac826" },
+        { "description": "`github.com/plexusone/omni-telnyx` v0.4.0 → v0.7.0 (audio mode, keypad digits, hangup)", "commit": "f0ac826" },
+        { "description": "`github.com/plexusone/omnivoice-core` v0.15.0 → v0.18.1 (audio pipeline mode, outbound call options, terminology engine)", "commit": "f0ac826" },
+        { "description": "Updated indirect dependencies", "commit": "f0ac826" }
+      ]
+    },
+    {
       "version": "v0.13.0",
       "date": "2026-07-05",
       "highlights": [
