@@ -223,7 +223,7 @@ CallSystem Providers: [twilio telnyx]
 
 ## Next Steps
 
-- [TTS Guide](guides/tts.md) - Deep dive into text-to-speech
-- [STT Guide](guides/stt.md) - Deep dive into speech-to-text
-- [Voice Calls](guides/voice-calls.md) - Phone call handling
+- [TTS Guide](tts.md) - Deep dive into text-to-speech
+- [STT Guide](stt.md) - Deep dive into speech-to-text
+- [Voice Calls](voice-calls.md) - Phone call handling
 - [Provider Comparison](providers/index.md) - Choose the right providers

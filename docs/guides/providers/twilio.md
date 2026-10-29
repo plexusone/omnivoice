@@ -313,7 +313,7 @@ if err != nil {
 
 ## Next Steps
 
-- [Voice Calls Guide](../guides/voice-calls.md) - Call handling patterns
-- [SMS Guide](../guides/sms.md) - SMS messaging patterns
-- [Voice Agents](../guides/voice-agents.md) - Build conversational agents
+- [Voice Calls Guide](../voice-calls.md) - Call handling patterns
+- [SMS Guide](../sms.md) - SMS messaging patterns
+- [Voice Agents](../voice-agents.md) - Build conversational agents
 - [Telnyx](telnyx.md) - Alternative provider

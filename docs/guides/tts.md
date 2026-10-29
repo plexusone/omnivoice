@@ -214,4 +214,4 @@ if err != nil {
 
 - [Streaming Guide](streaming.md) - Real-time TTS streaming
 - [Voice Agents](voice-agents.md) - Combine TTS with STT and LLMs
-- [Provider Details](../providers/index.md) - Provider-specific features
+- [Provider Details](providers/index.md) - Provider-specific features

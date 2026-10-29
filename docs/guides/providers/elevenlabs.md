@@ -256,4 +256,4 @@ if err != nil {
 
 - [OpenAI](openai.md) - Alternative TTS/STT
 - [Deepgram](deepgram.md) - Real-time STT
-- [Voice Agents](../guides/voice-agents.md) - Build conversational agents
+- [Voice Agents](../voice-agents.md) - Build conversational agents

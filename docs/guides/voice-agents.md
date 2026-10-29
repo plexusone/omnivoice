@@ -407,4 +407,4 @@ func (a *VoiceAgent) HandleWithRecovery(ctx context.Context, call omnivoice.Call
 
 - [Voice Calls](voice-calls.md) - Phone integration
 - [Streaming](streaming.md) - Real-time audio
-- [Provider Comparison](../providers/index.md) - Choose providers for latency
+- [Provider Comparison](providers/index.md) - Choose providers for latency

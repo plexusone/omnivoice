@@ -230,5 +230,5 @@ AI agents using OmniVoice for voice operations experience poor reliability due t
 
 - [AX Spec](https://github.com/plexusone/ax-spec)
 - [DIRECT Principles](https://github.com/grokify/direct-principles)
-- [Design Document](./ax-integration.md)
-- [Implementation Plan](./FEAT_AX_PLAN.md)
+- [Design Document](TRD.md)
+- [Implementation Plan](PLAN.md)

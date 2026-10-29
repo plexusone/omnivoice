@@ -289,6 +289,6 @@ if err != nil {
 
 ## Next Steps
 
-- [Streaming Guide](../guides/streaming.md) - Real-time audio patterns
-- [Voice Agents](../guides/voice-agents.md) - Build conversational agents
-- [Subtitles](../guides/subtitles.md) - Generate captions
+- [Streaming Guide](../streaming.md) - Real-time audio patterns
+- [Voice Agents](../voice-agents.md) - Build conversational agents
+- [Subtitles](../subtitles.md) - Generate captions

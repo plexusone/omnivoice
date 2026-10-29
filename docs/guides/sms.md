@@ -261,4 +261,4 @@ func sendSMSWithFallback(ctx context.Context, to, body string) (*omnivoice.SMSMe
 
 - [Voice Calls](voice-calls.md) - Make and receive phone calls
 - [Voice Agents](voice-agents.md) - Build conversational agents
-- [Provider Details](../providers/twilio.md) - Twilio-specific features
+- [Provider Details](providers/twilio.md) - Twilio-specific features

@@ -22,7 +22,7 @@ All phases completed:
 | Phase 5: Integration Testing | ✅ Complete | elevenlabs-go v0.10.0 |
 | Phase 6: Documentation | ✅ Complete | Both repos |
 
-See [FEAT_AX_PLAN.md](./FEAT_AX_PLAN.md) for detailed implementation tracking.
+See the [implementation plan](PLAN.md) for detailed implementation tracking.
 
 ## Goals
 
@@ -676,4 +676,4 @@ After implementation, run the experiments defined in `ax-spec/TASKS.md`:
 - [AX Spec](https://github.com/plexusone/ax-spec)
 - [DIRECT Principles](https://github.com/grokify/direct-principles)
 - [elevenlabs-go/ax](https://github.com/plexusone/elevenlabs-go/tree/main/ax)
-- [OmniVoice Architecture](../index.md)
+- [OmniX Philosophy and Repository Patterns](../../design/architecture/omnix-philosophy.md)

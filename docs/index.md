@@ -108,6 +108,6 @@ import (
 
 ## Next Steps
 
-- [Getting Started](getting-started.md) - Detailed setup guide
-- [Provider Comparison](providers/index.md) - Choose the right providers
+- [Getting Started](guides/getting-started.md) - Detailed setup guide
+- [Provider Comparison](guides/providers/index.md) - Choose the right providers
 - [API Reference](https://pkg.go.dev/github.com/plexusone/omnivoice) - GoDoc

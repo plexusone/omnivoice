@@ -36,8 +36,8 @@ extra_css:
 
 nav:
   - Home: index.md
-  - Getting Started: getting-started.md
   - Guides:
+      - Getting Started: guides/getting-started.md
       - CLI: guides/cli.md
       - Text-to-Speech: guides/tts.md
       - Speech-to-Text: guides/stt.md
@@ -46,16 +46,23 @@ nav:
       - Streaming: guides/streaming.md
       - Subtitles: guides/subtitles.md
       - Voice Agents: guides/voice-agents.md
-  - Providers:
-      - Overview: providers/index.md
-      - OpenAI: providers/openai.md
-      - ElevenLabs: providers/elevenlabs.md
-      - Deepgram: providers/deepgram.md
-      - Twilio: providers/twilio.md
-      - Telnyx: providers/telnyx.md
-  - Reference:
-      - Provider Registry: reference/registry.md
-      - Multi-Provider Failover: reference/failover.md
+      - Provider Registry: guides/registry.md
+      - Multi-Provider Failover: guides/failover.md
+      - Providers:
+          - Overview: guides/providers/index.md
+          - OpenAI: guides/providers/openai.md
+          - ElevenLabs: guides/providers/elevenlabs.md
+          - Deepgram: guides/providers/deepgram.md
+          - Twilio: guides/providers/twilio.md
+          - Telnyx: guides/providers/telnyx.md
+  - Design:
+      - Architecture:
+          - OmniX Philosophy: design/architecture/omnix-philosophy.md
+  - Specs:
+      - AX Integration:
+          - PRD: specs/ax-integration/PRD.md
+          - TRD: specs/ax-integration/TRD.md
+          - Plan: specs/ax-integration/PLAN.md
   - Releases:
       - v0.13.0: releases/v0.13.0.md
       - v0.12.0: releases/v0.12.0.md

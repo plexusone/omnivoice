@@ -380,4 +380,4 @@ if !omnivoice.HasTTSProvider("custom") {
 ## Next Steps
 
 - [Multi-Provider Failover](failover.md) - Reliability patterns
-- [Provider Comparison](../providers/index.md) - Choose the right provider
+- [Provider Comparison](providers/index.md) - Choose the right provider

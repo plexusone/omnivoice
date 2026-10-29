@@ -305,4 +305,4 @@ if err != nil {
 
 - [SMS Messaging](sms.md) - Send text messages
 - [Voice Agents](voice-agents.md) - Build conversational agents
-- [Multi-Provider Failover](../reference/failover.md) - Reliability patterns
+- [Multi-Provider Failover](failover.md) - Reliability patterns

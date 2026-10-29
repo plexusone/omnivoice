@@ -371,4 +371,4 @@ func synthesizeWithRetry(ctx context.Context, provider omnivoice.TTSProvider, te
 ## Next Steps
 
 - [Provider Registry](registry.md) - Dynamic provider selection
-- [Provider Comparison](../providers/index.md) - Choose the right providers
+- [Provider Comparison](providers/index.md) - Choose the right providers

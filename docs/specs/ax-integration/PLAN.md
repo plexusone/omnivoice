@@ -12,8 +12,8 @@ This document tracks the implementation of AX integration across omnivoice-core,
 
 **Related Documents:**
 
-- [PRD](./FEAT_AX_PRD.md) — Goals and requirements
-- [Design](./ax-integration.md) — Technical architecture
+- [PRD](PRD.md) — Goals and requirements
+- [Design](TRD.md) — Technical architecture
 
 ## Progress Tracker
 
