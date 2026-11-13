@@ -41,6 +41,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/plexusone/ogen-tools v0.3.0 // indirect
 	github.com/plexusone/omnillm-core v0.18.1 // indirect
+	github.com/plexusone/terminology-spec v0.2.0 // indirect
 	github.com/segmentio/asm v1.2.1 // indirect
 	github.com/shopspring/decimal v1.6.0 // indirect
 	github.com/spf13/pflag v1.1.0 // indirect

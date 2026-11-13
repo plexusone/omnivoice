@@ -76,6 +76,8 @@ github.com/plexusone/omnillm-core v0.18.1 h1:Pp/F7L9edGlPtd/OvTq39/H2XttIXRN9K5c
 github.com/plexusone/omnillm-core v0.18.1/go.mod h1:qX6C1tOcLoDa6C4sgMUUgjX/zjM9CfBXG/pmnK7lveA=
 github.com/plexusone/omnivoice-core v0.19.0 h1:W2/9SysMqW5AqvSAr19jz5mXs9GD0RQ6FRRD2uKWQ78=
 github.com/plexusone/omnivoice-core v0.19.0/go.mod h1:3vrybRusrdZnXQjpNavdTN1sf2HAw905MXoKghhTUqw=
+github.com/plexusone/terminology-spec v0.2.0 h1:RXHjrJ5AzkotsC3MTss8PhpE+Su9Mab4Yj6RVsxx2og=
+github.com/plexusone/terminology-spec v0.2.0/go.mod h1:/DWB5bWgpgdgIw6Jn4zinjClwwiNUDLMVv1zKYjuaVg=
 github.com/rogpeppe/go-internal v1.14.1 h1:UQB4HGPB6osV0SQTLymcB4TgvyWu6ZyliaW0tI/otEQ=
 github.com/rogpeppe/go-internal v1.14.1/go.mod h1:MaRKkUm5W0goXpeCfT7UZI6fk/L7L7so1lCWt35ZSgc=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
