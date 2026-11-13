@@ -29,6 +29,10 @@ type (
 
 	// TTSClient is the multi-provider TTS client.
 	TTSClient = tts.Client
+
+	// Pronunciation tells a provider how to say a term: IPA where the voice
+	// or model accepts phonemes, a respelling otherwise.
+	Pronunciation = tts.Pronunciation
 )
 
 // Re-export TTS errors
@@ -42,4 +46,10 @@ var (
 )
 
 // Re-export TTS functions
-var NewTTSClient = tts.NewClient
+var (
+	NewTTSClient = tts.NewClient
+
+	// ApplyPronunciations rewrites text with pronunciations, as IPA phoneme
+	// tags or respellings.
+	ApplyPronunciations = tts.ApplyPronunciations
+)
