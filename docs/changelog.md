@@ -6,6 +6,7 @@ See [CHANGELOG.md](https://github.com/plexusone/omnivoice/blob/main/CHANGELOG.md
 
 | Version | Date | Highlights |
 |---------|------|------------|
+| [v0.15.0](releases/v0.15.0.md) | 2026-11-13 | Speech synthesis on the command line with `speak` and `voices`, and pronunciations as IPA or respellings with any TTS provider |
 | [v0.14.0](releases/v0.14.0.md) | 2026-10-28 | OpenAI, ElevenLabs, and Deepgram TTS return 8 kHz mu-law or A-law phone-call audio from the same config, with the correct sample rate |
 | [v0.13.0](releases/v0.13.0.md) | 2026-07-05 | Deepgram Voice Agent realtime provider support |
 | v0.12.1 | 2026-06-29 | Patch release for dependency updates |
@@ -20,14 +21,13 @@ See [CHANGELOG.md](https://github.com/plexusone/omnivoice/blob/main/CHANGELOG.md
 | [v0.6.0](releases/v0.6.0.md) | 2026-03-07 | Re-export callsystem types from omnivoice-core for unified imports |
 | [v0.5.0](releases/v0.5.0.md) | 2026-03-01 | Batteries-included voice pipeline framework for Go with unified STT and TTS interfaces |
 
-## Latest Release: v0.14.0
+## Latest Release: v0.15.0
 
-- **Phone-call speech from any TTS provider**: OpenAI, ElevenLabs, and Deepgram return 8 kHz mu-law or A-law audio from the same config
-- **Raw call audio**: Twilio and Telnyx voice gateways gain an audio mode
-- **Keypad digits**: answered Twilio and Telnyx outbound calls can send DTMF tones
-- **Docs**: user guides moved under `docs/guides/`
+- **Speech on the command line**: `omnivoice speak` writes text to an audio file with any TTS provider, and `omnivoice voices` lists and filters a provider's voices
+- **Pronunciations**: names and terms said from IPA or respellings, from a terminology-spec terms directory or `--ipa` and `--say`
+- **ElevenLabs**: IPA sent as phoneme tags on the models that honour them, respellings on the rest
 
-See [v0.14.0 Release Notes](releases/v0.14.0.md) for details.
+See [v0.15.0 Release Notes](releases/v0.15.0.md) for details.
 
 ## Versioning
 
