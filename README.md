@@ -96,6 +96,30 @@ omnivoice transcribe -p deepgram -f vtt -o subtitles.vtt podcast.mp3
 omnivoice providers list
 ```
 
+### Speech Synthesis
+
+```bash
+export ELEVENLABS_API_KEY="your-api-key"
+
+# Find a voice
+omnivoice voices --match italian
+
+# Synthesize text, writing MP3 (or .wav, .opus) by extension
+omnivoice speak --voice <id> -o miura.mp3 "The Miura was shown at Geneva."
+
+# Control how names are said: IPA for models that accept phonemes,
+# a respelling for the rest
+omnivoice speak --voice <id> --model eleven_flash_v2 \
+  --ipa "Miura=ˈmjura" --say "Miura=mee oora" -o miura.mp3 "The Miura."
+
+# Or take pronunciations from a terminology-spec terms directory
+omnivoice speak --voice <id> --terms terms -o lesson.mp3 - < lesson.txt
+```
+
+With ElevenLabs, `--phonemes auto` sends IPA as phoneme tags only on the models
+that honour them (`eleven_flash_v2`, `eleven_turbo_v2`, `eleven_monolingual_v1`);
+`on` and `off` override that.
+
 ### Output Formats
 
 | Format | Description |
