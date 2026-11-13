@@ -3,13 +3,13 @@ module github.com/plexusone/omnivoice
 go 1.26.6
 
 require (
-	github.com/plexusone/elevenlabs-go v0.14.0
+	github.com/plexusone/elevenlabs-go v0.15.0
 	github.com/plexusone/omni-deepgram v0.7.0
 	github.com/plexusone/omni-google v0.7.0
 	github.com/plexusone/omni-openai v0.8.0
 	github.com/plexusone/omni-telnyx v0.7.0
 	github.com/plexusone/omni-twilio v0.12.0
-	github.com/plexusone/omnivoice-core v0.18.1
+	github.com/plexusone/omnivoice-core v0.19.0
 	github.com/spf13/cobra v1.10.2
 )
 
@@ -36,11 +36,12 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.16 // indirect
 	github.com/mattn/go-isatty v0.0.24 // indirect
-	github.com/ogen-go/ogen v1.24.0 // indirect
+	github.com/ogen-go/ogen v1.25.0 // indirect
 	github.com/openai/openai-go v1.12.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/plexusone/ogen-tools v0.3.0 // indirect
 	github.com/plexusone/omnillm-core v0.18.1 // indirect
+	github.com/plexusone/terminology-spec v0.2.0 // indirect
 	github.com/segmentio/asm v1.2.1 // indirect
 	github.com/shopspring/decimal v1.6.0 // indirect
 	github.com/spf13/pflag v1.1.0 // indirect
@@ -57,7 +58,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.47.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.28.0 // indirect
-	golang.org/x/exp v0.0.0-20261112173441-d10d3b464990 // indirect
+	golang.org/x/exp v0.0.0-20261113113407-e3970619a1a4 // indirect
 	golang.org/x/net v0.62.0 // indirect
 	golang.org/x/sync v0.25.0 // indirect
 	golang.org/x/sys v0.50.0 // indirect

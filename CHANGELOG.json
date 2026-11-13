@@ -7,6 +7,33 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.15.0",
+      "date": "2026-11-13",
+      "highlights": [
+        { "description": "Speech synthesis on the command line: `omnivoice speak` and `omnivoice voices`", "commit": "4ce5f7f" },
+        { "description": "Pronunciations for names and terms, as IPA or respellings, with any TTS provider", "commit": "e4fc45b" }
+      ],
+      "added": [
+        { "description": "`Pronunciation` and `ApplyPronunciations` re-exported from omnivoice-core", "commit": "e4fc45b" },
+        { "description": "[cli] `speak` synthesizes text to an audio file, with pronunciations from a terminology-spec terms directory, `--ipa` and `--say`", "commit": "4ce5f7f" },
+        { "description": "[cli] `voices` lists a provider's voices, filtered with `--match`, as text or JSON", "commit": "4ce5f7f" },
+        { "description": "[cli] `speak` puts respellings into the text for providers that don't apply pronunciations, checks the audio against the output's extension, wrapping raw PCM in a WAV header, and needs an API key only where the provider does", "commit": "4fca60b" }
+      ],
+      "tests": [
+        { "description": "[cli] `speak` and `voices` with a fake provider", "commit": "8e5bb8c" },
+        { "description": "[cli] Respellings for other providers, output formats and WAV headers, and providers without an API key", "commit": "4fca60b" }
+      ],
+      "documentation": [
+        { "description": "README describes speech synthesis on the command line", "commit": "7b0ae4a" },
+        { "description": "CLI guide covers `speak` and `voices`; TTS guide covers pronunciations", "commit": "dc3b89a" }
+      ],
+      "dependencies": [
+        { "description": "Requires `github.com/plexusone/omnivoice-core` v0.19.0 (pronunciations on synthesis requests) and `github.com/plexusone/elevenlabs-go` v0.15.0 (pronunciations, dictionaries and surrounding text)", "commit": "23e53df" },
+        { "description": "`speak --terms` reads terms through omnivoice-core, adding `github.com/plexusone/terminology-spec` v0.2.0 as an indirect dependency", "commit": "4ce5f7f" },
+        { "description": "Updated indirect dependencies", "commit": "e42550a" }
+      ]
+    },
+    {
       "version": "v0.14.0",
       "date": "2026-10-28",
       "highlights": [

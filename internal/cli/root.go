@@ -17,11 +17,13 @@ var (
 // rootCmd represents the base command when called without any subcommands.
 var rootCmd = &cobra.Command{
 	Use:   "omnivoice",
-	Short: "Multi-provider speech-to-text CLI",
-	Long: `omnivoice is a command-line tool for speech-to-text transcription.
+	Short: "Multi-provider speech-to-text and text-to-speech CLI",
+	Long: `omnivoice is a command-line tool for speech-to-text transcription and
+text-to-speech synthesis.
 
 It supports multiple providers including Deepgram, OpenAI, and ElevenLabs,
-with features like speaker diarization, timestamps, and subtitle generation.`,
+with features like speaker diarization, timestamps, subtitle generation and
+pronunciation control for names and terms.`,
 	Version: omnivoice.Version,
 }
 
@@ -36,6 +38,8 @@ func init() {
 
 	rootCmd.AddCommand(transcribeCmd)
 	rootCmd.AddCommand(providersCmd)
+	rootCmd.AddCommand(newSpeakCmd())
+	rootCmd.AddCommand(newVoicesCmd())
 
 	// Set version template
 	rootCmd.SetVersionTemplate(fmt.Sprintf("omnivoice version %s\n", omnivoice.Version))
