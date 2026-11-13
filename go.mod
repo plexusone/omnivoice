@@ -3,13 +3,13 @@ module github.com/plexusone/omnivoice
 go 1.26.6
 
 require (
-	github.com/plexusone/elevenlabs-go v0.14.0
+	github.com/plexusone/elevenlabs-go v0.15.0
 	github.com/plexusone/omni-deepgram v0.7.0
 	github.com/plexusone/omni-google v0.7.0
 	github.com/plexusone/omni-openai v0.8.0
 	github.com/plexusone/omni-telnyx v0.7.0
 	github.com/plexusone/omni-twilio v0.12.0
-	github.com/plexusone/omnivoice-core v0.18.1
+	github.com/plexusone/omnivoice-core v0.19.0
 	github.com/spf13/cobra v1.10.2
 )
 
@@ -57,7 +57,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.47.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.28.0 // indirect
-	golang.org/x/exp v0.0.0-20261112173441-d10d3b464990 // indirect
+	golang.org/x/exp v0.0.0-20261113113407-e3970619a1a4 // indirect
 	golang.org/x/net v0.62.0 // indirect
 	golang.org/x/sync v0.25.0 // indirect
 	golang.org/x/sys v0.50.0 // indirect
