@@ -36,7 +36,7 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-colorable v0.1.16 // indirect
 	github.com/mattn/go-isatty v0.0.24 // indirect
-	github.com/ogen-go/ogen v1.24.0 // indirect
+	github.com/ogen-go/ogen v1.25.0 // indirect
 	github.com/openai/openai-go v1.12.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/plexusone/ogen-tools v0.3.0 // indirect
