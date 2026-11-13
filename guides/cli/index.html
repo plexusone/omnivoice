@@ -475,6 +475,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#speak" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        speak
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        voices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#providers-list" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -579,6 +601,28 @@
     <span class="md-ellipsis">
       
         Using Different Providers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#speech-synthesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Speech Synthesis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pronouncing-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pronouncing Names
       
     </span>
   </a>
@@ -1542,6 +1586,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../releases/v0.15.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.15.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../releases/v0.14.0/" class="md-nav__link">
         
   
@@ -1938,6 +2010,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#speak" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        speak
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        voices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#providers-list" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2049,6 +2143,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#speech-synthesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Speech Synthesis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pronouncing-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pronouncing Names
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#check-provider-status" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2118,7 +2234,8 @@
 
 
 <h1 id="command-line-interface">Command-Line Interface<a class="headerlink" href="#command-line-interface" title="Permanent link">&para;</a></h1>
-<p>OmniVoice includes a CLI for speech-to-text transcription without writing code.</p>
+<p>OmniVoice includes a CLI for speech-to-text transcription and text-to-speech
+synthesis without writing code.</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>go<span class="w"> </span>install<span class="w"> </span>github.com/plexusone/omnivoice/cmd/omnivoice@latest
 </code></pre></div>
@@ -2194,102 +2311,237 @@
 </tr>
 </tbody>
 </table>
+<h3 id="speak">speak<a class="headerlink" href="#speak" title="Permanent link">&para;</a></h3>
+<p>Synthesize speech from text and write it to an audio file.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>omnivoice<span class="w"> </span>speak<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span><span class="w"> </span><span class="o">[</span>text<span class="o">]</span>
+</code></pre></div>
+<p>The text comes from the argument, or from standard input with <code>-</code> or no
+argument. The output's extension picks the format: <code>.mp3</code>, <code>.wav</code>, <code>.opus</code> or
+<code>.pcm</code>. Raw PCM from a provider is written to a <code>.wav</code> with a WAV header. A
+provider that can't return the format asked for, such as ElevenLabs for
+<code>.opus</code>, stops with an error and writes nothing.</p>
+<p>Set the provider's API key in its environment variable, such as
+<code>ELEVENLABS_API_KEY</code>. Providers that need none, such as <code>twilio</code>, work
+without it.</p>
+<p><strong>Flags:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Short</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--voice</code></td>
+<td></td>
+<td></td>
+<td>Voice ID (required; list them with <code>omnivoice voices</code>)</td>
+</tr>
+<tr>
+<td><code>--output</code></td>
+<td><code>-o</code></td>
+<td></td>
+<td>Audio file to write (required)</td>
+</tr>
+<tr>
+<td><code>--provider</code></td>
+<td><code>-p</code></td>
+<td><code>elevenlabs</code></td>
+<td>TTS provider</td>
+</tr>
+<tr>
+<td><code>--model</code></td>
+<td><code>-m</code></td>
+<td></td>
+<td>Provider-specific model</td>
+</tr>
+<tr>
+<td><code>--locale</code></td>
+<td><code>-l</code></td>
+<td><code>en-US</code></td>
+<td>BCP-47 locale of the text, for choosing pronunciations</td>
+</tr>
+<tr>
+<td><code>--terms</code></td>
+<td></td>
+<td></td>
+<td>A terminology-spec terms directory to take pronunciations from</td>
+</tr>
+<tr>
+<td><code>--ipa</code></td>
+<td></td>
+<td></td>
+<td><code>TERM=IPA</code>, such as <code>Miura=ˈmjura</code>; repeatable</td>
+</tr>
+<tr>
+<td><code>--say</code></td>
+<td></td>
+<td></td>
+<td><code>TERM=RESPELLING</code>, such as <code>Miura=mee oora</code>; repeatable</td>
+</tr>
+<tr>
+<td><code>--phonemes</code></td>
+<td></td>
+<td><code>auto</code></td>
+<td>ElevenLabs: send IPA as phoneme tags <code>auto</code> (by model), <code>on</code> or <code>off</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="voices">voices<a class="headerlink" href="#voices" title="Permanent link">&para;</a></h3>
+<p>List a TTS provider's voices.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>omnivoice<span class="w"> </span>voices<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Short</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--provider</code></td>
+<td><code>-p</code></td>
+<td><code>elevenlabs</code></td>
+<td>TTS provider</td>
+</tr>
+<tr>
+<td><code>--match</code></td>
+<td></td>
+<td></td>
+<td>Only voices whose name, language or details contain this text</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td></td>
+<td><code>false</code></td>
+<td>Print JSON</td>
+</tr>
+</tbody>
+</table>
 <h3 id="providers-list">providers list<a class="headerlink" href="#providers-list" title="Permanent link">&para;</a></h3>
 <p>List available STT providers and their configuration status.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>omnivoice<span class="w"> </span>providers<span class="w"> </span>list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>omnivoice<span class="w"> </span>providers<span class="w"> </span>list
 </code></pre></div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="basic-transcription">Basic Transcription<a class="headerlink" href="#basic-transcription" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DEEPGRAM_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-api-key&quot;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Output to terminal</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>podcast.mp3
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># Save to file</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-o<span class="w"> </span>transcript.txt<span class="w"> </span>podcast.mp3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DEEPGRAM_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-api-key&quot;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># Output to terminal</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>podcast.mp3
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># Save to file</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-o<span class="w"> </span>transcript.txt<span class="w"> </span>podcast.mp3
 </code></pre></div>
 <h3 id="json-output-omnivoice-transcript-format">JSON Output (OmniVoice Transcript Format)<a class="headerlink" href="#json-output-omnivoice-transcript-format" title="Permanent link">&para;</a></h3>
 <p>Get full metadata including timestamps, speakers, and confidence scores:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>--diarize<span class="w"> </span>--timestamps<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>-o<span class="w"> </span>transcript.json<span class="w"> </span>podcast.mp3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>--diarize<span class="w"> </span>--timestamps<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>-o<span class="w"> </span>transcript.json<span class="w"> </span>podcast.mp3
 </code></pre></div>
 <p>Output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://omnivoice.dev/schema/transcript-v1.json&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello and welcome to the podcast...&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">&quot;duration_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">330000</span><span class="p">,</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nt">&quot;segments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">      </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello and welcome to the podcast.&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">      </span><span class="nt">&quot;start_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">      </span><span class="nt">&quot;end_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2500</span><span class="p">,</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">      </span><span class="nt">&quot;speaker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Speaker 1&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">      </span><span class="nt">&quot;words&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">        </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">}</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">      </span><span class="p">]</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">  </span><span class="p">],</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deepgram&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-28T10:30:00Z&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="nt">&quot;audio_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;podcast.mp3&quot;</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://omnivoice.dev/schema/transcript-v1.json&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello and welcome to the podcast...&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nt">&quot;duration_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">330000</span><span class="p">,</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="nt">&quot;segments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">      </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello and welcome to the podcast.&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">      </span><span class="nt">&quot;start_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">      </span><span class="nt">&quot;end_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2500</span><span class="p">,</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">      </span><span class="nt">&quot;speaker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Speaker 1&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">      </span><span class="nt">&quot;words&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">        </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;start_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;end_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">}</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">    </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deepgram&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">    </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-28T10:30:00Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">    </span><span class="nt">&quot;audio_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;podcast.mp3&quot;</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="subtitle-generation">Subtitle Generation<a class="headerlink" href="#subtitle-generation" title="Permanent link">&para;</a></h3>
 <h4 id="srt-subrip">SRT (SubRip)<a class="headerlink" href="#srt-subrip" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>-f<span class="w"> </span>srt<span class="w"> </span>-o<span class="w"> </span>subtitles.srt<span class="w"> </span>podcast.mp3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>-f<span class="w"> </span>srt<span class="w"> </span>-o<span class="w"> </span>subtitles.srt<span class="w"> </span>podcast.mp3
 </code></pre></div>
 <p>Output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>1
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>00:00:00,000 --&gt; 00:00:02,500
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Hello and welcome to the podcast.
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>2
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>00:00:02,800 --&gt; 00:00:05,200
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>Today we&#39;re talking about AI.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>1
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>00:00:00,000 --&gt; 00:00:02,500
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>Hello and welcome to the podcast.
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>2
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>00:00:02,800 --&gt; 00:00:05,200
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>Today we&#39;re talking about AI.
 </code></pre></div>
 <h4 id="webvtt">WebVTT<a class="headerlink" href="#webvtt" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>-f<span class="w"> </span>vtt<span class="w"> </span>-o<span class="w"> </span>subtitles.vtt<span class="w"> </span>podcast.mp3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>-f<span class="w"> </span>vtt<span class="w"> </span>-o<span class="w"> </span>subtitles.vtt<span class="w"> </span>podcast.mp3
 </code></pre></div>
 <p>Output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>WEBVTT
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>1
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>00:00:00.000 --&gt; 00:00:02.500
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>Hello and welcome to the podcast.
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>2
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>00:00:02.800 --&gt; 00:00:05.200
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>Today we&#39;re talking about AI.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>WEBVTT
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>1
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>00:00:00.000 --&gt; 00:00:02.500
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>Hello and welcome to the podcast.
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>2
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>00:00:02.800 --&gt; 00:00:05.200
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>Today we&#39;re talking about AI.
 </code></pre></div>
 <h3 id="speaker-diarization">Speaker Diarization<a class="headerlink" href="#speaker-diarization" title="Permanent link">&para;</a></h3>
 <p>Identify different speakers in the audio:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>--diarize<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>-o<span class="w"> </span>meeting.json<span class="w"> </span>meeting.mp3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>--diarize<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>-o<span class="w"> </span>meeting.json<span class="w"> </span>meeting.mp3
 </code></pre></div>
 <h3 id="using-different-providers">Using Different Providers<a class="headerlink" href="#using-different-providers" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Deepgram (default)</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DEEPGRAM_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-key&quot;</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>audio.mp3
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># OpenAI Whisper</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-key&quot;</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>openai<span class="w"> </span>audio.mp3
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1"># ElevenLabs</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ELEVENLABS_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-key&quot;</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>elevenlabs<span class="w"> </span>audio.mp3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Deepgram (default)</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DEEPGRAM_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-key&quot;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>deepgram<span class="w"> </span>audio.mp3
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1"># OpenAI Whisper</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-key&quot;</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>openai<span class="w"> </span>audio.mp3
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="c1"># ElevenLabs</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ELEVENLABS_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-key&quot;</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>omnivoice<span class="w"> </span>transcribe<span class="w"> </span>-p<span class="w"> </span>elevenlabs<span class="w"> </span>audio.mp3
 </code></pre></div>
+<h3 id="speech-synthesis">Speech Synthesis<a class="headerlink" href="#speech-synthesis" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Find a voice with an Italian accent</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>omnivoice<span class="w"> </span>voices<span class="w"> </span>--match<span class="w"> </span>italian
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># Synthesize a sentence</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>omnivoice<span class="w"> </span>speak<span class="w"> </span>--voice<span class="w"> </span>&lt;id&gt;<span class="w"> </span>-o<span class="w"> </span>miura.mp3<span class="w"> </span><span class="s2">&quot;The Miura was shown at Geneva.&quot;</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1"># Narration from a file, with pronunciations from a terms directory</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>omnivoice<span class="w"> </span>speak<span class="w"> </span>--voice<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--terms<span class="w"> </span>terms<span class="w"> </span>-o<span class="w"> </span>lesson.mp3<span class="w"> </span>-<span class="w"> </span>&lt;<span class="w"> </span>lesson.txt
+</code></pre></div>
+<h3 id="pronouncing-names">Pronouncing Names<a class="headerlink" href="#pronouncing-names" title="Permanent link">&para;</a></h3>
+<p>Give a term's pronunciation as IPA, a respelling, or both. ElevenLabs uses
+the IPA where the model accepts phonemes and the respelling otherwise; see
+<a href="../tts/#pronunciations">Pronunciations</a>. For other providers, <code>speak</code> puts
+the respellings into the text itself, and a term with only IPA is spoken as
+written.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>omnivoice<span class="w"> </span>speak<span class="w"> </span>--voice<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--model<span class="w"> </span>eleven_flash_v2<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span>--ipa<span class="w"> </span><span class="s2">&quot;Lamborghini=lamborˈɡiːni&quot;</span><span class="w"> </span>--say<span class="w"> </span><span class="s2">&quot;Lamborghini=lambor gheeny&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span>-o<span class="w"> </span>lambo.mp3<span class="w"> </span><span class="s2">&quot;Tractors made Lamborghini wealthy.&quot;</span>
+</code></pre></div>
+<p><code>--ipa</code> and <code>--say</code> win over a <code>--terms</code> directory for the terms they name.
+Slashes or brackets around IPA, as dictionaries print it, are removed.</p>
 <h3 id="check-provider-status">Check Provider Status<a class="headerlink" href="#check-provider-status" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>omnivoice<span class="w"> </span>providers<span class="w"> </span>list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>omnivoice<span class="w"> </span>providers<span class="w"> </span>list
 </code></pre></div>
 <p>Output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>PROVIDER    ENV VAR             CONFIGURED  FEATURES
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>--------    -------             ----------  --------
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>deepgram    DEEPGRAM_API_KEY    Yes         streaming, diarization, timestamps, punctuation
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>elevenlabs  ELEVENLABS_API_KEY  No          diarization, timestamps
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>openai      OPENAI_API_KEY      Yes         timestamps, punctuation
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>PROVIDER    ENV VAR             CONFIGURED  FEATURES
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>--------    -------             ----------  --------
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>deepgram    DEEPGRAM_API_KEY    Yes         streaming, diarization, timestamps, punctuation
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>elevenlabs  ELEVENLABS_API_KEY  No          diarization, timestamps
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>openai      OPENAI_API_KEY      Yes         timestamps, punctuation
 </code></pre></div>
 <h2 id="output-formats">Output Formats<a class="headerlink" href="#output-formats" title="Permanent link">&para;</a></h2>
 <table>
