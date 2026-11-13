@@ -148,17 +148,64 @@ func audioFile(format string, res *omnivoice.SynthesisResult) ([]byte, error) {
 		if len(a) >= 12 && string(a[:4]) == "RIFF" && string(a[8:12]) == "WAVE" {
 			return a, nil
 		}
+		if enc := encoding(a); enc != "" {
+			return nil, fmt.Errorf("the provider returned %s, not WAV or raw PCM; write .mp3 instead", enc)
+		}
 		if res.SampleRate <= 0 {
 			return nil, errors.New("the provider returned audio that isn't WAV and gave no sample rate to wrap it; write .mp3 or .pcm instead")
 		}
 		return wavFile(a, res.SampleRate), nil
 	case "opus":
-		if bytes.HasPrefix(a, []byte("OggS")) {
+		if isOggOpus(a) {
 			return a, nil
 		}
-		return nil, errors.New("the provider doesn't return Ogg Opus; write .mp3 or .wav instead")
+		enc := encoding(a)
+		if enc == "" {
+			enc = "unrecognized audio"
+		}
+		return nil, fmt.Errorf("the provider returned %s, not Ogg Opus; write .mp3 or .wav instead", enc)
 	}
 	return a, nil
+}
+
+// encoding names the encoded format a's signature shows, or "" when it
+// shows none, as for raw PCM.
+func encoding(a []byte) string {
+	switch {
+	case bytes.HasPrefix(a, []byte("ID3")) || isMP3Frame(a):
+		return "MP3"
+	case bytes.HasPrefix(a, []byte("OggS")):
+		return "Ogg"
+	case bytes.HasPrefix(a, []byte("fLaC")):
+		return "FLAC"
+	case bytes.HasPrefix(a, []byte{0x1A, 0x45, 0xDF, 0xA3}):
+		return "WebM"
+	case len(a) >= 8 && string(a[4:8]) == "ftyp":
+		return "MP4"
+	}
+	return ""
+}
+
+// isMP3Frame reports whether a starts with an MPEG Layer III frame header
+// with a valid bitrate and sample rate. Raw PCM rarely does: quiet audio
+// starts with bytes such as FF FF, which read as Layer I.
+func isMP3Frame(a []byte) bool {
+	if len(a) < 3 || a[0] != 0xFF || a[1]&0xE0 != 0xE0 {
+		return false
+	}
+	version, layer := a[1]>>3&3, a[1]>>1&3
+	bitrate, rate := a[2]>>4, a[2]>>2&3
+	return version != 1 && layer == 1 && bitrate != 0 && bitrate != 15 && rate != 3
+}
+
+// isOggOpus reports whether a is an Ogg stream whose first packet is an
+// Opus identification header. Ogg alone could hold Vorbis.
+func isOggOpus(a []byte) bool {
+	if len(a) < 27 || !bytes.HasPrefix(a, []byte("OggS")) {
+		return false
+	}
+	start := 27 + int(a[26]) // the header, then one byte per segment
+	return len(a) >= start+8 && string(a[start:start+8]) == "OpusHead"
 }
 
 // wavFile wraps raw 16-bit little-endian mono PCM in a WAV header.

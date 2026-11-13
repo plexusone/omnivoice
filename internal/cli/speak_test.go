@@ -146,6 +146,16 @@ func TestSpeakRespells(t *testing.T) {
 	}
 }
 
+// mp3Frame starts with an MPEG-1 Layer III header: 128 kbps, 44.1 kHz.
+var mp3Frame = []byte{0xFF, 0xFB, 0x90, 0x64, 0, 0, 0, 0}
+
+// oggPage is a first Ogg page with one segment holding packet.
+func oggPage(packet string) []byte {
+	page := append([]byte("OggS"), make([]byte, 22)...) // version through page CRC
+	page = append(page, 1, byte(len(packet)))           //nolint:gosec // one short segment and its length
+	return append(page, packet...)
+}
+
 func TestAudioFile(t *testing.T) {
 	raw := []byte{1, 2, 3, 4}
 	cases := []struct {
@@ -158,7 +168,13 @@ func TestAudioFile(t *testing.T) {
 		{"wav from the provider", "wav", tts.SynthesisResult{Audio: []byte("RIFF\x00\x00\x00\x00WAVEfmt ")}, "raw"},
 		{"raw PCM for a wav", "wav", tts.SynthesisResult{Audio: raw, SampleRate: 44100}, "wrapped"},
 		{"raw PCM without a rate", "wav", tts.SynthesisResult{Audio: raw}, "error"},
-		{"ogg opus", "opus", tts.SynthesisResult{Audio: []byte("OggS....")}, "raw"},
+		{"quiet raw PCM for a wav", "wav", tts.SynthesisResult{Audio: []byte{0xFF, 0xFF, 0x00, 0x00}, SampleRate: 16000}, "wrapped"},
+		{"mp3 with a rate for a wav", "wav", tts.SynthesisResult{Audio: mp3Frame, SampleRate: 44100}, "error"},
+		{"id3 mp3 for a wav", "wav", tts.SynthesisResult{Audio: []byte("ID3...."), SampleRate: 44100}, "error"},
+		{"ogg for a wav", "wav", tts.SynthesisResult{Audio: oggPage("OpusHead"), SampleRate: 48000}, "error"},
+		{"ogg opus", "opus", tts.SynthesisResult{Audio: oggPage("OpusHead")}, "raw"},
+		{"ogg vorbis for an opus", "opus", tts.SynthesisResult{Audio: oggPage("\x01vorbis")}, "error"},
+		{"short ogg for an opus", "opus", tts.SynthesisResult{Audio: []byte("OggS")}, "error"},
 		{"mp3 for an opus", "opus", tts.SynthesisResult{Audio: []byte("ID3....")}, "error"},
 	}
 	for _, tc := range cases {
@@ -173,9 +189,9 @@ func TestAudioFile(t *testing.T) {
 		case tc.want == "raw" && !bytes.Equal(got, tc.res.Audio):
 			t.Errorf("%s: audio changed", tc.name)
 		case tc.want == "wrapped":
-			if len(got) != 44+len(raw) || string(got[:4]) != "RIFF" || string(got[8:16]) != "WAVEfmt " ||
-				binary.LittleEndian.Uint32(got[24:]) != 44100 || binary.LittleEndian.Uint32(got[40:]) != 4 ||
-				!bytes.Equal(got[44:], raw) {
+			if len(got) != 44+len(tc.res.Audio) || string(got[:4]) != "RIFF" || string(got[8:16]) != "WAVEfmt " ||
+				binary.LittleEndian.Uint32(got[24:]) != uint32(tc.res.SampleRate) || binary.LittleEndian.Uint32(got[40:]) != 4 || //nolint:gosec // test sample rates
+				!bytes.Equal(got[44:], tc.res.Audio) {
 				t.Errorf("%s: header % x", tc.name, got[:44])
 			}
 		}
