@@ -1,7 +1,9 @@
 package cli
 
 import (
+	"bytes"
 	"context"
+	"encoding/binary"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -90,6 +92,16 @@ func runSpeak(ctx context.Context, o *speakOptions, args []string, stdin io.Read
 		return fmt.Errorf("--phonemes must be auto, on or off, not %q", o.phonemes)
 	}
 
+	if len(pronunciations) > 0 && !appliesPronunciations[strings.ToLower(o.provider)] {
+		// The provider ignores Pronunciations, so say the respellings in
+		// the text instead.
+		text = omnivoice.ApplyPronunciations(text, pronunciations, false)
+		config.Pronunciations = nil
+		if n := ipaOnly(pronunciations); n > 0 {
+			logInfo("%s doesn't take IPA: %d terms without a respelling are spoken as written", o.provider, n)
+		}
+	}
+
 	p, err := ttsProvider(o.provider)
 	if err != nil {
 		return err
@@ -99,11 +111,80 @@ func runSpeak(ctx context.Context, o *speakOptions, args []string, stdin io.Read
 	if err != nil {
 		return fmt.Errorf("synthesis failed: %w", err)
 	}
-	if err := os.WriteFile(o.output, res.Audio, 0o600); err != nil {
+	audio, err := audioFile(config.OutputFormat, res)
+	if err != nil {
+		return fmt.Errorf("%s: %w", o.output, err)
+	}
+	if err := os.WriteFile(o.output, audio, 0o600); err != nil {
 		return err
 	}
-	logInfo("Wrote %s (%d bytes)", o.output, len(res.Audio))
+	logInfo("Wrote %s (%d bytes)", o.output, len(audio))
 	return nil
+}
+
+// appliesPronunciations names the providers that apply
+// SynthesisConfig.Pronunciations themselves. For the others, speak puts
+// the respellings into the text.
+var appliesPronunciations = map[string]bool{"elevenlabs": true}
+
+func ipaOnly(ps []omnivoice.Pronunciation) int {
+	n := 0
+	for _, p := range ps {
+		if p.IPA != "" && p.Respelling == "" {
+			n++
+		}
+	}
+	return n
+}
+
+// audioFile returns the audio to write for the format the output file
+// names. Providers may return another encoding than the one asked for, so
+// the bytes are checked: raw PCM for a .wav gets a WAV header, and
+// anything else that doesn't match is an error, with nothing written.
+func audioFile(format string, res *omnivoice.SynthesisResult) ([]byte, error) {
+	a := res.Audio
+	switch format {
+	case "wav":
+		if len(a) >= 12 && string(a[:4]) == "RIFF" && string(a[8:12]) == "WAVE" {
+			return a, nil
+		}
+		if res.SampleRate <= 0 {
+			return nil, errors.New("the provider returned audio that isn't WAV and gave no sample rate to wrap it; write .mp3 or .pcm instead")
+		}
+		return wavFile(a, res.SampleRate), nil
+	case "opus":
+		if bytes.HasPrefix(a, []byte("OggS")) {
+			return a, nil
+		}
+		return nil, errors.New("the provider doesn't return Ogg Opus; write .mp3 or .wav instead")
+	}
+	return a, nil
+}
+
+// wavFile wraps raw 16-bit little-endian mono PCM in a WAV header.
+func wavFile(pcm []byte, sampleRate int) []byte {
+	const channels, bits = 1, 16
+	var b bytes.Buffer
+	b.Grow(44 + len(pcm))
+	le := func(v any) {
+		if err := binary.Write(&b, binary.LittleEndian, v); err != nil {
+			panic(err) // writing fixed-size values to a bytes.Buffer can't fail
+		}
+	}
+	b.WriteString("RIFF")
+	le(uint32(36 + len(pcm))) //nolint:gosec // audio is far below 4 GB
+	b.WriteString("WAVEfmt ")
+	le(uint32(16))
+	le(uint16(1)) // PCM
+	le(uint16(channels))
+	le(uint32(sampleRate))                       //nolint:gosec // a sample rate
+	le(uint32(sampleRate * channels * bits / 8)) //nolint:gosec // a byte rate
+	le(uint16(channels * bits / 8))
+	le(uint16(bits))
+	b.WriteString("data")
+	le(uint32(len(pcm))) //nolint:gosec // audio is far below 4 GB
+	b.Write(pcm)
+	return b.Bytes()
 }
 
 func speakText(args []string, stdin io.Reader) (string, error) {
@@ -178,12 +259,20 @@ func outputFormat(path string) string {
 	}
 }
 
+// ttsProvider returns the named provider, with its API key when one is
+// set. Each provider checks its own credentials; some, such as twilio,
+// need none.
 func ttsProvider(name string) (omnivoice.TTSProvider, error) {
 	key := getAPIKeyForProvider(name)
-	if key == "" {
-		return nil, fmt.Errorf("set %s for %s", getEnvVarName(name), name)
+	var opts []omnivoice.ProviderOption
+	if key != "" {
+		opts = append(opts, omnivoice.WithAPIKey(key))
 	}
-	return omnivoice.GetTTSProvider(name, omnivoice.WithAPIKey(key))
+	p, err := omnivoice.GetTTSProvider(name, opts...)
+	if err != nil && key == "" {
+		return nil, fmt.Errorf("%w (set %s if %s needs an API key)", err, getEnvVarName(name), name)
+	}
+	return p, err
 }
 
 type voicesOptions struct {

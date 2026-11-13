@@ -3,6 +3,8 @@ package cli
 import (
 	"bytes"
 	"context"
+	"encoding/binary"
+	"errors"
 	"os"
 	"path/filepath"
 	"strings"
@@ -22,7 +24,8 @@ func (f *fakeTTS) Name() string { return "fake" }
 
 func (f *fakeTTS) Synthesize(_ context.Context, text string, config tts.SynthesisConfig) (*tts.SynthesisResult, error) {
 	f.text, f.config = text, config
-	return &tts.SynthesisResult{Audio: []byte("audio:" + tts.ApplyPronunciations(text, config.Pronunciations, true)), Format: config.OutputFormat}, nil
+	audio := []byte("audio:" + tts.ApplyPronunciations(text, config.Pronunciations, true))
+	return &tts.SynthesisResult{Audio: audio, Format: config.OutputFormat, SampleRate: 16000}, nil
 }
 
 func (f *fakeTTS) SynthesizeStream(context.Context, string, tts.SynthesisConfig) (<-chan tts.StreamChunk, error) {
@@ -40,11 +43,15 @@ func (f *fakeTTS) GetVoice(context.Context, string) (*tts.Voice, error) {
 	return nil, tts.ErrVoiceNotFound
 }
 
+// registerFake registers the fake provider, which applies pronunciations
+// itself, as ElevenLabs does.
 func registerFake(t *testing.T) *fakeTTS {
 	t.Helper()
 	f := &fakeTTS{}
 	omnivoice.RegisterTTSProvider("fake", func(omnivoice.ProviderConfig) (tts.Provider, error) { return f, nil }, omnivoice.PriorityThick)
 	t.Setenv("FAKE_API_KEY", "test")
+	appliesPronunciations["fake"] = true
+	t.Cleanup(func() { delete(appliesPronunciations, "fake") })
 	return f
 }
 
@@ -76,8 +83,8 @@ func TestSpeak(t *testing.T) {
 		t.Fatal(err)
 	}
 	want := `audio:<phoneme alphabet="ipa" ph="lamborˈɡiːni">Lamborghini</phoneme> built the <phoneme alphabet="ipa" ph="ˈmjura">Miura</phoneme>.`
-	if string(got) != want {
-		t.Errorf("audio = %s", got)
+	if len(got) < 44 || string(got[:4]) != "RIFF" || string(got[44:]) != want {
+		t.Errorf("audio = %q", got)
 	}
 	ps := f.config.Pronunciations
 	if len(ps) != 2 || ps[0].Respelling != "lam bor ghini" || ps[0].IPA != "lamborˈɡiːni" || ps[1].IPA != "ˈmjura" {
@@ -121,5 +128,80 @@ func TestOutputFormat(t *testing.T) {
 		if got := outputFormat(in); got != want {
 			t.Errorf("outputFormat(%q) = %q", in, got)
 		}
+	}
+}
+
+// TestSpeakRespells checks that a provider that ignores Pronunciations
+// gets the respellings in its text.
+func TestSpeakRespells(t *testing.T) {
+	f := registerFake(t)
+	delete(appliesPronunciations, "fake")
+	o := &speakOptions{provider: "fake", voice: "v", output: filepath.Join(t.TempDir(), "a.mp3"), phonemes: "auto",
+		ipa: []string{"Miura=ˈmjura", "Countach=ˈkuntaʃ"}, say: []string{"Miura=mee oora"}}
+	if err := runSpeak(context.Background(), o, []string{"The Miura and the Countach."}, nil); err != nil {
+		t.Fatal(err)
+	}
+	if f.text != "The mee oora and the Countach." || f.config.Pronunciations != nil {
+		t.Errorf("request = %q, %+v", f.text, f.config.Pronunciations)
+	}
+}
+
+func TestAudioFile(t *testing.T) {
+	raw := []byte{1, 2, 3, 4}
+	cases := []struct {
+		name, format string
+		res          tts.SynthesisResult
+		want         string // "raw", "wrapped" or "error"
+	}{
+		{"mp3", "mp3", tts.SynthesisResult{Audio: raw}, "raw"},
+		{"pcm", "pcm", tts.SynthesisResult{Audio: raw}, "raw"},
+		{"wav from the provider", "wav", tts.SynthesisResult{Audio: []byte("RIFF\x00\x00\x00\x00WAVEfmt ")}, "raw"},
+		{"raw PCM for a wav", "wav", tts.SynthesisResult{Audio: raw, SampleRate: 44100}, "wrapped"},
+		{"raw PCM without a rate", "wav", tts.SynthesisResult{Audio: raw}, "error"},
+		{"ogg opus", "opus", tts.SynthesisResult{Audio: []byte("OggS....")}, "raw"},
+		{"mp3 for an opus", "opus", tts.SynthesisResult{Audio: []byte("ID3....")}, "error"},
+	}
+	for _, tc := range cases {
+		got, err := audioFile(tc.format, &tc.res)
+		switch {
+		case tc.want == "error":
+			if err == nil {
+				t.Errorf("%s: no error", tc.name)
+			}
+		case err != nil:
+			t.Errorf("%s: %v", tc.name, err)
+		case tc.want == "raw" && !bytes.Equal(got, tc.res.Audio):
+			t.Errorf("%s: audio changed", tc.name)
+		case tc.want == "wrapped":
+			if len(got) != 44+len(raw) || string(got[:4]) != "RIFF" || string(got[8:16]) != "WAVEfmt " ||
+				binary.LittleEndian.Uint32(got[24:]) != 44100 || binary.LittleEndian.Uint32(got[40:]) != 4 ||
+				!bytes.Equal(got[44:], raw) {
+				t.Errorf("%s: header % x", tc.name, got[:44])
+			}
+		}
+	}
+}
+
+// TestTTSProviderKey checks that the API key is optional: the provider's
+// factory decides, and its error names the variable to set.
+func TestTTSProviderKey(t *testing.T) {
+	omnivoice.RegisterTTSProvider("keyless", func(omnivoice.ProviderConfig) (tts.Provider, error) { return &fakeTTS{}, nil }, omnivoice.PriorityThick)
+	omnivoice.RegisterTTSProvider("keyed", func(c omnivoice.ProviderConfig) (tts.Provider, error) {
+		if c.APIKey == "" {
+			return nil, errors.New("keyed: API key is required")
+		}
+		return &fakeTTS{}, nil
+	}, omnivoice.PriorityThick)
+	t.Setenv("KEYLESS_API_KEY", "")
+	t.Setenv("KEYED_API_KEY", "")
+	if _, err := ttsProvider("keyless"); err != nil {
+		t.Errorf("keyless: %v", err)
+	}
+	if _, err := ttsProvider("keyed"); err == nil || !strings.Contains(err.Error(), "KEYED_API_KEY") {
+		t.Errorf("keyed without a key: %v", err)
+	}
+	t.Setenv("KEYED_API_KEY", "k")
+	if _, err := ttsProvider("keyed"); err != nil {
+		t.Errorf("keyed with a key: %v", err)
 	}
 }
