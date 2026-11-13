@@ -1,6 +1,7 @@
 # Command-Line Interface
 
-OmniVoice includes a CLI for speech-to-text transcription without writing code.
+OmniVoice includes a CLI for speech-to-text transcription and text-to-speech
+synthesis without writing code.
 
 ## Installation
 
@@ -31,6 +32,46 @@ omnivoice transcribe [flags] <audio-file>
 | `--timestamps` | | `false` | Enable word timestamps |
 | `--verbose` | `-v` | `false` | Verbose output |
 | `--quiet` | `-q` | `false` | Suppress non-essential output |
+
+### speak
+
+Synthesize speech from text and write it to an audio file.
+
+```bash
+omnivoice speak [flags] [text]
+```
+
+The text comes from the argument, or from standard input with `-` or no
+argument. The output's extension picks the format: `.mp3`, `.wav`, `.opus` or
+`.pcm`.
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `--voice` | | | Voice ID (required; list them with `omnivoice voices`) |
+| `--output` | `-o` | | Audio file to write (required) |
+| `--provider` | `-p` | `elevenlabs` | TTS provider |
+| `--model` | `-m` | | Provider-specific model |
+| `--locale` | `-l` | `en-US` | BCP-47 locale of the text, for choosing pronunciations |
+| `--terms` | | | A terminology-spec terms directory to take pronunciations from |
+| `--ipa` | | | `TERM=IPA`, such as `Miura=ˈmjura`; repeatable |
+| `--say` | | | `TERM=RESPELLING`, such as `Miura=mee oora`; repeatable |
+| `--phonemes` | | `auto` | ElevenLabs: send IPA as phoneme tags `auto` (by model), `on` or `off` |
+
+### voices
+
+List a TTS provider's voices.
+
+```bash
+omnivoice voices [flags]
+```
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `--provider` | `-p` | `elevenlabs` | TTS provider |
+| `--match` | | | Only voices whose name, language or details contain this text |
+| `--json` | | `false` | Print JSON |
 
 ### providers list
 
@@ -153,6 +194,34 @@ omnivoice transcribe -p openai audio.mp3
 export ELEVENLABS_API_KEY="your-key"
 omnivoice transcribe -p elevenlabs audio.mp3
 ```
+
+### Speech Synthesis
+
+```bash
+# Find a voice with an Italian accent
+omnivoice voices --match italian
+
+# Synthesize a sentence
+omnivoice speak --voice <id> -o miura.mp3 "The Miura was shown at Geneva."
+
+# Narration from a file, with pronunciations from a terms directory
+omnivoice speak --voice <id> --terms terms -o lesson.mp3 - < lesson.txt
+```
+
+### Pronouncing Names
+
+Give a term's pronunciation as IPA, a respelling, or both. Providers use the
+IPA where the voice or model accepts phonemes and the respelling otherwise;
+see [Pronunciations](tts.md#pronunciations).
+
+```bash
+omnivoice speak --voice <id> --model eleven_flash_v2 \
+  --ipa "Lamborghini=lamborˈɡiːni" --say "Lamborghini=lambor gheeny" \
+  -o lambo.mp3 "Tractors made Lamborghini wealthy."
+```
+
+`--ipa` and `--say` win over a `--terms` directory for the terms they name.
+Slashes or brackets around IPA, as dictionaries print it, are removed.
 
 ### Check Provider Status
 

@@ -143,6 +143,38 @@ result, _ := provider.Synthesize(ctx, text, omnivoice.SynthesisConfig{
 })
 ```
 
+## Pronunciations
+
+Names and terms that a voice mispronounces can carry a pronunciation in
+`SynthesisConfig.Pronunciations`: IPA, a respelling, or both.
+
+```go
+result, _ := provider.Synthesize(ctx, "The Miura was shown at Geneva.", omnivoice.SynthesisConfig{
+    VoiceID: voiceID,
+    Pronunciations: []omnivoice.Pronunciation{
+        {Term: "Miura", IPA: "ˈmjura", Respelling: "mee oora"},
+    },
+})
+```
+
+Each provider uses what its voice or model accepts. ElevenLabs sends IPA as
+SSML phoneme tags on `eleven_flash_v2`, `eleven_turbo_v2` and
+`eleven_monolingual_v1`, and the respelling on other models. A term with
+neither is spoken as written. Terms match whole words, ignoring case.
+
+Take pronunciations from terminology-spec terms, which carry both per
+locale:
+
+```go
+import "github.com/plexusone/omnivoice-core/terminology"
+
+terms, _ := terminology.LoadDir("terms")
+cfg.Pronunciations = terminology.PronunciationsFor(terms, "en-US")
+```
+
+A provider without its own pronunciation support can rewrite text with
+`omnivoice.ApplyPronunciations(text, cfg.Pronunciations, phonemes)`.
+
 ## SSML Support
 
 Some providers support SSML for fine-grained control:
