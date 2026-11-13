@@ -15,7 +15,7 @@ require (
 
 require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/deepgram/deepgram-go-sdk/v3 v3.10.0 // indirect
+	github.com/deepgram/deepgram-go-sdk/v3 v3.11.0 // indirect
 	github.com/dlclark/regexp2 v1.12.0 // indirect
 	github.com/dvonthenen/websocket v1.5.1-dyv.2 // indirect
 	github.com/fatih/color v1.19.0 // indirect
@@ -43,13 +43,13 @@ require (
 	github.com/plexusone/omnillm-core v0.18.1 // indirect
 	github.com/segmentio/asm v1.2.1 // indirect
 	github.com/shopspring/decimal v1.6.0 // indirect
-	github.com/spf13/pflag v1.0.10 // indirect
-	github.com/team-telnyx/telnyx-go/v4 v4.106.0 // indirect
-	github.com/tidwall/gjson v1.20.0 // indirect
+	github.com/spf13/pflag v1.1.0 // indirect
+	github.com/team-telnyx/telnyx-go/v4 v4.107.0 // indirect
+	github.com/tidwall/gjson v1.20.2 // indirect
 	github.com/tidwall/match v1.2.0 // indirect
-	github.com/tidwall/pretty v1.2.2 // indirect
-	github.com/tidwall/sjson v1.2.5 // indirect
-	github.com/twilio/twilio-go v1.32.0 // indirect
+	github.com/tidwall/pretty v1.3.0 // indirect
+	github.com/tidwall/sjson v1.2.9 // indirect
+	github.com/twilio/twilio-go v1.33.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/otel v1.47.0 // indirect
 	go.opentelemetry.io/otel/log v1.47.0 // indirect
@@ -57,11 +57,11 @@ require (
 	go.opentelemetry.io/otel/trace v1.47.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.28.0 // indirect
-	golang.org/x/exp v0.0.0-20261014143641-f0251eb4aa3e // indirect
+	golang.org/x/exp v0.0.0-20261112173441-d10d3b464990 // indirect
 	golang.org/x/net v0.62.0 // indirect
-	golang.org/x/sync v0.24.0 // indirect
-	golang.org/x/sys v0.49.0 // indirect
-	golang.org/x/text v0.43.0 // indirect
+	golang.org/x/sync v0.25.0 // indirect
+	golang.org/x/sys v0.50.0 // indirect
+	golang.org/x/text v0.44.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	k8s.io/klog/v2 v2.140.0 // indirect
 )
