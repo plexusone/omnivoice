@@ -43,7 +43,13 @@ omnivoice speak [flags] [text]
 
 The text comes from the argument, or from standard input with `-` or no
 argument. The output's extension picks the format: `.mp3`, `.wav`, `.opus` or
-`.pcm`.
+`.pcm`. Raw PCM from a provider is written to a `.wav` with a WAV header. A
+provider that can't return the format asked for, such as ElevenLabs for
+`.opus`, stops with an error and writes nothing.
+
+Set the provider's API key in its environment variable, such as
+`ELEVENLABS_API_KEY`. Providers that need none, such as `twilio`, work
+without it.
 
 **Flags:**
 
@@ -210,9 +216,11 @@ omnivoice speak --voice <id> --terms terms -o lesson.mp3 - < lesson.txt
 
 ### Pronouncing Names
 
-Give a term's pronunciation as IPA, a respelling, or both. Providers use the
-IPA where the voice or model accepts phonemes and the respelling otherwise;
-see [Pronunciations](tts.md#pronunciations).
+Give a term's pronunciation as IPA, a respelling, or both. ElevenLabs uses
+the IPA where the model accepts phonemes and the respelling otherwise; see
+[Pronunciations](tts.md#pronunciations). For other providers, `speak` puts
+the respellings into the text itself, and a term with only IPA is spoken as
+written.
 
 ```bash
 omnivoice speak --voice <id> --model eleven_flash_v2 \

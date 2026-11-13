@@ -16,10 +16,12 @@
       "added": [
         { "description": "`Pronunciation` and `ApplyPronunciations` re-exported from omnivoice-core", "commit": "e4fc45b" },
         { "description": "[cli] `speak` synthesizes text to an audio file, with pronunciations from a terminology-spec terms directory, `--ipa` and `--say`", "commit": "4ce5f7f" },
-        { "description": "[cli] `voices` lists a provider's voices, filtered with `--match`, as text or JSON", "commit": "4ce5f7f" }
+        { "description": "[cli] `voices` lists a provider's voices, filtered with `--match`, as text or JSON", "commit": "4ce5f7f" },
+        { "description": "[cli] `speak` puts respellings into the text for providers that don't apply pronunciations, checks the audio against the output's extension, wrapping raw PCM in a WAV header, and needs an API key only where the provider does", "commit": "4fca60b" }
       ],
       "tests": [
-        { "description": "[cli] `speak` and `voices` with a fake provider", "commit": "8e5bb8c" }
+        { "description": "[cli] `speak` and `voices` with a fake provider", "commit": "8e5bb8c" },
+        { "description": "[cli] Respellings for other providers, output formats and WAV headers, and providers without an API key", "commit": "4fca60b" }
       ],
       "documentation": [
         { "description": "README describes speech synthesis on the command line", "commit": "7b0ae4a" },
