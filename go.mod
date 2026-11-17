@@ -7,7 +7,7 @@ require (
 	github.com/plexusone/elevenlabs-go v0.15.1
 	github.com/plexusone/omni-deepgram v0.7.0
 	github.com/plexusone/omni-google v0.7.0
-	github.com/plexusone/omni-openai v0.8.0
+	github.com/plexusone/omni-openai v0.8.1
 	github.com/plexusone/omni-telnyx v0.7.0
 	github.com/plexusone/omni-twilio v0.12.0
 	github.com/plexusone/omnivoice-core v0.20.0
@@ -18,7 +18,7 @@ require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/buger/jsonparser v1.6.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/deepgram/deepgram-go-sdk/v3 v3.11.0 // indirect
+	github.com/deepgram/deepgram-go-sdk/v3 v3.11.1 // indirect
 	github.com/dlclark/regexp2 v1.12.0 // indirect
 	github.com/dvonthenen/websocket v1.5.1-dyv.2 // indirect
 	github.com/fatih/color v1.19.0 // indirect
@@ -51,11 +51,11 @@ require (
 	github.com/shopspring/decimal v1.6.0 // indirect
 	github.com/spf13/pflag v1.1.0 // indirect
 	github.com/team-telnyx/telnyx-go/v4 v4.107.0 // indirect
-	github.com/tidwall/gjson v1.20.2 // indirect
+	github.com/tidwall/gjson v1.20.4 // indirect
 	github.com/tidwall/match v1.2.0 // indirect
 	github.com/tidwall/pretty v1.3.0 // indirect
 	github.com/tidwall/sjson v1.2.9 // indirect
-	github.com/twilio/twilio-go v1.33.0 // indirect
+	github.com/twilio/twilio-go v1.33.1 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/otel v1.47.0 // indirect
 	go.opentelemetry.io/otel/log v1.47.0 // indirect
