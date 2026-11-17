@@ -96,12 +96,12 @@ omnivoice verify quotes --audio <file> [--index <transcript.json>] (--quotes <fi
 | `--index` | | | OmniVoice JSON transcript of the recording, with word timestamps; needed for quotations without times |
 | `--quotes` | | | JSON array of `{"id", "text", "start_ms", "end_ms"}`; the times are optional |
 | `--quote` | | | A quotation to check; repeatable |
-| `--providers` | `-p` | `deepgram,elevenlabs,openai` | Engines, comma-separated |
+| `--providers` | `-p` | `deepgram,elevenlabs,openai` | Engines, comma-separated, each once |
 | `--model` | | | `provider=model`; repeatable |
 | `--keyword` | | | A name or term to help engines; repeatable |
 | `--terms` | | | terminology-spec terms directory: canonical forms become key words, aliases are accepted |
 | `--plain-engine` | | last in `--providers` | Engine that runs without key words |
-| `--min-engines` | | `3` | Fewest engines that must produce a transcript to decide |
+| `--min-engines` | | `3` | Fewest engines that must produce a transcript to decide; between 1 and the number of providers |
 | `--pad` | | `1.5s` | Padding before and after each clip |
 | `--language` | `-l` | `en-US` | Language tag; empty to detect |
 | `--output` | `-o` | stdout | Write the JSON report here |
@@ -132,7 +132,7 @@ omnivoice verify absence --transcript <a.json> --transcript <b.json> --phrase <t
 |------|-------|---------|-------------|
 | `--transcript` | | | OmniVoice JSON transcript with word timestamps; repeat for each engine |
 | `--phrase` | | | Phrase to search for; repeatable |
-| `--min-score` | | `0.8` | Lowest match score that counts as found (0–1) |
+| `--min-score` | | `0.8` | Lowest match score that counts as found, from 0 to 1 |
 | `--output` | `-o` | stdout | Write the JSON result here |
 
 ### providers list

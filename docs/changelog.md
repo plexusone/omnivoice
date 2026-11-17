@@ -22,13 +22,13 @@ See [CHANGELOG.md](https://github.com/plexusone/omnivoice/blob/main/CHANGELOG.md
 | [v0.6.0](releases/v0.6.0.md) | 2026-03-07 | Re-export callsystem types from omnivoice-core for unified imports |
 | [v0.5.0](releases/v0.5.0.md) | 2026-03-01 | Batteries-included voice pipeline framework for Go with unified STT and TTS interfaces |
 
-## Latest Release: v0.15.0
+## Latest Release: v0.16.0
 
-- **Speech on the command line**: `omnivoice speak` writes text to an audio file with any TTS provider, and `omnivoice voices` lists and filters a provider's voices
-- **Pronunciations**: names and terms said from IPA or respellings, from a terminology-spec terms directory or `--ipa` and `--say`
-- **ElevenLabs**: IPA sent as phoneme tags on the models that honour them, respellings on the rest
+- **Quotations checked against a recording**: `omnivoice verify quotes` has Deepgram, ElevenLabs and OpenAI hear a clip around each quotation, and reports whether they agreed, agree on a correction, or dispute a word that matters
+- **Searching before an absence claim**: `omnivoice verify absence` reports how many independent transcripts contain each phrase
+- **Language codes and WAV clips work with every provider**, through elevenlabs-go v0.15.1 and omni-openai v0.8.1
 
-See [v0.15.0 Release Notes](releases/v0.15.0.md) for details.
+See [v0.16.0 Release Notes](releases/v0.16.0.md) for details.
 
 ## Versioning
 
