@@ -120,6 +120,22 @@ With ElevenLabs, `--phonemes auto` sends IPA as phoneme tags only on the models
 that honour them (`eleven_flash_v2`, `eleven_turbo_v2`, `eleven_monolingual_v1`);
 `on` and `off` override that.
 
+### Checking Quotations Against Audio
+
+```bash
+# Check quotations with three engines: each is found in the index transcript,
+# clipped, heard by every engine and compared
+omnivoice verify quotes --audio episode.mp3 --index episode.json \
+  --quotes quotes.json -p deepgram,elevenlabs,openai -o report.json
+
+# Search independent transcripts before saying a recording never mentions something
+omnivoice verify absence --transcript deepgram.json --transcript openai.json --phrase "locally"
+```
+
+Each quotation is `agreed`, `corrected`, `disputed`, `notFound` or
+`insufficient`; see the [CLI guide](docs/guides/cli.md#verify-quotes). ffmpeg
+must be on `PATH`.
+
 ### Output Formats
 
 | Format | Description |
