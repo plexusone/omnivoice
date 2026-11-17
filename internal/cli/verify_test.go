@@ -2,7 +2,9 @@ package cli
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
@@ -97,5 +99,37 @@ func TestVerifyEnginesNeedKeysAndPlainEngine(t *testing.T) {
 	o = &verifyQuotesOptions{providers: "deepgram", models: []string{"nova-3"}}
 	if _, err := o.engines(false); err == nil {
 		t.Error("want an error for --model without provider=")
+	}
+}
+
+func TestVerifyQuotesRejectsTooFewProviders(t *testing.T) {
+	t.Setenv("DEEPGRAM_API_KEY", "test")
+	t.Setenv("ELEVENLABS_API_KEY", "test")
+	audio := writeFile(t, "a.mp3", "x")
+	tr := writeFile(t, "t.json", transcriptFixture)
+	for _, n := range []int{3, 0} {
+		o := &verifyQuotesOptions{audio: audio, index: tr, quotes: []string{"run all the tests"}, providers: "deepgram,elevenlabs", minEngines: n}
+		err := runVerifyQuotes(context.Background(), o, io.Discard)
+		if err == nil || !strings.Contains(err.Error(), "--min-engines") {
+			t.Errorf("min-engines %d: want an early --min-engines error, got %v", n, err)
+		}
+	}
+}
+
+func TestVerifyEnginesRejectDuplicateProviders(t *testing.T) {
+	t.Setenv("DEEPGRAM_API_KEY", "test")
+	o := &verifyQuotesOptions{providers: "deepgram, Deepgram"}
+	if _, err := o.engines(false); err == nil || !strings.Contains(err.Error(), "more than once") {
+		t.Errorf("want a duplicate provider error, got %v", err)
+	}
+}
+
+func TestVerifyAbsenceRejectsScoreOutOfRange(t *testing.T) {
+	tr := writeFile(t, "t.json", transcriptFixture)
+	for _, s := range []float64{80, -0.1} {
+		o := &verifyAbsenceOptions{transcripts: []string{tr}, phrases: []string{"tests"}, minScore: s}
+		if err := runVerifyAbsence(o, io.Discard); err == nil || !strings.Contains(err.Error(), "--min-score") {
+			t.Errorf("min-score %v: want an error, got %v", s, err)
+		}
 	}
 }
