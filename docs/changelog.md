@@ -6,6 +6,7 @@ See [CHANGELOG.md](https://github.com/plexusone/omnivoice/blob/main/CHANGELOG.md
 
 | Version | Date | Highlights |
 |---------|------|------------|
+| [v0.16.0](releases/v0.16.0.md) | 2026-11-17 | Check quotations against a recording with `verify quotes` and several speech-to-text engines, and search transcripts with `verify absence` |
 | [v0.15.0](releases/v0.15.0.md) | 2026-11-13 | Speech synthesis on the command line with `speak` and `voices`, and pronunciations as IPA or respellings with any TTS provider |
 | [v0.14.0](releases/v0.14.0.md) | 2026-10-28 | OpenAI, ElevenLabs, and Deepgram TTS return 8 kHz mu-law or A-law phone-call audio from the same config, with the correct sample rate |
 | [v0.13.0](releases/v0.13.0.md) | 2026-07-05 | Deepgram Voice Agent realtime provider support |
