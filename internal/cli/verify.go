@@ -163,6 +163,11 @@ func runVerifyQuotes(ctx context.Context, o *verifyQuotesOptions, stdout io.Writ
 	if err != nil {
 		return err
 	}
+	// Fail before any engine runs: too few engines can never decide.
+	if o.minEngines < 1 || o.minEngines > len(engines) {
+		return fmt.Errorf("--min-engines %d needs between 1 and %d with %d provider(s) (%s); pass --min-engines %d or add providers",
+			o.minEngines, len(engines), len(engines), o.providers, len(engines))
+	}
 	v := verify.Verifier{
 		Engines: engines,
 		Options: verify.Options{
@@ -239,10 +244,18 @@ func (o *verifyQuotesOptions) engines(withKeywords bool) ([]verify.Engine, error
 		models[strings.ToLower(p)] = model
 	}
 	var names []string
+	seen := map[string]bool{}
 	for _, n := range strings.Split(o.providers, ",") {
-		if n = strings.ToLower(strings.TrimSpace(n)); n != "" {
-			names = append(names, n)
+		n = strings.ToLower(strings.TrimSpace(n))
+		if n == "" {
+			continue
 		}
+		if seen[n] {
+			// The same engine twice would count as two engines agreeing.
+			return nil, fmt.Errorf("--providers lists %s more than once", n)
+		}
+		seen[n] = true
+		names = append(names, n)
 	}
 	if len(names) == 0 {
 		return nil, fmt.Errorf("no providers")
@@ -389,6 +402,9 @@ Example:
 func runVerifyAbsence(o *verifyAbsenceOptions, stdout io.Writer) error {
 	if len(o.transcripts) == 0 || len(o.phrases) == 0 {
 		return fmt.Errorf("give at least one --transcript and one --phrase")
+	}
+	if o.minScore < 0 || o.minScore > 1 {
+		return fmt.Errorf("--min-score %v is outside 0–1 (for example, 0.8)", o.minScore)
 	}
 	var ts []verify.IndexedTranscript
 	for _, p := range o.transcripts {
