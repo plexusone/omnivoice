@@ -40,6 +40,7 @@ func init() {
 	rootCmd.AddCommand(providersCmd)
 	rootCmd.AddCommand(newSpeakCmd())
 	rootCmd.AddCommand(newVoicesCmd())
+	rootCmd.AddCommand(newVerifyCmd())
 
 	// Set version template
 	rootCmd.SetVersionTemplate(fmt.Sprintf("omnivoice version %s\n", omnivoice.Version))

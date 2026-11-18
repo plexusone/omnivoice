@@ -79,6 +79,62 @@ omnivoice voices [flags]
 | `--match` | | | Only voices whose name, language or details contain this text |
 | `--json` | | `false` | Print JSON |
 
+### verify quotes
+
+Check quotations against a recording. Each quotation is found in an index
+transcript of the whole recording, cut out with a little padding, and
+transcribed by every engine; the words are compared, and each quotation gets a
+decision.
+
+```bash
+omnivoice verify quotes --audio <file> [--index <transcript.json>] (--quotes <file> | --quote <text>...) [flags]
+```
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `--audio` | | | Recording to check against (required) |
+| `--index` | | | OmniVoice JSON transcript of the recording, with word timestamps; needed for quotations without times |
+| `--quotes` | | | JSON array of `{"id", "text", "start_ms", "end_ms"}`; the times are optional |
+| `--quote` | | | A quotation to check; repeatable |
+| `--providers` | `-p` | `deepgram,elevenlabs,openai` | Engines, comma-separated, each once |
+| `--model` | | | `provider=model`; repeatable |
+| `--keyword` | | | A name or term to help engines; repeatable |
+| `--terms` | | | terminology-spec terms directory: canonical forms become key words, aliases are accepted |
+| `--plain-engine` | | last in `--providers` | Engine that runs without key words |
+| `--min-engines` | | `3` | Fewest engines that must produce a transcript to decide; between 1 and the number of providers |
+| `--pad` | | `1.5s` | Padding before and after each clip |
+| `--language` | `-l` | `en-US` | Language tag; empty to detect |
+| `--output` | `-o` | stdout | Write the JSON report here |
+
+| Decision | Meaning |
+|----------|---------|
+| `agreed` | Every engine heard the quotation |
+| `corrected` | The engines agree with each other but not with the quotation; the report gives what they heard |
+| `disputed` | The engines disagree on a number, negation, name, term or other substantive word |
+| `notFound` | The quotation could not be located in the recording |
+| `insufficient` | Too few engines produced a transcript |
+
+ffmpeg must be on `PATH`. Key words are never taken from the quotation, and
+one engine always runs without them. Confirm names, titles and dates from a
+written source, whatever the engines hear.
+
+### verify absence
+
+Search several independent transcripts of a recording for phrases, before
+saying it doesn't mention something. The result says only how many
+transcripts have each phrase, never that the recording lacks it.
+
+```bash
+omnivoice verify absence --transcript <a.json> --transcript <b.json> --phrase <text>... [flags]
+```
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `--transcript` | | | OmniVoice JSON transcript with word timestamps; repeat for each engine |
+| `--phrase` | | | Phrase to search for; repeatable |
+| `--min-score` | | `0.8` | Lowest match score that counts as found, from 0 to 1 |
+| `--output` | `-o` | stdout | Write the JSON result here |
+
 ### providers list
 
 List available STT providers and their configuration status.
@@ -230,6 +286,35 @@ omnivoice speak --voice <id> --model eleven_flash_v2 \
 
 `--ipa` and `--say` win over a `--terms` directory for the terms they name.
 Slashes or brackets around IPA, as dictionaries print it, are removed.
+
+### Checking Quotations Against a Recording
+
+```bash
+# A timed transcript of the whole episode, to find each quotation in
+omnivoice transcribe -p deepgram --timestamps -f json -o episode.json episode.mp3
+
+# Check two quotations with three engines
+omnivoice verify quotes --audio episode.mp3 --index episode.json \
+  --quote "we can have the model run all the tests" \
+  --quote "I clear the context window between every request" \
+  -p deepgram,elevenlabs,openai -o report.json
+```
+
+The summary on stderr lists each quotation's decision, clip and the
+substantive words the engines disagree on:
+
+```text
+quote-1      agreed       35:05–35:14  we can have the model run all the tests
+quote-2      agreed       23:53–23:58  I clear the context window between every request
+
+agreed 2
+```
+
+```bash
+# Before saying the episode never mentions something
+omnivoice verify absence --transcript deepgram.json --transcript openai.json \
+  --phrase "locally" --phrase "on my laptop"
+```
 
 ### Check Provider Status
 

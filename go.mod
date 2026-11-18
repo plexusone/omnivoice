@@ -3,19 +3,22 @@ module github.com/plexusone/omnivoice
 go 1.26.6
 
 require (
-	github.com/plexusone/elevenlabs-go v0.15.0
+	github.com/grokify/mogo v0.75.0
+	github.com/plexusone/elevenlabs-go v0.15.1
 	github.com/plexusone/omni-deepgram v0.7.0
 	github.com/plexusone/omni-google v0.7.0
-	github.com/plexusone/omni-openai v0.8.0
+	github.com/plexusone/omni-openai v0.8.1
 	github.com/plexusone/omni-telnyx v0.7.0
 	github.com/plexusone/omni-twilio v0.12.0
-	github.com/plexusone/omnivoice-core v0.19.0
+	github.com/plexusone/omnivoice-core v0.20.0
 	github.com/spf13/cobra v1.10.2
 )
 
 require (
+	github.com/bahlo/generic-list-go v0.2.0 // indirect
+	github.com/buger/jsonparser v1.6.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/deepgram/deepgram-go-sdk/v3 v3.11.0 // indirect
+	github.com/deepgram/deepgram-go-sdk/v3 v3.11.1 // indirect
 	github.com/dlclark/regexp2 v1.12.0 // indirect
 	github.com/dvonthenen/websocket v1.5.1-dyv.2 // indirect
 	github.com/fatih/color v1.19.0 // indirect
@@ -30,14 +33,16 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/schema v1.4.1 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
-	github.com/grokify/mogo v0.75.0 // indirect
 	github.com/grokify/sogo v0.16.0 // indirect
 	github.com/hokaccha/go-prettyjson v0.0.0-20211117102719-0474bc63780f // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
+	github.com/invopop/jsonschema v0.14.0 // indirect
 	github.com/mattn/go-colorable v0.1.16 // indirect
 	github.com/mattn/go-isatty v0.0.24 // indirect
 	github.com/ogen-go/ogen v1.25.0 // indirect
 	github.com/openai/openai-go v1.12.0 // indirect
+	github.com/pb33f/go-yaml v0.1.1 // indirect
+	github.com/pb33f/ordered-map/v2 v2.3.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/plexusone/ogen-tools v0.3.0 // indirect
 	github.com/plexusone/omnillm-core v0.18.1 // indirect
@@ -46,11 +51,11 @@ require (
 	github.com/shopspring/decimal v1.6.0 // indirect
 	github.com/spf13/pflag v1.1.0 // indirect
 	github.com/team-telnyx/telnyx-go/v4 v4.107.0 // indirect
-	github.com/tidwall/gjson v1.20.2 // indirect
+	github.com/tidwall/gjson v1.20.4 // indirect
 	github.com/tidwall/match v1.2.0 // indirect
 	github.com/tidwall/pretty v1.3.0 // indirect
 	github.com/tidwall/sjson v1.2.9 // indirect
-	github.com/twilio/twilio-go v1.33.0 // indirect
+	github.com/twilio/twilio-go v1.33.1 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/otel v1.47.0 // indirect
 	go.opentelemetry.io/otel/log v1.47.0 // indirect
@@ -59,7 +64,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.28.0 // indirect
 	golang.org/x/exp v0.0.0-20261113113407-e3970619a1a4 // indirect
-	golang.org/x/net v0.62.0 // indirect
+	golang.org/x/net v0.63.0 // indirect
 	golang.org/x/sync v0.25.0 // indirect
 	golang.org/x/sys v0.50.0 // indirect
 	golang.org/x/text v0.44.0 // indirect

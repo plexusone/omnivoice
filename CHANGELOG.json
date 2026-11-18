@@ -7,6 +7,34 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.16.0",
+      "date": "2026-11-17",
+      "highlights": [
+        { "description": "Check quotations against a recording on the command line: `omnivoice verify quotes` has several speech-to-text engines hear each quotation's clip and reports whether they agreed, agree on a correction, or dispute a word that matters", "commit": "3ca9085" }
+      ],
+      "added": [
+        { "description": "`omnivoice verify quotes`: quotations from `--quotes` or `--quote`, located in an `--index` transcript, clipped and transcribed by every engine in `--providers`; a JSON report and a summary of decisions (`agreed`, `corrected`, `disputed`, `notFound`, `insufficient`) with the substantive words engines disagree on", "commit": "3ca9085" },
+        { "description": "`verify quotes` key words from `--keyword` and a terminology-spec `--terms` directory, never from the quotation; `--plain-engine` runs without them, by default the last provider", "commit": "3ca9085" },
+        { "description": "`omnivoice verify absence`: searches independent transcripts for phrases and reports how many have each, never that the recording lacks it", "commit": "3ca9085" },
+        { "description": "Flags are checked before any engine runs: `--min-engines` between 1 and the number of providers, each provider listed once, and `--min-score` from 0 to 1", "commit": "75a0904" }
+      ],
+      "dependencies": [
+        { "description": "Requires `github.com/plexusone/omnivoice-core` v0.20.0 for the verify package", "commit": "3ca9085" },
+        { "description": "`github.com/plexusone/elevenlabs-go` v0.15.1 and `github.com/plexusone/omni-openai` v0.8.1, which send each service the language codes it accepts, and name OpenAI uploads so WAV clips are recognized", "commit": "aae74da" },
+        { "description": "`github.com/grokify/mogo` v0.75.0, now a direct dependency", "commit": "3ca9085" },
+        { "description": "Indirect dependencies updated", "commit": "aae74da" }
+      ],
+      "documentation": [
+        { "description": "CLI guide: `verify quotes` and `verify absence`, with flags, decisions and an example; README section on checking quotations", "commit": "d694c22" },
+        { "description": "CLI guide: flag limits; docs changelog shows v0.16.0 as the latest release", "commit": "ba41c41" },
+        { "description": "v0.16.0 release notes at `docs/releases/v0.16.0.md`" }
+      ],
+      "tests": [
+        { "description": "`verify absence` on a transcript fixture, quotation loading and validation, and engine set-up with keys, models and the plain engine", "commit": "3ca9085" },
+        { "description": "Flag checks: too few providers, a repeated provider and a score outside 0–1", "commit": "e402b93" }
+      ]
+    },
+    {
       "version": "v0.15.0",
       "date": "2026-11-13",
       "highlights": [
