@@ -7,6 +7,28 @@
   "maintainers": ["plexusone", "johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.16.1",
+      "date": "2026-11-21",
+      "highlights": [
+        { "description": "`verify quotes` no longer disputes a quotation over informal forms such as \"gonna\", words an engine splits or joins differently, or a word cut off mid-word, through omnivoice-core v0.20.1", "commit": "017b2dc" }
+      ],
+      "fixed": [
+        { "description": "`omnivoice --version` reports the current release; it printed 0.10.0", "commit": "579b950" },
+        { "description": "`verify quotes` treats \"gonna\", \"wanna\", \"gotta\", \"kinda\", \"sorta\" and \"ok\" as their full forms, reconciles words heard split or joined, and drops words cut off mid-word, so these no longer count as disputes", "commit": "017b2dc" },
+        { "description": "`verify quotes` locates a quotation with elided text in the shortest matching stretch, so its clip no longer runs for minutes", "commit": "017b2dc" }
+      ],
+      "dependencies": [
+        { "description": "Requires `github.com/plexusone/omnivoice-core` v0.20.1", "commit": "017b2dc" },
+        { "description": "`github.com/deepgram/deepgram-go-sdk/v3` v3.12.0; indirect dependencies updated", "commit": "017b2dc" }
+      ],
+      "documentation": [
+        { "description": "v0.16.1 release notes at `docs/releases/v0.16.1.md`" }
+      ],
+      "tests": [
+        { "description": "`Version` must match the latest release in CHANGELOG.json" }
+      ]
+    },
+    {
       "version": "v0.16.0",
       "date": "2026-11-17",
       "highlights": [
