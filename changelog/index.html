@@ -1299,6 +1299,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../releases/v0.16.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.16.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../releases/v0.16.0/" class="md-nav__link">
         
   
@@ -1741,10 +1769,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#latest-release-v0160" class="md-nav__link">
+  <a href="#latest-release-v0161" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Latest Release: v0.16.0
+        Latest Release: v0.16.1
       
     </span>
   </a>
@@ -1808,10 +1836,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#latest-release-v0160" class="md-nav__link">
+  <a href="#latest-release-v0161" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Latest Release: v0.16.0
+        Latest Release: v0.16.1
       
     </span>
   </a>
@@ -1861,6 +1889,11 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../releases/v0.16.1/">v0.16.1</a></td>
+<td>2026-11-21</td>
+<td><code>verify quotes</code> reconciles informal forms, split and joined words, and cut-off words; <code>--version</code> reports the current release</td>
+</tr>
 <tr>
 <td><a href="../releases/v0.16.0/">v0.16.0</a></td>
 <td>2026-11-17</td>
@@ -1938,13 +1971,13 @@
 </tr>
 </tbody>
 </table>
-<h2 id="latest-release-v0160">Latest Release: v0.16.0<a class="headerlink" href="#latest-release-v0160" title="Permanent link">&para;</a></h2>
+<h2 id="latest-release-v0161">Latest Release: v0.16.1<a class="headerlink" href="#latest-release-v0161" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Quotations checked against a recording</strong>: <code>omnivoice verify quotes</code> has Deepgram, ElevenLabs and OpenAI hear a clip around each quotation, and reports whether they agreed, agree on a correction, or dispute a word that matters</li>
-<li><strong>Searching before an absence claim</strong>: <code>omnivoice verify absence</code> reports how many independent transcripts contain each phrase</li>
-<li><strong>Language codes and WAV clips work with every provider</strong>, through elevenlabs-go v0.15.1 and omni-openai v0.8.1</li>
+<li><strong>Fewer false disputes in <code>verify quotes</code></strong>: informal forms such as "gonna", words an engine splits or joins differently, and words cut off mid-word no longer count as disagreements</li>
+<li><strong>Shorter clips for quotations with elided text</strong>: the quotation is located in the shortest matching stretch</li>
+<li><strong><code>omnivoice --version</code> reports the current release</strong></li>
 </ul>
-<p>See <a href="../releases/v0.16.0/">v0.16.0 Release Notes</a> for details.</p>
+<p>See <a href="../releases/v0.16.1/">v0.16.1 Release Notes</a> for details.</p>
 <h2 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h2>
 <p>OmniVoice follows <a href="https://semver.org/">Semantic Versioning</a>:</p>
 <ul>
