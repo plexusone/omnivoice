@@ -6,6 +6,7 @@ See [CHANGELOG.md](https://github.com/plexusone/omnivoice/blob/main/CHANGELOG.md
 
 | Version | Date | Highlights |
 |---------|------|------------|
+| [v0.16.1](releases/v0.16.1.md) | 2026-11-21 | `verify quotes` reconciles informal forms, split and joined words, and cut-off words; `--version` reports the current release |
 | [v0.16.0](releases/v0.16.0.md) | 2026-11-17 | Check quotations against a recording with `verify quotes` and several speech-to-text engines, and search transcripts with `verify absence` |
 | [v0.15.0](releases/v0.15.0.md) | 2026-11-13 | Speech synthesis on the command line with `speak` and `voices`, and pronunciations as IPA or respellings with any TTS provider |
 | [v0.14.0](releases/v0.14.0.md) | 2026-10-28 | OpenAI, ElevenLabs, and Deepgram TTS return 8 kHz mu-law or A-law phone-call audio from the same config, with the correct sample rate |
@@ -22,13 +23,13 @@ See [CHANGELOG.md](https://github.com/plexusone/omnivoice/blob/main/CHANGELOG.md
 | [v0.6.0](releases/v0.6.0.md) | 2026-03-07 | Re-export callsystem types from omnivoice-core for unified imports |
 | [v0.5.0](releases/v0.5.0.md) | 2026-03-01 | Batteries-included voice pipeline framework for Go with unified STT and TTS interfaces |
 
-## Latest Release: v0.16.0
+## Latest Release: v0.16.1
 
-- **Quotations checked against a recording**: `omnivoice verify quotes` has Deepgram, ElevenLabs and OpenAI hear a clip around each quotation, and reports whether they agreed, agree on a correction, or dispute a word that matters
-- **Searching before an absence claim**: `omnivoice verify absence` reports how many independent transcripts contain each phrase
-- **Language codes and WAV clips work with every provider**, through elevenlabs-go v0.15.1 and omni-openai v0.8.1
+- **Fewer false disputes in `verify quotes`**: informal forms such as "gonna", words an engine splits or joins differently, and words cut off mid-word no longer count as disagreements
+- **Shorter clips for quotations with elided text**: the quotation is located in the shortest matching stretch
+- **`omnivoice --version` reports the current release**
 
-See [v0.16.0 Release Notes](releases/v0.16.0.md) for details.
+See [v0.16.1 Release Notes](releases/v0.16.1.md) for details.
 
 ## Versioning
 
